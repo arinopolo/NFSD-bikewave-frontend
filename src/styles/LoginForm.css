@@ -1,0 +1,105 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 400px;
+
+}
+
+input {
+  background-color: white;
+
+  border: 0;
+  border-bottom: 1px solid #868686;
+  outline: none;
+  display: flex;
+
+  align-items: flex-end;
+}
+
+label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  cursor: text;
+}
+
+input,
+label {
+  width: 100%;
+  font-size: 0.9rem;
+  height: 2rem;
+  color: #868686;
+  transition: 0.3s ease-in-out;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label,
+input:valid + label {
+  font-size: 0.6rem;
+  top: -1rem;
+  pointer-events: none;
+}
+
+input:focus,
+input:not(:placeholder-shown),
+input:valid {
+  border-bottom: 1px solid #31b15c;
+}
+
+.submit {
+  background-color: #31b15c;
+  color: white;
+  border-radius: 50px;
+  border: transparent;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  justify-content: center;
+  align-items: center;
+  border: 0;
+
+  height: auto;
+  padding: 0.7rem 0;
+  transition: 0.3s ease-in-out;
+}
+
+.submit:hover {
+  background-color: #258847;
+}
+
+.field-holder {
+  width: 100%;
+  position: relative;
+}
+
+.container-register-proposal {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.container-register-proposal > a {
+  color: #31b15c;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.link-password-forgoten {
+  font-size: 0.6rem;
+
+}
+
+@media (max-width: 800px) {
+  form {
+    width: 80%;
+  }
+  .link-password-forgoten {
+    font-size: 0.8rem;
+  
+  }
+}
