@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: #868686;
 }
 
 :root {
@@ -13,16 +14,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  color: #2c2c2c;
 }
 
 p {
   margin: 0 0;
-  color: black;
+  font-size: 0.8rem;
 }
 
 body {
   display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   min-width: 320px;
   margin: 0;
+}
+
+h1 {
+  font-size: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 0.8rem;
 }

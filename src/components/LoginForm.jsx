@@ -1,16 +1,25 @@
-import LogoComponent from "./LogoComponent";
 import "../styles/LoginForm.css";
 
 const LoginForm = () => {
   return (
     <>
-      <LogoComponent />
       <form action="">
-        <label htmlFor="email"></label>
-        <input type="text" id="email" placeholder="Email" />
-        <label htmlFor="password"></label>
-        <input type="password" placeholder="Contraseña" />
+        <div className="field-holder">
+          <input type="email" id="email" required placeholder="" />
+          <label htmlFor="email">Email</label>
+        </div>
+        <div className="field-holder">
+          <input type="password" id="password" required placeholder="" />
+          <label htmlFor="password">Contraseña</label>
+        </div>
+        {/* submit button*/}
+        <input type="submit" value="Iniciar sesión" className="submit" />
       </form>
+      <a href="" className="link-password-forgoten">He olvidado mi contraseña</a>
+
+      <di className="container-register-proposal">
+        <p>¿Aún no tienes cuenta?</p> <a href="">Regístrate</a>
+      </di>
     </>
   );
 };
