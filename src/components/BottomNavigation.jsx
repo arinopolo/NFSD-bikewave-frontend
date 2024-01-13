@@ -19,10 +19,10 @@ const BottomNavigation = () => {
         </div>
         <div className="bottom-nav-btn">
           <FontAwesomeIcon icon={faBicycle} size="lg" className="icon" />
-          <a href="">Inicio</a>
+          <a href="">Alquileres</a>
         </div>
         <div className="bottom-nav-btn">
-          <FontAwesomeIcon icon={faHeart} size="xl" className="icon" />
+          <FontAwesomeIcon icon={faHeart} size="lg" className="icon" />
 
           <a href="">Favoritos</a>
         </div>

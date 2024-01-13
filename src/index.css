@@ -10,7 +10,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #868686;
+  color: #292929;
 }
 
 :root {
@@ -33,9 +33,6 @@ p {
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   min-width: 320px;
   margin: 0;
@@ -47,5 +44,5 @@ h1 {
 
 a {
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
