@@ -3,11 +3,10 @@ form {
   flex-direction: column;
   gap: 2rem;
   width: 400px;
-
 }
 
 input {
-  background-color: white;
+  background-color: transparent;
 
   border: 0;
   border-bottom: 1px solid #868686;
@@ -31,7 +30,7 @@ label {
   width: 100%;
   font-size: 0.9rem;
   height: 2rem;
-  color: #868686;
+  color: #292929;
   transition: 0.3s ease-in-out;
 }
 
@@ -68,7 +67,7 @@ input:valid {
 }
 
 .submit:hover {
-  background-color: #258847;
+  background-color: #239b4c;
 }
 
 .field-holder {
@@ -87,11 +86,19 @@ input:valid {
   font-size: 1rem;
   font-style: italic;
   font-weight: 700;
+  transition: 0.3s ease-in-out;
+}
+
+.container-register-proposal > a:hover {
+  color: #239b4c;
 }
 
 .link-password-forgoten {
   font-size: 0.6rem;
+}
 
+.link-password-forgoten:hover {
+  font-weight: 500;
 }
 
 @media (max-width: 800px) {
@@ -100,6 +107,5 @@ input:valid {
   }
   .link-password-forgoten {
     font-size: 0.8rem;
-  
   }
 }

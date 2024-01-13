@@ -1,9 +1,18 @@
 .login-page-container {
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  
+}
+
+@media (max-width: 800px) {
+  .login-page-container {
+    background-image: url("../assets/fondo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
 }
