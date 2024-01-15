@@ -34,6 +34,7 @@ const LoginForm = () => {
         onSubmit={(values, { resetForm }) => {
           resetForm();
           console.log("enviadooo");
+          //aqui va a ir la conexion con el back haciendo una entrada con token
         }}
       >
         {() => (
@@ -53,6 +54,7 @@ const LoginForm = () => {
                 autoComplete="off"
               />
               <label htmlFor="password">Contraseña</label>
+
               <span
                 className="password-toggle-icon"
                 onClick={() => setShowPassword(!showPassword)}

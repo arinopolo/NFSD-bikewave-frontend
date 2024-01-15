@@ -1,6 +1,7 @@
 import BottomNavigation from "../components/BottomNavigation";
 import LoginForm from "../components/LoginForm";
 import LogoComponent from "../components/LogoComponent";
+import RegisterForm from "../components/RegisterForm";
 import "../styles/LoginPage.css";
 
 const LoginPage = () => {
@@ -8,8 +9,9 @@ const LoginPage = () => {
     <div className="login-page-container">
       <LogoComponent />
 
-      <LoginForm />
-      <BottomNavigation/>
+    
+   <RegisterForm />
+      <BottomNavigation />
     </div>
   );
 };
