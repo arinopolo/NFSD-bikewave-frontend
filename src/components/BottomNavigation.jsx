@@ -7,15 +7,17 @@ import {
   faMessage,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const BottomNavigation = () => {
   return (
     <>
       <nav className="bottom-navigation-container">
         <div className="bottom-nav-btn">
-          <FontAwesomeIcon icon={faHouse} size="lg" className="icon" />
-
-          <a href="">Inicio</a>
+          <Link to="/">
+            <FontAwesomeIcon icon={faHouse} size="xl" className="icon" />
+            <p>Inicio</p>{" "}
+          </Link>
         </div>
         <div className="bottom-nav-btn">
           <FontAwesomeIcon icon={faBicycle} size="lg" className="icon" />
@@ -32,8 +34,10 @@ const BottomNavigation = () => {
           <a href="">Mensajes</a>
         </div>
         <div className="bottom-nav-btn">
-          <FontAwesomeIcon icon={faUser} size="lg" className="icon" />
-          <a href="">Perfil</a>
+          <Link to="/login">
+            <FontAwesomeIcon icon={faUser} size="xl" className="icon" />
+            <p>Perfil</p>{" "}
+          </Link>
         </div>
       </nav>
     </>

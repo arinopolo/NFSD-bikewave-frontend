@@ -3,6 +3,7 @@ form {
   flex-direction: column;
   gap: 2rem;
   width: 400px;
+  justify-content: flex-start;
 }
 
 input {
@@ -31,12 +32,12 @@ label {
   font-size: 0.9rem;
   height: 2rem;
   color: #292929;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 input:focus + label,
 input:not(:placeholder-shown) + label,
-input:valid + label {
+input:focus:not(:placeholder-shown) + label {
   font-size: 0.6rem;
   top: -1rem;
   pointer-events: none;
@@ -44,8 +45,9 @@ input:valid + label {
 
 input:focus,
 input:not(:placeholder-shown),
-input:valid {
+input:focus:not(:placeholder-shown) {
   border-bottom: 1px solid #31b15c;
+  transition: border-bottom 0.2s ease-in-out;
 }
 
 .submit {
@@ -73,6 +75,11 @@ input:valid {
 .field-holder {
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0.3rem;
 }
 
 .container-register-proposal {
@@ -101,6 +108,18 @@ input:valid {
   font-weight: 500;
 }
 
+.error {
+  font-size: 0.7rem;
+  color: #848484;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 @media (max-width: 800px) {
   form {
     width: 80%;
