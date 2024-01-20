@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/BottomNavigation.css";
 import {
   faBicycle,
+  faCircle,
+  faCirclePlus,
   faHeart,
   faHouse,
   faMessage,
@@ -19,14 +21,17 @@ const BottomNavigation = () => {
             <p>Inicio</p>{" "}
           </Link>
         </div>
-        <div className="bottom-nav-btn">
-          <FontAwesomeIcon icon={faBicycle} size="lg" className="icon" />
-          <a href="">Alquileres</a>
-        </div>
+
         <div className="bottom-nav-btn">
           <FontAwesomeIcon icon={faHeart} size="lg" className="icon" />
 
           <a href="">Favoritos</a>
+        </div>
+        <div className="bottom-nav-btn">
+          <Link to="/list-item">
+            <FontAwesomeIcon icon={faCirclePlus} size="xl" className="icon" />
+            <p>Alquilar </p>
+          </Link>
         </div>
         <div className="bottom-nav-btn">
           <FontAwesomeIcon icon={faMessage} size="lg" className="icon" />

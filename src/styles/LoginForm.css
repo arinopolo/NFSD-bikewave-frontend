@@ -1,101 +1,21 @@
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 400px;
-  justify-content: flex-start;
-}
-
-input {
-  background-color: transparent;
-
-  border: 0;
-  border-bottom: 1px solid #868686;
-  outline: none;
-  display: flex;
-
-  align-items: flex-end;
-}
-
-label {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  align-items: center;
-  cursor: text;
-}
-
-input,
-label {
-  width: 100%;
-  font-size: 0.9rem;
-  height: 2rem;
-  color: #292929;
-  transition: 0.2s ease-in-out;
-}
-
-input:focus + label,
-input:not(:placeholder-shown) + label,
-input:focus:not(:placeholder-shown) + label {
-  font-size: 0.6rem;
-  top: -1rem;
-  pointer-events: none;
-}
-
-input:focus,
-input:not(:placeholder-shown),
-input:focus:not(:placeholder-shown) {
-  border-bottom: 1px solid #31b15c;
-  transition: border-bottom 0.2s ease-in-out;
-}
-
-.submit {
-  background-color: #31b15c;
-  color: white;
-  border-radius: 50px;
-  border: transparent;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-
-  justify-content: center;
-  align-items: center;
-  border: 0;
-
-  height: auto;
-  padding: 0.7rem 0;
-  transition: 0.3s ease-in-out;
-}
-
-.submit:hover {
-  background-color: #239b4c;
-}
-
-.field-holder {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3rem;
-}
-
 .container-register-proposal {
+  align-items: center;
   display: flex;
   gap: 0.5rem;
-  align-items: center;
 }
 
-.container-register-proposal > a {
+.btn-register-login-proposal {
+  background: none;
+  border: none;
   color: #31b15c;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-style: italic;
   font-weight: 700;
+  padding: 0;
   transition: 0.3s ease-in-out;
 }
 
-.container-register-proposal > a:hover {
+.btn-register-login-proposal:hover {
   color: #239b4c;
 }
 
@@ -107,22 +27,7 @@ input:focus:not(:placeholder-shown) {
   font-weight: 500;
 }
 
-.error {
-  font-size: 0.7rem;
-  color: #848484;
-}
-
-.password-toggle-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
 @media (max-width: 800px) {
-  form {
-    width: 80%;
-  }
   .link-password-forgoten {
     font-size: 0.8rem;
   }

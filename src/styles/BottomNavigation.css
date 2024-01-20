@@ -1,16 +1,15 @@
 .bottom-navigation-container {
-  width: 100vw;
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  padding: 0.8rem 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  bottom: 0;
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  display: flex;
   gap: 3rem;
-
+  justify-content: center;
+  left: 0;
+  padding: 0.8rem 0;
+  position: fixed;
+  text-align: center;
+  width: 100vw;
 }
 
 .icon {
@@ -18,18 +17,18 @@
 }
 
 .bottom-nav-btn {
+  align-items: center;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 50px;
   transition: 0.3s ease-in-out;
+  width: 50px;
 }
 
 .bottom-nav-btn:hover {
-  scale: 1.05;
   font-weight: 600;
+  scale: 1.05;
 }
 
 p {

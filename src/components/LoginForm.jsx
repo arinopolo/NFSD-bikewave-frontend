@@ -3,9 +3,26 @@ import "../styles/LoginForm.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import api from "../api/api";
 
-const LoginForm = () => {
+const LoginForm = ({ toggle, setToken, token }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loginTried, setLoginTried] = useState(false);
+
+  const loginHandler = async (values) => {
+    try {
+      const loginData = await api.login(values.email, values.password);
+
+      setToken(loginData.token);
+      navigate("/");
+    } catch (error) {
+      console.error("Incorrect credentials:", error.message);
+      setToken("");
+      setLoginTried(true);
+    }
+  };
 
   return (
     <>
@@ -22,16 +39,19 @@ const LoginForm = () => {
               values.email
             )
           ) {
-            errors.email = "La dirección del correo es inválida";
+            errors.email =
+              "Por favor, ingrese una dirección de correo electrónico válida.";
           }
-
           // Validación de la contraseña
           if (!values.password) {
             errors.password = "Por favor introduce tu contraseña";
           }
           return errors;
         }}
+        //enviar el formulario
         onSubmit={(values, { resetForm }) => {
+          console.log("values", values);
+          loginHandler(values);
           resetForm();
           console.log("enviadooo");
           //aqui va a ir la conexion con el back haciendo una entrada con token
@@ -46,15 +66,6 @@ const LoginForm = () => {
             </div>
 
             <div className="field-holder">
-              <Field
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                placeholder=""
-                autoComplete="off"
-              />
-              <label htmlFor="password">Contraseña</label>
-
               <span
                 className="password-toggle-icon"
                 onClick={() => setShowPassword(!showPassword)}
@@ -65,7 +76,19 @@ const LoginForm = () => {
                   <FontAwesomeIcon icon={faEye} size="sm" />
                 )}
               </span>
+              <Field
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                placeholder=""
+                autoComplete="off"
+              />
+              <label htmlFor="password">Contraseña</label>
+
               <ErrorMessage name="password" component="div" className="error" />
+              {!token && loginTried ? (
+                <p className="incorrect-data">Datos incorrectos </p>
+              ) : null}
             </div>
 
             {/* Botón de envío */}
@@ -81,7 +104,10 @@ const LoginForm = () => {
       </a>
 
       <div className="container-register-proposal">
-        <p>¿Aún no tienes cuenta?</p> <a href="">Regístrate</a>
+        <p>¿Aún no tienes cuenta?</p>{" "}
+        <button className="btn-register-login-proposal" onClick={toggle}>
+          Regístrate
+        </button>
       </div>
     </>
   );
