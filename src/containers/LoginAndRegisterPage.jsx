@@ -2,11 +2,11 @@ import { useState } from "react";
 import BottomNavigation from "../components/BottomNavigation";
 import LoginForm from "../components/LoginForm";
 import LogoComponent from "../components/LogoComponent";
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from "../components/Register/RegisterForm";
 import "../styles/LoginPage.css";
 
 // eslint-disable-next-line react/prop-types
-const LoginAndRegisterPage = ({ setToken, token }) => {
+const LoginAndRegisterPage = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
 
   const toggleLoginForm = () => {
@@ -18,7 +18,7 @@ const LoginAndRegisterPage = ({ setToken, token }) => {
       <LogoComponent />
 
       {showLoginForm ? (
-        <LoginForm toggle={toggleLoginForm} setToken={setToken} token={token} />
+        <LoginForm toggle={toggleLoginForm}  />
       ) : (
         <RegisterForm toggle={toggleLoginForm} />
       )}

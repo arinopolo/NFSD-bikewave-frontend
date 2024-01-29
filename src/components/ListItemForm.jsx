@@ -1,29 +1,48 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import api from "../api/api";
+import "../styles/ListItemForm.css";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
-const ListItemForm = ({ token }) => {
-  const listItem = async (values) => {
-    console.log(token);
-    const addProduct = await fetch("http://localhost:3000/bicycles/add", {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      redirect: "follow",
-    });
-    console.log(addProduct.url);
-    console.log(JSON.stringify(values));
-    if (!addProduct.ok) {
-      throw new Error(`Error: ${addProduct.status} - ${addProduct.statusText}`);
+const ListItemForm = () => {
+  const options = [
+    { key: "Select an option", value: "" },
+    { key: "City", value: "city" },
+    { key: "Mountain", value: "mountain" },
+  ];
+
+  const { token } = useContext(AuthContext);
+  const handleListitem = async (values) => {
+    try {
+      console.log(values);
+      const listItemData = await api.listItem(values);
+
+      if (listItemData) {
+        return <div>añadido con exito</div>;
+        console.log(listItemData);
+      }
+    } catch (error) {
+      if (!token) {
+        console.log("missing token");
+        return;
+      }
+      console.error(
+        "Error en la operación de agregar un producto:",
+        error.message
+      );
     }
   };
 
   return (
     <>
       <Formik
-        initialValues={{ brand: "", price: 0, location: "" }}
+        initialValues={{
+          brand: "",
+          price: 0,
+          location: "",
+          model: "",
+          category: "",
+        }}
         /*
       validate={(values) => {
         let errors = {};
@@ -36,36 +55,26 @@ const ListItemForm = ({ token }) => {
         return errors;
       }} */
         onSubmit={(values, { resetForm }) => {
-          listItem(values);
+          handleListitem(values);
           resetForm();
-          console.log("enviadooo");
-          //aqui va a ir la conexion con el back haciendo una entrada con token
         }}
       >
         {() => (
           <Form>
             <div className="form-register">
-              <div className="field-holder-register">
+              <div className=" field-holder-register list-item red">
                 <Field type="brand" id="brand" name="brand" placeholder="" />
                 <label htmlFor="brand">
                   Marca <span className="required">*</span>
                 </label>
-                <ErrorMessage
-                  name="firstName"
-                  component="div"
-                  className="error"
-                />
+                <ErrorMessage name="brand" component="div" className="error" />
               </div>
               <div className="field-holder-register">
                 <Field type="number" id="price" name="price" placeholder="" />
                 <label htmlFor="price">
                   Precio <span className="required">*</span>
                 </label>
-                <ErrorMessage
-                  name="secondName"
-                  component="div"
-                  className="error"
-                />
+                <ErrorMessage name="price" component="div" className="error" />
               </div>
             </div>
             <div className="field-holder-register">
@@ -73,9 +82,30 @@ const ListItemForm = ({ token }) => {
               <label htmlFor="location">
                 Localidad <span className="required">*</span>
               </label>
-              <ErrorMessage name="email" component="div" className="error" />
+              <ErrorMessage name="location" component="div" className="error" />
             </div>
 
+            <div className="field-holder-register">
+              <Field type="text" id="model" name="model" placeholder="" />
+              <label htmlFor="model">
+                Modelo <span className="required">*</span>
+              </label>
+              <ErrorMessage name="model" component="div" className="error" />
+            </div>
+
+            <div className="field-holder-register">
+              <Field as="select" id="category" name="category">
+                {options.map((option) => {
+                  return (
+                    <option key={option.value} value={option.value}>
+                      {option.key}
+                    </option>
+                  );
+                })}
+              </Field>
+
+              <ErrorMessage name="category" component="div" className="error" />
+            </div>
             {/* Botón de envío */}
             <button type="submit" className="submit">
               Subir mi bicicleta

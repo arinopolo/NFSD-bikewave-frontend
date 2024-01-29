@@ -1,25 +1,32 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "../styles/LoginForm.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+import { AuthContext } from "../contexts/AuthContext";
 
-const LoginForm = ({ toggle, setToken, token }) => {
+const LoginForm = ({ toggle }) => {
+  const { token, updateToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loginTried, setLoginTried] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
 
   const loginHandler = async (values) => {
+    setErrorMessage("");
     try {
+      setErrorMessage("");
       const loginData = await api.login(values.email, values.password);
-
-      setToken(loginData.token);
-      navigate("/");
+      if (loginData && loginData.success) {
+        updateToken(loginData.token);
+        navigate("/");
+      } else {
+        setErrorMessage(loginData.msg);
+      }
     } catch (error) {
-      console.error("Incorrect credentials:", error.message);
-      setToken("");
+      console.error("Login failed. Try again", error);
       setLoginTried(true);
     }
   };
@@ -50,11 +57,8 @@ const LoginForm = ({ toggle, setToken, token }) => {
         }}
         //enviar el formulario
         onSubmit={(values, { resetForm }) => {
-          console.log("values", values);
           loginHandler(values);
           resetForm();
-          console.log("enviadooo");
-          //aqui va a ir la conexion con el back haciendo una entrada con token
         }}
       >
         {() => (
@@ -86,9 +90,12 @@ const LoginForm = ({ toggle, setToken, token }) => {
               <label htmlFor="password">Contraseña</label>
 
               <ErrorMessage name="password" component="div" className="error" />
+
               {!token && loginTried ? (
-                <p className="incorrect-data">Datos incorrectos </p>
+                <p className="incorrect-data">Login failed. Try again </p>
               ) : null}
+
+              {errorMessage && <p className="incorrect-data">{errorMessage}</p>}
             </div>
 
             {/* Botón de envío */}

@@ -2,12 +2,12 @@ import LogoComponent from "../components/LogoComponent";
 import BottomNavigation from "../components/BottomNavigation";
 import ListItemForm from "../components/ListItemForm";
 
-const ListItemPage = ({ token }) => {
+const ListItemPage = () => {
   return (
     <div className="login-page-container">
       <LogoComponent />
 
-      <ListItemForm token={token} />
+      <ListItemForm />
       <BottomNavigation />
     </div>
   );

@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Formik, Form } from "formik";
-import "../styles/RegisterForm.css";
-import api from "../api/api";
+import "../../styles/RegisterForm.css";
+import api from "../../api/api";
 import { useState } from "react";
 import RegistrationSuccessMessage from "./RegistrationSuccessMessage";
 import RegistrationFailMessage from "./RegistrationFailMessage";
@@ -15,7 +15,7 @@ const RegisterForm = ({ toggle }) => {
       const registerData = await api.register(values);
 
       if (registerData) {
-        // Establecer registrationSuccessful solo si la respuesta es exitosa
+
         setRegistrationSuccessful(true);
       }
     } catch (error) {
