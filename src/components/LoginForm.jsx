@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import { AuthContext } from "../contexts/AuthContext";
+import Button from "./button/Button";
 
 const LoginForm = ({ toggle }) => {
   const { token, updateToken } = useContext(AuthContext);
@@ -64,8 +65,16 @@ const LoginForm = ({ toggle }) => {
         {() => (
           <Form>
             <div className="field-holder">
-              <Field type="text" id="email" name="email" placeholder="" />
-              <label htmlFor="email">Email</label>
+              <Field
+                type="text"
+                id="email"
+                name="email"
+                placeholder=""
+                className="input-login"
+              />
+              <label htmlFor="email" className="label-login">
+                Email
+              </label>
               <ErrorMessage name="email" component="div" className="error" />
             </div>
 
@@ -81,13 +90,16 @@ const LoginForm = ({ toggle }) => {
                 )}
               </span>
               <Field
+                className="input-login"
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 placeholder=""
                 autoComplete="off"
               />
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password" className="label-login">
+                Contraseña
+              </label>
 
               <ErrorMessage name="password" component="div" className="error" />
 
@@ -99,9 +111,7 @@ const LoginForm = ({ toggle }) => {
             </div>
 
             {/* Botón de envío */}
-            <button type="submit" className="submit">
-              Iniciar sesión
-            </button>
+            <Button text={"Iniciar sesión"} />
           </Form>
         )}
       </Formik>

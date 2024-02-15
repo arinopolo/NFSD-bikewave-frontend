@@ -3,7 +3,9 @@ import "../App.css";
 
 const LogoComponent = () => {
   return (
-    <img src={bikewaveLogo} className="logo-bikewave" alt="Bikewave logo" />
+   
+      <img src={bikewaveLogo} className="logo-bikewave" alt="Bikewave logo" />
+ 
   );
 };
 

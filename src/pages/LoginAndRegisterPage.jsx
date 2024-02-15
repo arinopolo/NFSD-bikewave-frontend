@@ -1,8 +1,8 @@
 import { useState } from "react";
-import BottomNavigation from "../components/BottomNavigation";
+import BottomNavigation from "../components/navigation/BottomNavigation";
 import LoginForm from "../components/LoginForm";
 import LogoComponent from "../components/LogoComponent";
-import RegisterForm from "../components/Register/RegisterForm";
+import RegisterForm from "../components/register/RegisterForm";
 import "../styles/LoginPage.css";
 
 // eslint-disable-next-line react/prop-types
@@ -18,7 +18,7 @@ const LoginAndRegisterPage = () => {
       <LogoComponent />
 
       {showLoginForm ? (
-        <LoginForm toggle={toggleLoginForm}  />
+        <LoginForm toggle={toggleLoginForm} />
       ) : (
         <RegisterForm toggle={toggleLoginForm} />
       )}

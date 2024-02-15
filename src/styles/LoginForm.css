@@ -1,3 +1,48 @@
+input {
+  align-items: flex-end;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  display: flex;
+  outline: none;
+}
+
+label {
+  align-items: center;
+  cursor: text;
+  display: flex;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+input,
+label {
+  font-size: 0.9rem;
+  height: 2rem;
+  transition: 0.2s ease-in-out;
+  width: 100%;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.42);
+  background-color: transparent;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label,
+input:focus:not(:placeholder-shown) + label {
+  font-size: 0.6rem;
+  pointer-events: none;
+  top: -1rem;
+}
+
+input:focus,
+input:not(:placeholder-shown),
+input:focus:not(:placeholder-shown) {
+  border: none;
+  border-bottom: 1px solid #31b15c;
+  transition: border-bottom 0.2s ease-in-out;
+}
+
 .container-register-proposal {
   align-items: center;
   display: flex;
@@ -16,6 +61,7 @@
 }
 
 .btn-register-login-proposal:hover {
+ background-color: transparent;
   color: #239b4c;
 }
 

@@ -4,7 +4,7 @@
   border-radius: 5px;
   padding: 0.5rem 1rem;
   position: absolute;
-  top: 50%;
+  top: 25%;
   text-align: start;
   display: flex;
   flex-direction: column;
@@ -12,9 +12,15 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+.padding {
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .close-modal-btn {
   cursor: pointer;
-  color: #5cb965;
+  color: #31b15c;
 }
 
 .filter-btn {
@@ -23,11 +29,18 @@
   align-self: center;
 }
 
-.price-tag {
+.price-tag,
+.price-tag:not(:placeholder-shown) {
   max-width: 5rem;
   max-height: 1.5rem;
+  border-bottom: none;
   border: 1px solid #dddddd;
   border-radius: 5px;
+}
+
+.price-tag:focus,
+.price-tag:focus:not(:placeholder-shown) {
+  border: 1px solid #31b15c;
 }
 
 .price-container {
@@ -47,21 +60,16 @@
   width: 20px;
   border-radius: 20px;
   background-color: #5cb965;
-
   top: -7px;
 }
 
-.slider .progress {
-  height: 5px;
-  border-radius: 5px;
-  background-color: #2c2c2c;
-  left: 30%;
-  right: 25%;
-  position: absolute;
+.slider .track-1 {
+  background-color: #5cb965;
+  height: 100%;
 }
 
 @media (max-width: 800px) {
-  .price-filter-moda {
+  .price-filter-modal {
     width: 70%;
   }
 }

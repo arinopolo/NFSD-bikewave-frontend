@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const login = async (email, password) => {
@@ -39,23 +42,10 @@ const register = async (values) => {
       },
     });
 
-    if (!backendResponse.ok) {
-      throw new Error(
-        `Error: ${backendResponse.status} - ${backendResponse.statusText}`
-      );
-    }
-
     const data = await backendResponse.json();
-
     return data;
   } catch (error) {
-    console.error(
-      "Error en la operación de registrar un usuario:",
-      error.message
-    );
-
-    const data = null;
-    return data;
+    console.error("Register error:", error.message);
   }
 };
 
@@ -69,9 +59,6 @@ const getBicyclesList = async () => {
       },
     });
 
-    if (!backendResponse.ok) {
-      throw new Error("Failed to fetch data");
-    }
     const data = await backendResponse.json();
     return data;
   } catch (error) {
@@ -80,24 +67,40 @@ const getBicyclesList = async () => {
 };
 
 // agregar el producto a la lista de productos
-const listItem = async (values) => {
-  const token = window.localStorage.getItem("token");
-  const addProduct = await fetch(`${BASE_URL}/bicycles/add`, {
-    method: "POST",
-    body: JSON.stringify(values),
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  });
+const listItem = async (formData) => {
+  try {
+    const token = localStorage.getItem("token");
+    const addProduct = await fetch(`${BASE_URL}/bicycles/add`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: token,
+      },
+    });
 
-  if (!addProduct.ok) {
-    throw new Error(`Error: ${addProduct.status} - ${addProduct.statusText}`);
+    const data = await addProduct.json();
+    return data;
+  } catch (error) {
+    console.error("Listing error:", error.message);
   }
+};
 
-  const data = await addProduct.json();
-  return data;
+const getBicycleInfo = async () => {
+  try {
+    const backendResponse = await fetch(`${BASE_URL}/bicycles/${userid}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
 };
 
 export default {
@@ -105,4 +108,5 @@ export default {
   register,
   getBicyclesList,
   listItem,
+  getBicycleInfo,
 };

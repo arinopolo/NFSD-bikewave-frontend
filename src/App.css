@@ -37,6 +37,7 @@ h2 {
 
 h3 {
   font-size: 0.8rem;
+  font-weight: 400;
 }
 
 h4 {
@@ -49,82 +50,16 @@ a {
 }
 
 .logo-bikewave {
-  margin: 1rem 1rem;
+  margin: 2rem auto;
   width: 8rem;
-}
-
-button {
-  cursor: pointer;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: flex-start;
-  width: 400px;
-}
-
-input {
-  align-items: flex-end;
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid #868686;
-  display: flex;
-  outline: none;
-}
-
-label {
-  align-items: center;
-  cursor: text;
-  display: flex;
-  left: 0;
-  position: absolute;
-  top: 0;
-}
-
-input,
-label {
-  font-size: 0.9rem;
-  height: 2rem;
-  transition: 0.2s ease-in-out;
-  width: 100%;
-}
-
-input:focus + label,
-input:not(:placeholder-shown) + label,
-input:focus:not(:placeholder-shown) + label {
-  font-size: 0.6rem;
-  pointer-events: none;
-  top: -1rem;
-}
-
-input:focus,
-input:not(:placeholder-shown),
-input:focus:not(:placeholder-shown) {
-  border-bottom: 1px solid #31b15c;
-  transition: border-bottom 0.2s ease-in-out;
-}
-
-.submit {
-  align-items: center;
-  background-color: #31b15c;
-  border: transparent;
-  border: 0;
-  border-radius: 50px;
-  color: white;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-style: italic;
-  font-weight: 700;
-  height: auto;
-  justify-content: center;
-  padding: 0.7rem 0;
-  transition: 0.3s ease-in-out;
-}
-
-.submit:hover {
-  background-color: #239b4c;
+  width: 30vw;
 }
 
 .field-holder {
@@ -159,6 +94,13 @@ input:focus:not(:placeholder-shown) {
   justify-content: space-between;
   align-items: center;
 }
+
+.flex-row {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
 .flex-row-center {
   display: flex;
   justify-content: center;
@@ -172,13 +114,39 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.search-input {
-  width: 25rem;
-  border-radius: 100px;
-  border: 1px solid #239b4c;
+select {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.42);
+  color: rgba(0, 0, 0, 0.42);
+  border-radius: 5px;
+  width: 100%;
+  height: 2rem;
+}
+
+textarea {
+  background-color: white;
+  font-family: "Inter", system-ui, "Avenir", Helvetica, Arial, sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.42);
+  color: rgba(0, 0, 0, 0.42);
+  border-radius: 5px;
+  width: 100%;
+}
+
+textarea:focus,
+textarea:focus-visible {
+  border: 1px solid #31b15c;
+}
+
+select:focus,
+select:focus-visible {
+  border: 1px solid #31b15c;
 }
 @media (max-width: 800px) {
   form {
-    width: 70%;
+    width: 80%;
+  }
+
+  .logo-bikewave {
+    margin: 3rem auto;
   }
 }

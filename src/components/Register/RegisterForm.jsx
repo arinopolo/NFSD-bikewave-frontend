@@ -4,6 +4,7 @@ import api from "../../api/api";
 import { useState } from "react";
 import RegistrationSuccessMessage from "./RegistrationSuccessMessage";
 import RegistrationFailMessage from "./RegistrationFailMessage";
+import Button from "../button/Button";
 
 const RegisterForm = ({ toggle }) => {
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
@@ -14,8 +15,7 @@ const RegisterForm = ({ toggle }) => {
     try {
       const registerData = await api.register(values);
 
-      if (registerData) {
-
+      if (registerData.success) {
         setRegistrationSuccessful(true);
       }
     } catch (error) {
@@ -119,8 +119,9 @@ const RegisterForm = ({ toggle }) => {
                     id="firstName"
                     name="firstName"
                     placeholder=""
+                    className="input-login"
                   />
-                  <label htmlFor="firstName">
+                  <label htmlFor="firstName" className="label-login">
                     Nombre <span className="required">*</span>
                   </label>
                   <ErrorMessage
@@ -135,8 +136,9 @@ const RegisterForm = ({ toggle }) => {
                     id="secondName"
                     name="secondName"
                     placeholder=""
+                    className="input-login"
                   />
-                  <label htmlFor="secondName">
+                  <label htmlFor="secondName" className="label-login">
                     Apellido <span className="required">*</span>
                   </label>
                   <ErrorMessage
@@ -147,20 +149,27 @@ const RegisterForm = ({ toggle }) => {
                 </div>
               </div>
               <div className="field-holder-register">
-                <Field type="text" id="email" name="email" placeholder="" />
-                <label htmlFor="email">
+                <Field
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder=""
+                  className="input-login"
+                />
+                <label htmlFor="email" className="label-login">
                   Email <span className="required">*</span>
                 </label>
                 <ErrorMessage name="email" component="div" className="error" />
               </div>
               <div className="field-holder-register">
                 <Field
+                  className="input-login"
                   type="text"
                   id="password"
                   name="password"
                   placeholder=""
                 />
-                <label htmlFor="password">
+                <label htmlFor="password" className="label-login">
                   Contraseña <span className="required">*</span>
                 </label>
                 <ErrorMessage
@@ -170,10 +179,7 @@ const RegisterForm = ({ toggle }) => {
                 />
               </div>
 
-              {/* Botón de envío */}
-              <button type="submit" className="submit">
-                Registrarme
-              </button>
+              <Button text={"Registrarme"} />
             </Form>
           )}
         </Formik>

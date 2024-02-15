@@ -1,0 +1,37 @@
+.detailed-item-container {
+  display: grid;
+  grid-template-columns: 60% 1fr;
+  grid-template-rows: auto;
+  text-align: start;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.like-text {
+  color: #31b15c;
+  font-weight: 700;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+@media (max-width: 800px) {
+  .detailed-item-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .details {
+    width: 90%;
+    padding: 0;
+    margin-bottom: 6rem;
+  }
+}
