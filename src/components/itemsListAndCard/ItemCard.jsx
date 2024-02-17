@@ -7,6 +7,12 @@ import NotLikedHeart from "../heart/NotLikedHeart";
 import { Link } from "react-router-dom";
 
 const ItemCard = ({ bicycle, setFavorite }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleClickLike = (bicycleId) => {
+    setIsLiked(!isLiked);
+    setFavorite(bicycleId);
+  };
   return (
     <div key={bicycle._id} className="item-container">
       <div
@@ -20,10 +26,11 @@ const ItemCard = ({ bicycle, setFavorite }) => {
           backgroundPosition: "center",
           position: "relative",
         }}
-        onClick={() => setFavorite(bicycle._id)}
+        onClick={() => handleClickLike(bicycle._id)}
       >
-        <NotLikedHeart />
+        <div>{isLiked ? <LikedHeart /> : <NotLikedHeart />}</div>
       </div>
+
       <Link to={`/products/${bicycle._id}`}>
         <div className="item-info-container">
           <div>

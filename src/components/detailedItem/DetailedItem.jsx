@@ -1,8 +1,8 @@
 import React from "react";
-import BigPhoto from "../../components/photos/bigPhoto/BigPhoto";
+import BigPhoto from "../photos/bigPhoto/BigPhoto";
 import "./DetailedItem.css";
-import LikedHeart from "../../components/heart/LikedHeart";
-import NotLikedHeart from "../../components/heart/NotLikedHeart";
+import LikedHeart from "../heart/LikedHeart";
+import NotLikedHeart from "../heart/NotLikedHeart";
 import {
   CityIcon,
   ElectricIcon,
@@ -11,8 +11,8 @@ import {
   ProIcon,
   RoadIcon,
 } from "../../assets/SVGIcons";
-import CategoryComponent from "../../components/filters/CategoryComponent";
-import Button from "../../components/button/Button";
+import CategoryComponent from "../filters/category/Category";
+import Button from "../button/Button";
 
 const DetailedItem = ({ bicycle }) => {
   const categoryIcons = {

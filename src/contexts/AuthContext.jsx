@@ -3,28 +3,42 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState({
+    token: null,
+    userId: null,
+  });
 
-  const updateToken = (token) => {
-    window.localStorage.setItem("token", token);
+  const updateUser = (userData) => {
+    window.localStorage.setItem("token", userData.token);
+    window.localStorage.setItem("userId", userData.userId);
 
-    setToken(token);
+    setUser({ ...user, ...userData });
   };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    setToken(token);
+    const userId = window.localStorage.getItem("userId");
+    if (token) {
+      setUser((prevUser) => ({ ...prevUser, token }));
+    }
+    if (userId) {
+      setUser((prevUser) => ({ ...prevUser, userId }));
+    }
   }, []);
 
   const logout = () => {
-    setToken(null);
+    setUser((prevUser) => ({ ...prevUser, token: null, userId: null }));
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userId");
   };
 
   const contextValue = {
-    token,
-    updateToken,
+    user,
+    setUser,
+    updateUser,
     logout,
   };
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+  );
 };

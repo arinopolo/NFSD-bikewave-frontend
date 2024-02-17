@@ -36,7 +36,6 @@ h2 {
 }
 
 h3 {
-  font-size: 0.8rem;
   font-weight: 400;
 }
 
@@ -52,6 +51,10 @@ a {
 .logo-bikewave {
   margin: 2rem auto;
   width: 8rem;
+}
+
+.bold {
+  font-weight: 800;
 }
 
 form {

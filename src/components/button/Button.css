@@ -1,6 +1,5 @@
 button {
-    
-    align-items: center;
+  align-items: center;
   background-color: #31b15c;
   border: transparent;
   border: 0;
@@ -12,10 +11,10 @@ button {
   font-weight: 700;
   height: auto;
   justify-content: center;
-  padding: 0.7rem 0;
+  padding: 0.7rem 1rem;
   transition: 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #239b4c;
-  }
+  background-color: #239b4c;
+}

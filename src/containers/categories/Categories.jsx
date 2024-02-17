@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import "../styles/Categories.css";
-import CategoryComponent from "../components/filters/CategoryComponent";
+import React, { useState } from "react";
+import CategoryComponent from "../../components/filters/category/Category";
+import "./Categories.css";
 import {
   AllIcon,
   CityIcon,
@@ -9,7 +9,7 @@ import {
   GravelIcon,
   ElectricIcon,
   ProIcon,
-} from "../assets/SVGIcons";
+} from "../../assets/SVGIcons";
 
 const CategoriesFilter = ({ setCategory, category }) => {
   const [isActive, setIsActive] = useState("all");

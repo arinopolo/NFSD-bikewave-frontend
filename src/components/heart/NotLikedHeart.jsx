@@ -6,13 +6,12 @@ const NotLikedHeart = () => {
   return (
     <FontAwesomeIcon
       icon={faHeart}
-      size="2xl"
+      size="xl"
       style={{
         color: "#31b15c",
         position: "absolute",
         top: "0.2rem",
         right: "0.2rem",
-        zIndex: "1",
       }}
     />
   );

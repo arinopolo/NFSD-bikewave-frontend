@@ -7,7 +7,7 @@ const LikedHeart = () => {
     <>
       <FontAwesomeIcon
         icon={faHeart}
-        size="2xl"
+        size="xl"
         style={{
           color: "#31b15c",
           position: "absolute",

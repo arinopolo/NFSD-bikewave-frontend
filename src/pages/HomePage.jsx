@@ -1,12 +1,10 @@
 import LogoComponent from "../components/LogoComponent";
-import Categories from "../components/filters/CategoryComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import SearchFilterComponent from "../containers/SearchAndFilter";
 import FilterModal from "../components/filters/PriceFilter";
-import CategoriesFilter from "../containers/CategoriesFilter";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import CategoriesFilter from "../containers/categories/Categories";
+import api from "../api/api";
 
 const HomePage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
@@ -18,29 +16,17 @@ const HomePage = () => {
   const [maxPrice, setMaxPrice] = useState(3000);
   const [location, setLocation] = useState("");
 
-  console.log(favorite);
-
   const getBicyclesList = async () => {
     try {
-      const categoryParam = category ? `category=${category}&` : "";
-      const minPriceParam = `minPrice=${minPrice}&`;
-      const maxPriceParam = `maxPrice=${maxPrice}&`;
-      const locationParam = location ? `location=${location}&` : "";
-
-      const backendResponse = await fetch(
-        `${BASE_URL}/bicycles/?${categoryParam}${minPriceParam}${maxPriceParam}${locationParam}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      const backendResponse = await api.getBicyclesList(
+        category,
+        minPrice,
+        maxPrice,
+        location
       );
 
-      const data = await backendResponse.json();
-
-      if (data) {
-        setBicyclesList(data);
+      if (backendResponse) {
+        setBicyclesList(backendResponse);
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
@@ -49,20 +35,8 @@ const HomePage = () => {
 
   const addToFavorite = async (favoriteId) => {
     try {
-      const token = localStorage.getItem("token");
-      console.log(favoriteId);
-      const addProduct = await fetch(
-        `${BASE_URL}/users/favorites/${favoriteId}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-
-      const data = await addProduct.json();
-      return data;
+      const backendResponse = await api.addToFavorite(favoriteId);
+      console.log(backendResponse);
     } catch (error) {
       console.error("Listing error:", error.message);
     }
@@ -94,7 +68,11 @@ const HomePage = () => {
         />
       )}
       <CategoriesFilter setCategory={setCategory} category={category} />
-      <ItemsList bicyclesList={bicyclesList} setFavorite={setFavorite} />
+      <ItemsList
+        bicyclesList={bicyclesList}
+        setFavorite={setFavorite}
+        favorite={favorite}
+      />
     </>
   );
 };

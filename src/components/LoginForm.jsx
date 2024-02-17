@@ -9,7 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import Button from "./button/Button";
 
 const LoginForm = ({ toggle }) => {
-  const { token, updateToken } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loginTried, setLoginTried] = useState(false);
@@ -21,7 +21,8 @@ const LoginForm = ({ toggle }) => {
       setErrorMessage("");
       const loginData = await api.login(values.email, values.password);
       if (loginData && loginData.success) {
-        updateToken(loginData.token);
+        console.log(loginData);
+        updateUser({ userId: loginData.userId, token: loginData.token });
         navigate("/");
       } else {
         setErrorMessage(loginData.msg);
@@ -103,7 +104,7 @@ const LoginForm = ({ toggle }) => {
 
               <ErrorMessage name="password" component="div" className="error" />
 
-              {!token && loginTried ? (
+              {!user.token && loginTried ? (
                 <p className="incorrect-data">Login failed. Try again </p>
               ) : null}
 

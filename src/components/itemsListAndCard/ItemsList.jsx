@@ -6,7 +6,7 @@ const ErrorMessage = () => {
   return <div className="error">No se han encontrado bicicletas</div>;
 };
 
-const ItemsList = ({ bicyclesList, setFavorite }) => {
+const ItemsList = ({ bicyclesList, setFavorite, favorite }) => {
   return (
     <>
       {bicyclesList.length > 0 ? (
@@ -16,6 +16,7 @@ const ItemsList = ({ bicyclesList, setFavorite }) => {
               key={bicycle._id}
               bicycle={bicycle}
               setFavorite={setFavorite}
+              favorite={favorite}
             />
           ))}
         </div>

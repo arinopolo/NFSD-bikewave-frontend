@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginAndRegisterPage from "./pages/LoginAndRegisterPage";
 import ListItemPage from "./pages/ListItemPage";
 import HomePage from "./pages/HomePage";
-import BottomNavigation from "./components/navigation/BottomNavigation";
+import BottomNavigation from "./containers/bottomNavigation/BottomNavigation";
 import ItemPage from "./pages/ItemPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ProfilePage from "./pages/ProfilePage";

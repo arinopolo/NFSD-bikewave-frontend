@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BottomNavigation from "../components/navigation/BottomNavigation";
 import LoginForm from "../components/LoginForm";
 import LogoComponent from "../components/LogoComponent";
 import RegisterForm from "../components/register/RegisterForm";
@@ -22,8 +21,6 @@ const LoginAndRegisterPage = () => {
       ) : (
         <RegisterForm toggle={toggleLoginForm} />
       )}
-
-      <BottomNavigation />
     </div>
   );
 };

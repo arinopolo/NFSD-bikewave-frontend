@@ -1,27 +1,16 @@
 import LogoComponent from "../components/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
-import { useContext, useEffect, useState } from "react";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import { useEffect, useState } from "react";
+import api from "../api/api";
 
 const FavoritesPage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
 
-  const getBicyclesList = async () => {
+  const getFavoritesList = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const backendResponse = await fetch(`${BASE_URL}/users/favorites`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      });
-
-      const data = await backendResponse.json();
-      console.log("my data", data);
-      if (data) {
-        setBicyclesList(data);
+      const backendResponse = await api.getFavoritesList();
+      if (backendResponse) {
+        setBicyclesList(backendResponse);
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
@@ -29,7 +18,7 @@ const FavoritesPage = () => {
   };
 
   useEffect(() => {
-    getBicyclesList();
+    getFavoritesList();
   }, []);
 
   console.log("my bicycle list", bicyclesList);
