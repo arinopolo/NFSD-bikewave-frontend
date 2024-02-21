@@ -1,0 +1,8 @@
+.profile-button {
+  border-bottom: 1px solid #31b15c;
+  width: 50%;
+}
+
+.profile-button:hover {
+  opacity: 1;
+}

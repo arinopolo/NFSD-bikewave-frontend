@@ -1,95 +1,67 @@
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 400px;
-}
-
 input {
-  background-color: transparent;
-
-  border: 0;
-  border-bottom: 1px solid #868686;
-  outline: none;
-  display: flex;
-
   align-items: flex-end;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  display: flex;
+  outline: none;
 }
 
 label {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
   align-items: center;
   cursor: text;
+  display: flex;
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 
 input,
 label {
-  width: 100%;
   font-size: 0.9rem;
   height: 2rem;
-  color: #292929;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
+  width: 100%;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.42);
+  background-color: transparent;
 }
 
 input:focus + label,
 input:not(:placeholder-shown) + label,
-input:valid + label {
+input:focus:not(:placeholder-shown) + label {
   font-size: 0.6rem;
-  top: -1rem;
   pointer-events: none;
+  top: -1rem;
 }
 
 input:focus,
 input:not(:placeholder-shown),
-input:valid {
+input:focus:not(:placeholder-shown) {
+  border: none;
   border-bottom: 1px solid #31b15c;
-}
-
-.submit {
-  background-color: #31b15c;
-  color: white;
-  border-radius: 50px;
-  border: transparent;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-
-  justify-content: center;
-  align-items: center;
-  border: 0;
-
-  height: auto;
-  padding: 0.7rem 0;
-  transition: 0.3s ease-in-out;
-}
-
-.submit:hover {
-  background-color: #239b4c;
-}
-
-.field-holder {
-  width: 100%;
-  position: relative;
+  transition: border-bottom 0.2s ease-in-out;
 }
 
 .container-register-proposal {
+  align-items: center;
   display: flex;
   gap: 0.5rem;
-  align-items: center;
 }
 
-.container-register-proposal > a {
+.btn-register-login-proposal {
+  background: none;
+  border: none;
   color: #31b15c;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-style: italic;
   font-weight: 700;
+  padding: 0;
   transition: 0.3s ease-in-out;
 }
 
-.container-register-proposal > a:hover {
+.btn-register-login-proposal:hover {
+ background-color: transparent;
   color: #239b4c;
 }
 
@@ -102,9 +74,6 @@ input:valid {
 }
 
 @media (max-width: 800px) {
-  form {
-    width: 80%;
-  }
   .link-password-forgoten {
     font-size: 0.8rem;
   }

@@ -1,0 +1,25 @@
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50rem;
+}
+
+.avatar-container p {
+  font-size: 3rem;
+}
+
+.about-me {
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .profile-container {
+    flex-direction: column;
+    width: 90%;
+  }
+}

@@ -1,13 +1,13 @@
 import "./App.css";
-import HomePage from "./containers/HomePage";
 
-import LoginPage from "./containers/LoginPage";
+import AppRoutes from "./AppRouter";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <>
-      <HomePage />
-    </>
+    <AuthContextProvider>
+      <AppRoutes />
+    </AuthContextProvider>
   );
 }
 

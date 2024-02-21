@@ -1,0 +1,24 @@
+.icon {
+  color: #31b15c;
+}
+
+.bottom-nav-btn {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+  width: 10%;
+}
+
+.bottom-nav-btn:hover {
+  font-weight: 600;
+  scale: 1.05;
+}
+
+@media (max-width: 800px) {
+  .bottom-nav-btn {
+    flex-grow: 1;
+  }
+}

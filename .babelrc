@@ -1,0 +1,7 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "externals": {
+    "@babel/runtime/helpers/extends": "_extends",
+    "@babel/runtime/helpers/inheritsLoose": "_inheritsLoose"
+  }
+}

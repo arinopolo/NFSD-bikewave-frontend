@@ -1,0 +1,11 @@
+.settings-container {
+  padding: 2rem 0;
+  width: 50%;
+  height: 80vh;
+  cursor: pointer;
+}
+
+.btn-close-session {
+  width: 100%;
+  align-self: center;
+}

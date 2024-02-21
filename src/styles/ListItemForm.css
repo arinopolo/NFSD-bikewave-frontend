@@ -1,0 +1,136 @@
+.big-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: start;
+}
+
+.list-item-container {
+  width: 90%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.steps {
+  display: flex;
+  gap: 1rem;
+}
+
+.steps > * {
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: #31b15c;
+  border-radius: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.steps span {
+  font-size: 0.8rem;
+  color: white;
+}
+
+.input-listitem,
+.input-listitem:not(:placeholder-shown) {
+  border: 1px solid rgba(0, 0, 0, 0.42);
+  padding: 1rem 0.4rem;
+  border-radius: 10px;
+}
+
+.label-listitem {
+  padding: 0 0.4rem;
+}
+
+.input-listitem:focus + label,
+.input-listitem:not(:placeholder-shown) + label,
+.input-listitem:focus:not(:placeholder-shown) + label {
+  font-size: 0.6rem;
+  pointer-events: none;
+  top: -1.5rem;
+  padding: 0;
+}
+
+.input-listitem:focus,
+.input-listitem:focus:not(:placeholder-shown) {
+  border: 1px solid #31b15c;
+  transition: border-bottom 0.2s ease-in-out;
+}
+
+#firststep,
+#secondstep,
+#thirdstep {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.step-btn {
+  padding: 0.6rem 0.5rem;
+  border-radius: 5px;
+  border: transparent;
+  width: 50%;
+  background-color: #31b15c;
+  color: white;
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.back {
+  border: 1px solid rgba(0, 0, 0, 0.232);
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.232);
+}
+
+button:disabled {
+  cursor: auto;
+}
+
+.btn-container {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+input[type="file"] {
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.file-selector {
+  width: 5rem;
+  height: 5rem;
+  background-color: #31b15c;
+  border-radius: 50px;
+}
+
+.file-selector h3 {
+  color: white;
+  font-size: 2rem;
+}
+.file-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.selected-photo {
+  width: 20rem;
+}
+@media (max-width: 800px) {
+  .list-item-container {
+    margin-top: 5rem;
+    justify-content: flex-start;
+  }
+}
