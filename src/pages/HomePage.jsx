@@ -10,6 +10,7 @@ import Map from "../components/Map";
 
 const HomePage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
+  const [favoritesList, setFavoritesList] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [refresh, toggleRefresh] = useState(false);
@@ -32,6 +33,7 @@ const HomePage = () => {
       // MAP OVER THE FULL ARRAY OF BICYCLES
       // backendResponse.forEach(bicycle => is included in favourites list?, if so bicycle.isFav: true)
       if (backendResponse) {
+        console.log("todos los bicis", backendResponse);
         setBicyclesList(backendResponse);
       }
     } catch (error) {
@@ -43,13 +45,22 @@ const HomePage = () => {
     getBicyclesList();
   }, [category, minPrice, maxPrice, location, refresh]);
 
-  /* useEffect(() => {
-    if (favorite) {
-      addToFavorite(favorite);
+  const getFavoritesList = async () => {
+    try {
+      const backendResponse = await api.getFavoritesList();
+      console.log("mis fav", backendResponse);
+      if (backendResponse) {
+        setFavoritesList(backendResponse);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
     }
-  }, [favorite]);
+  };
 
-  */
+  useEffect(() => {
+    getFavoritesList();
+  }, []);
+
   return (
     <>
       <LogoComponent />
