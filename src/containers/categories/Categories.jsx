@@ -11,7 +11,7 @@ import {
   ProIcon,
 } from "../../assets/SVGIcons";
 
-const CategoriesFilter = ({ setCategory, category }) => {
+const CategoriesFilter = ({ setCategory }) => {
   const [isActive, setIsActive] = useState("all");
 
   const handleCategoryClick = (category) => {

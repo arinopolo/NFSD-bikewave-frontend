@@ -202,20 +202,32 @@ const ListItemForm = () => {
                     className="error"
                   />
                 </div>
+                <div className="flex flex-column align-center gap-1">
+                  <h4 className="label-file">Añade una foto de tu bici</h4>
+                  <div className="file-container">
+                    <Field
+                      type="file"
+                      id="photo"
+                      name="photo"
+                      onChange={handlePhotoChange}
+                    />
 
-                <div className="field-holder">
-                  <Field
-                    type="file"
-                    id="photo"
-                    name="photo"
-                    onChange={handlePhotoChange}
-                  />
+                    <div className="file-selector flex justify-center align-center">
+                      <h3>+</h3>
+                    </div>
 
-                  <ErrorMessage
-                    name="photo"
-                    component="div"
-                    className="error"
-                  />
+                    <ErrorMessage
+                      name="photo"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
+                  {photoFile && (
+                    <img
+                      className="selected-photo"
+                      src={URL.createObjectURL(photoFile)}
+                    />
+                  )}
                 </div>
               </div>
             )}

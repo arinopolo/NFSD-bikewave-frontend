@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .steps {
@@ -38,7 +39,7 @@
 .input-listitem:not(:placeholder-shown) {
   border: 1px solid rgba(0, 0, 0, 0.42);
   padding: 1rem 0.4rem;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .label-listitem {
@@ -99,12 +100,34 @@ button:disabled {
 }
 
 input[type="file"] {
-  border-bottom: none;
-  width: 100%;
-  cursor: pointer;
-  padding: 10px 15px;
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
+.file-selector {
+  width: 5rem;
+  height: 5rem;
+  background-color: #31b15c;
+  border-radius: 50px;
+}
+
+.file-selector h3 {
+  color: white;
+  font-size: 2rem;
+}
+.file-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.selected-photo {
+  width: 20rem;
+}
 @media (max-width: 800px) {
   .list-item-container {
     margin-top: 5rem;

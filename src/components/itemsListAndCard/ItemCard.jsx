@@ -5,66 +5,81 @@ import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
 import LikedHeart from "../heart/LikedHeart";
 import NotLikedHeart from "../heart/NotLikedHeart";
 import { Link } from "react-router-dom";
+import api from "../../api/api";
 
-const ItemCard = ({ bicycle, setFavorite }) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleClickLike = (bicycleId) => {
-    setIsLiked(!isLiked);
-    setFavorite(bicycleId);
+const ItemCard = ({ bicycle, refresh, toggleRefresh }) => {
+  const handleClickLike = async (bicycleId, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      const backendResponse = await api.addAndDeleterFavorits(bicycleId);
+      console.log(backendResponse);
+      toggleRefresh(!refresh);
+    } catch (error) {
+      console.error("Listing error:", error.message);
+    }
   };
   return (
-    <div key={bicycle._id} className="item-container">
-      <div
-        src=""
-        alt=""
-        className="item-pic"
-        style={{
-          backgroundImage: `url(${bicycle.photo})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          position: "relative",
-        }}
-        onClick={() => handleClickLike(bicycle._id)}
-      >
-        <div>{isLiked ? <LikedHeart /> : <NotLikedHeart />}</div>
-      </div>
-
+    <>
       <Link to={`/products/${bicycle._id}`}>
-        <div className="item-info-container">
-          <div>
-            <div className="flex-row">
-              <h2 className="item-name">
-                {bicycle.brand} <span>{bicycle.model}</span>
-              </h2>
+        <div key={bicycle._id} className="item-container">
+          <div
+            src=""
+            alt=""
+            className="item-pic"
+            style={{
+              backgroundImage: `url(${bicycle.photo})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              position: "relative",
+            }}
+          >
+            <div>
+              {bicycle.isFav ? (
+                <LikedHeart onClick={(e) => handleClickLike(bicycle._id, e)} />
+              ) : (
+                <NotLikedHeart
+                  onClick={(e) => handleClickLike(bicycle._id, e)}
+                />
+              )}
             </div>
-            <h3>{bicycle.category}</h3>
-            <h3>
-              {bicycle.rating ? bicycle.rating : 0}
-              <FontAwesomeIcon
-                icon={faStar}
-                size="sm"
-                style={{ color: "#31b15c" }}
-              />
-            </h3>
           </div>
-          <div className="price-location">
-            <h2 className="lowercase">{bicycle.price} €/día </h2>
 
-            <h3>
-              {" "}
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                size="sm"
-                style={{ color: "#31b15c" }}
-              />{" "}
-              {bicycle.location}
-            </h3>
+          <div className="item-info-container">
+            <div>
+              <div className="flex-row">
+                <h2 className="item-name">
+                  {bicycle.brand} <span>{bicycle.model}</span>
+                </h2>
+              </div>
+              <h3>{bicycle.category}</h3>
+              <h3>
+                {bicycle.rating ? bicycle.rating : 0}
+                <FontAwesomeIcon
+                  icon={faStar}
+                  size="sm"
+                  style={{ color: "#31b15c" }}
+                />
+              </h3>
+            </div>
+            <div className="price-location">
+              <h2 className="lowercase">{bicycle.price} €/día </h2>
+
+              <h3>
+                {" "}
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  size="sm"
+                  style={{ color: "#31b15c" }}
+                />{" "}
+                {bicycle.location}
+              </h3>
+            </div>
           </div>
         </div>
       </Link>
-    </div>
+    </>
   );
 };
 

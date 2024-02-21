@@ -97,14 +97,14 @@ const getFavoritesList = async () => {
 };
 
 // añadir a favorites
-const addToFavorite = async (favoriteId) => {
+const addAndDeleterFavorits = async (favoriteId) => {
   try {
     const token = localStorage.getItem("token");
     console.log(favoriteId);
     const addProduct = await fetch(
       `${BASE_URL}/users/favorites/${favoriteId}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           Authorization: token,
         },
@@ -180,6 +180,6 @@ export default {
   getFavoritesList,
   listItem,
   getBicycleInfo,
-  addToFavorite,
+  addAndDeleterFavorits,
   getUserInfo,
 };

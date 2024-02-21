@@ -6,7 +6,7 @@ const ErrorMessage = () => {
   return <div className="error">No se han encontrado bicicletas</div>;
 };
 
-const ItemsList = ({ bicyclesList, setFavorite, favorite }) => {
+const ItemsList = ({ bicyclesList, refresh, toggleRefresh }) => {
   return (
     <>
       {bicyclesList.length > 0 ? (
@@ -15,8 +15,9 @@ const ItemsList = ({ bicyclesList, setFavorite, favorite }) => {
             <ItemCard
               key={bicycle._id}
               bicycle={bicycle}
-              setFavorite={setFavorite}
-              favorite={favorite}
+              refresh={refresh}
+              toggleRefresh={toggleRefresh}
+              
             />
           ))}
         </div>

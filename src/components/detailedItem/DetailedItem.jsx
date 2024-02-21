@@ -36,17 +36,12 @@ const DetailedItem = ({ bicycle }) => {
     <>
       <div className="detailed-item-container">
         <BigPhoto photo={bicycle.photo} />
-        <div className="details">
+        <div className="details align-start">
           <div>
             {" "}
             <h1 className="title">{bicycle.brand}</h1>
             <h2>{bicycle.model}</h2>
-            <p className="like-text">
-              <span>
-                <NotLikedHeart />
-              </span>{" "}
-              Añadir a favoritos
-            </p>
+            <p className="like-text">Añadir a favoritos</p>
           </div>
           <div>
             <CategoryComponent

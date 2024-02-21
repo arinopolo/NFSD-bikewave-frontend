@@ -3,7 +3,7 @@ import ListItemForm from "../components/ListItemForm";
 
 const ListItem = () => {
   return (
-    <div className="list-item-container">
+    <div className="list-item-container mb-15">
       <div>
         <h1 className="big-title">
           ¡Comparte tu pasión por el ciclismo y gana dinero extra alquilando tu

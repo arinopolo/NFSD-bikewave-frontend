@@ -14,23 +14,25 @@ const DetailedProfile = ({ userInfo }) => {
   };
   return (
     <>
-      <div className="profile-container">
-        <div className="avatar-container">
-          <p>{userInfo.firstName[0]}</p>
-          <p>{userInfo.secondName[0]}</p>
+      <div className="profile-container flex gap-1 align-center">
+        <div>
+          <div className="avatar-container">
+            <p>{userInfo.firstName[0]}</p>
+            <p>{userInfo.secondName[0]}</p>
+          </div>
+          <div className="flex gap-05 justify-center">
+            <h2>{userInfo.firstName}</h2>
+            <h2> {userInfo.secondName}</h2>
+          </div>
         </div>
-        <h1>
-          {userInfo.firstName}
-          {userInfo.secondName}
-        </h1>
-        <p>
-          ¡Hola a todos! Soy {userInfo.firstName} y acabo de unirme a{" "}
-          <span className="bold"> Bikewave.</span>
-          ¡Estoy emocionad@ por montar y alquilar bicicletas geniales!{" "}
-          {userInfo.firstName}
-        </p>
+        <div className="flex justify-start ">
+          <p className="about-me">
+            ¡Hola a todos! Soy {userInfo.firstName} y acabo de unirme a
+            <span className="bold"> Bikewave.</span>
+            ¡Estoy emocionad@ por montar y alquilar bicicletas geniales!
+          </p>
+        </div>
       </div>
-      <Button text={"Cerrar sesion"} onClick={() => handleLogoutClick()}  className="btn-close-session"/>
     </>
   );
 };

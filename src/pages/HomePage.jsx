@@ -5,11 +5,14 @@ import SearchFilterComponent from "../containers/SearchAndFilter";
 import FilterModal from "../components/filters/PriceFilter";
 import CategoriesFilter from "../containers/categories/Categories";
 import api from "../api/api";
+import GoogleMapReact from "google-map-react";
+import Map from "../components/Map";
 
 const HomePage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
-  const [favorite, setFavorite] = useState("");
+
   const [modalVisible, setModalVisible] = useState(false);
+  const [refresh, toggleRefresh] = useState(false);
 
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState(0);
@@ -24,7 +27,10 @@ const HomePage = () => {
         maxPrice,
         location
       );
-
+      // if logged in, get favourites
+      // once i have the favs... I MERGE THE WITH THE OTHER LIST
+      // MAP OVER THE FULL ARRAY OF BICYCLES
+      // backendResponse.forEach(bicycle => is included in favourites list?, if so bicycle.isFav: true)
       if (backendResponse) {
         setBicyclesList(backendResponse);
       }
@@ -33,24 +39,17 @@ const HomePage = () => {
     }
   };
 
-  const addToFavorite = async (favoriteId) => {
-    try {
-      const backendResponse = await api.addToFavorite(favoriteId);
-      console.log(backendResponse);
-    } catch (error) {
-      console.error("Listing error:", error.message);
-    }
-  };
-
   useEffect(() => {
     getBicyclesList();
-  }, [category, minPrice, maxPrice, location]);
+  }, [category, minPrice, maxPrice, location, refresh]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (favorite) {
       addToFavorite(favorite);
     }
   }, [favorite]);
+
+  */
   return (
     <>
       <LogoComponent />
@@ -70,9 +69,11 @@ const HomePage = () => {
       <CategoriesFilter setCategory={setCategory} category={category} />
       <ItemsList
         bicyclesList={bicyclesList}
-        setFavorite={setFavorite}
-        favorite={favorite}
+        refresh={refresh}
+        toggleRefresh={toggleRefresh}
       />
+
+      <Map />
     </>
   );
 };
