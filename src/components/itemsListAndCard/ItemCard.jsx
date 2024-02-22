@@ -7,7 +7,12 @@ import NotLikedHeart from "../heart/NotLikedHeart";
 import { Link } from "react-router-dom";
 import api from "../../api/api";
 
-const ItemCard = ({ bicycle, refresh, toggleRefresh }) => {
+const ItemCard = ({
+  bicycle,
+  refresh,
+  toggleRefresh,
+  isFavorite,
+}) => {
   const handleClickLike = async (bicycleId, e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -36,7 +41,7 @@ const ItemCard = ({ bicycle, refresh, toggleRefresh }) => {
             }}
           >
             <div>
-              {bicycle.isFav ? (
+              {isFavorite ? (
                 <LikedHeart onClick={(e) => handleClickLike(bicycle._id, e)} />
               ) : (
                 <NotLikedHeart

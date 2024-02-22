@@ -59,7 +59,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getFavoritesList();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -80,6 +80,7 @@ const HomePage = () => {
       <CategoriesFilter setCategory={setCategory} category={category} />
       <ItemsList
         bicyclesList={bicyclesList}
+        favoritesList={favoritesList}
         refresh={refresh}
         toggleRefresh={toggleRefresh}
       />
