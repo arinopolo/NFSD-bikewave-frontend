@@ -6,7 +6,7 @@ const ErrorMessage = () => {
   return <div className="error">No se han encontrado bicicletas</div>;
 };
 
-const ItemsList = ({ bicyclesList, refresh, toggleRefresh }) => {
+const ItemsList = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   return (
     <>
       {bicyclesList.length > 0 ? (
@@ -17,7 +17,13 @@ const ItemsList = ({ bicyclesList, refresh, toggleRefresh }) => {
               bicycle={bicycle}
               refresh={refresh}
               toggleRefresh={toggleRefresh}
-              
+              isFavorite={
+                Array.isArray(favoritesList)
+                  ? favoritesList.findIndex(
+                      (fav) => fav._id === bicycle._id
+                    ) !== -1
+                  : false
+              }
             />
           ))}
         </div>

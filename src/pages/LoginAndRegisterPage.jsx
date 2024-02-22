@@ -16,11 +16,7 @@ const LoginAndRegisterPage = () => {
     <div className="login-page-container">
       <LogoComponent />
 
-      {showLoginForm ? (
-        <LoginForm toggle={toggleLoginForm} />
-      ) : (
-        <RegisterForm toggle={toggleLoginForm} />
-      )}
+      <LoginForm toggle={toggleLoginForm} />
     </div>
   );
 };

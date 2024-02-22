@@ -104,7 +104,7 @@ const addAndDeleterFavorits = async (favoriteId) => {
     const addProduct = await fetch(
       `${BASE_URL}/users/favorites/${favoriteId}`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           Authorization: token,
         },
