@@ -33,17 +33,4 @@
   font-size: 0.7rem;
 }
 
-@media (max-width: 800px) {
-  .categories {
-    width: 90%;
-    height: auto;
-    gap: 5%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
 
-  .categories > div {
-    scroll-snap-align: start;
-  }
-}

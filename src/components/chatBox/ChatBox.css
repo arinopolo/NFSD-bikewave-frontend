@@ -1,0 +1,40 @@
+.chat-container,
+.chat-input {
+  width: 100%;
+}
+
+.chat-body {
+  width: 100%;
+  max-height: 40vh;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+  overflow-y: auto;
+}
+
+.chat-body > * {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+.message {
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.own {
+  text-align: right;
+}
+
+.other-message {
+  align-self: flex-start;
+}
+
+.date {
+  font-size: 0.6rem;
+}
+
+.react-input-emoji--button:hover {
+  background-color: transparent;
+}

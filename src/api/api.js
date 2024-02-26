@@ -54,7 +54,7 @@ const register = async (values) => {
 const getBicyclesList = async (category, minPrice, maxPrice, location) => {
   try {
     console.log(" mis params", category, minPrice, maxPrice, location);
-    const categoryParam = category ? `category=${category}&` : "";
+    const categoryParam = category !== "all" ? `category=${category}&` : "";
     const minPriceParam = `minPrice=${minPrice}&`;
     const maxPriceParam = `maxPrice=${maxPrice}&`;
     const locationParam = location ? `location=${location}&` : "";

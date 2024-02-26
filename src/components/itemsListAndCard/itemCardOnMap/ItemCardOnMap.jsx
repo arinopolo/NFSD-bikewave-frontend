@@ -1,34 +1,16 @@
-import React, { useState } from "react";
-import "../../styles/ItemCard.css";
+import React from "react";
+import "./ItemCardOnMap.css";
+import { Link } from "react-router-dom";
+import LikedHeart from "../../heart/LikedHeart";
+import NotLikedHeart from "../../heart/NotLikedHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
-import LikedHeart from "../heart/LikedHeart";
-import NotLikedHeart from "../heart/NotLikedHeart";
-import { Link } from "react-router-dom";
-import api from "../../api/api";
 
-const ItemCard = ({
-  bicycle,
-  refresh,
-  toggleRefresh,
-  isFavorite,
-  
-}) => {
-  const handleClickLike = async (bicycleId, e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    try {
-      const backendResponse = await api.addAndDeleterFavorits(bicycleId);
-      console.log(backendResponse);
-      toggleRefresh(!refresh);
-    } catch (error) {
-      console.error("Listing error:", error.message);
-    }
-  };
+const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
   return (
     <>
       <Link to={`/products/${bicycle._id}`}>
-        <div key={bicycle._id} className="item-container">
+        <div key={bicycle._id} className="item-container-map">
           <div
             src=""
             alt=""
@@ -89,4 +71,4 @@ const ItemCard = ({
   );
 };
 
-export default ItemCard;
+export default ItemCardOnMap;

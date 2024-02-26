@@ -7,6 +7,7 @@ import BottomNavigation from "./containers/bottomNavigation/BottomNavigation";
 import ItemPage from "./pages/ItemPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ProfilePage from "./pages/ProfilePage";
+import ChatPage from "./pages/ChatPage";
 
 const AppRoutes = () => {
   return (
@@ -18,7 +19,8 @@ const AppRoutes = () => {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/login" element={<LoginAndRegisterPage />} />
             <Route path="/list-item" element={<ListItemPage />} />
-            <Route path="/products/:userid" element={<ItemPage />} />
+            <Route path="/products/:bikeid" element={<ItemPage />} />
+            <Route path="/chats" element={<ChatPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </>
