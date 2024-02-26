@@ -15,9 +15,9 @@ const CategoriesFilter = ({ setCategory }) => {
   const [isActive, setIsActive] = useState("all");
 
   const handleCategoryClick = (category) => {
+    console.log("click");
     setIsActive(category);
     setCategory(category);
-    console.log("categoria", category);
   };
 
   const handleActiveCategory = (category) => {
@@ -28,7 +28,7 @@ const CategoriesFilter = ({ setCategory }) => {
       <div className="categories">
         <CategoryComponent
           onClick={() => {
-            handleCategoryClick(null);
+            handleCategoryClick("all");
           }}
           className={handleActiveCategory("all")}
           text={"Todas"}

@@ -36,7 +36,8 @@ h2 {
 }
 
 h3 {
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 h4 {
@@ -193,6 +194,10 @@ select:focus-visible {
 
 .align-start {
   align-items: flex-start;
+}
+
+.m-bottom {
+  margin-bottom: 10rem;
 }
 @media (max-width: 800px) {
   form {

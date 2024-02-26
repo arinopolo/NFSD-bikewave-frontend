@@ -1,17 +1,8 @@
 .big-title {
-  font-size: 2.2rem;
+  font-size: 1.9rem;
   font-weight: 800;
-  text-align: start;
-}
-
-.list-item-container {
-  width: 90%;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
+  text-align: center;
+  width: 50%;
 }
 
 .steps {
@@ -128,9 +119,24 @@ input[type="file"] {
 .selected-photo {
   width: 20rem;
 }
+
+
+.category-option.city {
+  background-image: url('../assets/SVGIcons/CityIcon.svg');
+}
+
+.category-option.road {
+  background-image: url('../assets/SVGIcons/RoadIcon.svg');
+}
+
 @media (max-width: 800px) {
   .list-item-container {
     margin-top: 5rem;
     justify-content: flex-start;
+  }
+
+  .big-title {
+    text-align: left;
+    width: 90%;
   }
 }

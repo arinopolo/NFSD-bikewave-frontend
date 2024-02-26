@@ -1,22 +1,35 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import api from "../api/api";
-import "../styles/ListItemForm.css";
+import api from "../../api/api";
+import "./ListItemForm.css";
 import { useState } from "react";
+import PlacesAutocomplete from "../AutocompleteInput";
+import {
+  CityIcon,
+  RoadIcon,
+  MountainIcon,
+  GravelIcon,
+  ElectricIcon,
+  ProIcon,
+} from "../../assets/SVGIcons";
+import ListItemFailMessage from "./ListItemFailMessage";
+import ListItemSuccessMessage from "./ListItemSuccessMessage";
 
-const ListItemForm = () => {
+const ListItemForm = ({ setListingTried, setListingSuccess }) => {
   const [errorMessage, setErrorMessage] = useState();
   const [step, setStep] = useState(1);
   const [photoFile, setPhotoFile] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
+  const [filledFields, setFilledFields] = useState(false);
 
   const categories = [
-    { key: "Categoría", value: "" },
-    { key: "Ciudad", value: "city" },
-    { key: "Carretera", value: "road" },
-    { key: "Montaña", value: "mountain" },
-    { key: "Gravel", value: "gravel" },
-    { key: "Eléctrico", value: "electric" },
-    { key: "Competición", value: "pro" },
+    { key: "Categoría", value: "", image: "" },
+    { key: "Ciudad", value: "city", image: CityIcon },
+    { key: "Carretera", value: "road", image: RoadIcon },
+    { key: "Montaña", value: "mountain", image: MountainIcon },
+    { key: "Gravel", value: "gravel", image: GravelIcon },
+    { key: "Eléctrico", value: "electric", image: ElectricIcon },
+    { key: "Competición", value: "pro", image: ProIcon },
   ];
 
   const cities = [
@@ -31,24 +44,36 @@ const ListItemForm = () => {
     setPhotoFile(file);
     setFileName(file.name);
   };
+
   const handleListitem = async (values) => {
     try {
-      console.log(values.photo);
-      const formData = new FormData();
-      formData.append("brand", values.brand);
-      formData.append("model", values.model);
-      formData.append("description", values.description);
-      formData.append("location", values.location);
-      formData.append("category", values.category);
-      formData.append("photo", photoFile); // Asegúrate de enviar el archivo de imagen aquí
-      formData.append("price", values.price);
-      formData.append("deposit", values.deposit);
+      if (coordinates) {
+        const formData = new FormData();
+        formData.append("brand", values.brand);
+        formData.append("model", values.model);
+        formData.append("description", values.description);
+        formData.append("location", values.location);
+        formData.append("category", values.category);
+        formData.append("photo", photoFile);
+        formData.append("price", values.price);
+        formData.append("deposit", values.deposit);
+        formData.append("lat", coordinates.lat);
+        formData.append("lng", coordinates.lng);
 
-      const listItemData = await api.listItem(formData);
+        const listItemData = await api.listItem(formData);
 
-      if (listItemData && listItemData.success) {
+        if (listItemData && listItemData.success) {
+          setListingSuccess(true);
+        } else {
+          setErrorMessage(listItemData.msg);
+          setListingSuccess(false);
+        }
       } else {
-        setErrorMessage(listItemData.msg);
+        // Manejar error de geocodificación
+        setListingSuccess(false);
+        setErrorMessage(
+          "No se pudieron obtener las coordenadas para la dirección proporcionada."
+        );
       }
     } catch (error) {
       console.error("Error en la operación de agregar un producto:", error);
@@ -56,7 +81,14 @@ const ListItemForm = () => {
   };
 
   const nextStep = () => {
-    setStep(step + 1);
+  
+
+    if (filledFields) {
+      setStep(step + 1);
+    } else {
+      // Aquí podrías mostrar un mensaje o realizar alguna acción para indicar al usuario que debe completar los campos antes de avanzar.
+      console.log("Completa los campos requeridos antes de continuar.");
+    }
   };
 
   const previousStep = () => {
@@ -74,6 +106,12 @@ const ListItemForm = () => {
         <div className={step === 3 ? "active" : "not-active"}>
           <span>3</span>
         </div>
+        <div className={step === 4 ? "active" : "not-active"}>
+          <span>4</span>
+        </div>
+        <div className={step === 5 ? "active" : "not-active"}>
+          <span>5</span>
+        </div>
       </div>
       <Formik
         initialValues={{
@@ -85,13 +123,54 @@ const ListItemForm = () => {
           photo: "",
           price: 0,
           deposit: 0,
+          address: "",
         }}
         validate={(values) => {
           let errors = {};
-
-          // Validación del correo
-          if (!values.brand) {
-            errors.brand = "Este campo es obligatorio";
+          if (step === 1) {
+            if (!values.brand || !values.model || !values.description) {
+              setFilledFields(false);
+              errors.brand = !values.brand ? "Este campo es obligatorio" : "";
+              errors.model = !values.model ? "Este campo es obligatorio" : "";
+              errors.description = !values.description
+                ? "Este campo es obligatorio"
+                : "";
+            } else {
+              setFilledFields(true);
+            }
+          } else if (step === 2) {
+            if (!values.category) {
+              setFilledFields(false);
+              errors.category = "Este campo es obligatorio";
+            } else {
+              setFilledFields(true);
+            }
+          } else if (step === 3) {
+            if (!values.location || !values.address) {
+              setFilledFields(false);
+              errors.location = !values.location
+                ? "Este campo es obligatorio"
+                : "";
+              errors.address = !values.address
+                ? "Este campo es obligatorio"
+                : "";
+            } else {
+              setFilledFields(true);
+            }
+          } else if (step === 4) {
+            if (!photoFile) {
+              setFilledFields(false);
+              errors.photo = "Debes subir una foto";
+            } else {
+              setFilledFields(true);
+            }
+          } else if (step === 5) {
+            if (!values.price) {
+              setFilledFields(false);
+              errors.price = "Este campo es obligatorio";
+            } else {
+              setFilledFields(true);
+            }
           }
 
           return errors;
@@ -99,13 +178,18 @@ const ListItemForm = () => {
         onSubmit={(values, { resetForm }) => {
           handleListitem(values);
           resetForm();
+          setListingTried(true);
         }}
       >
         {() => (
           <Form encType="multipart/form-data">
             {step === 1 && (
               <div id="firststep">
-                <h3>¿Cuál es la marca, modelo y tamaño de tu bicicleta?</h3>
+                <h3>
+                  Para empezar, selecciona la marca, el modelo y la categoría de
+                  tu bicicleta.
+                </h3>
+
                 <div className="field-holder">
                   <Field
                     type="text"
@@ -133,7 +217,7 @@ const ListItemForm = () => {
                     className="input-listitem"
                   />
                   <label htmlFor="model" className="label-listitem ">
-                    Modelo
+                    Modelo <span className="required">*</span>
                   </label>
                   <ErrorMessage
                     name="model"
@@ -151,7 +235,7 @@ const ListItemForm = () => {
                     className="input-listitem"
                   />
                   <label htmlFor="description" className="label-listitem ">
-                    Descripción
+                    Descripción <span className="required">*</span>
                   </label>
                   <ErrorMessage
                     name="description"
@@ -164,27 +248,8 @@ const ListItemForm = () => {
 
             {step === 2 && (
               <div id="secondstep">
-                <h3>
-                  Selecciona la ciudad donde te encuentras y la categoría de tu
-                  bicicleta
-                </h3>
-                <div className="field-holder">
-                  <Field as="select" id="location" name="location">
-                    {cities.map((city) => {
-                      return (
-                        <option key={city.value} value={city.value}>
-                          {city.key}
-                        </option>
-                      );
-                    })}
-                  </Field>
+                <h3>Selecciona la categoría de tu bicicleta</h3>
 
-                  <ErrorMessage
-                    name="location"
-                    component="div"
-                    className="error"
-                  />
-                </div>
                 <div className="field-holder">
                   <Field as="select" id="category" name="category">
                     {categories.map((category) => {
@@ -202,8 +267,57 @@ const ListItemForm = () => {
                     className="error"
                   />
                 </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div id="thirdstep">
+                <h3>
+                  Indica el precio diario por el cual deseas alquilar tu
+                  bicicleta y, si lo prefieres, especifica el depósito de
+                  garantía.
+                </h3>
+
+                <div className="field-holder">
+                  <Field as="select" id="location" name="location">
+                    {cities.map((city) => {
+                      return (
+                        <option key={city.value} value={city.value}>
+                          {city.key}
+                        </option>
+                      );
+                    })}
+                  </Field>
+
+                  <ErrorMessage
+                    name="location"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <div className="field-holder">
+                  <Field
+                    name="address"
+                    id="address"
+                    component={PlacesAutocomplete}
+                    onUpdateCoordinates={setCoordinates}
+                  />
+
+                  <ErrorMessage
+                    name="address"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div id="thirdstep">
+                <h3>Añade un foto de tu bicicleta.</h3>
+
                 <div className="flex flex-column align-center gap-1">
-                  <h4 className="label-file">Añade una foto de tu bici</h4>
                   <div className="file-container">
                     <Field
                       type="file"
@@ -232,13 +346,14 @@ const ListItemForm = () => {
               </div>
             )}
 
-            {step === 3 && (
+            {step === 5 && (
               <div id="thirdstep">
                 <h3>
                   Indica el precio diario por el cual deseas alquilar tu
                   bicicleta y, si lo prefieres, especifica el depósito de
                   garantía.
                 </h3>
+
                 <div className="field-holder">
                   <Field
                     type="number"
@@ -248,7 +363,7 @@ const ListItemForm = () => {
                     className="input-listitem"
                   />
                   <label htmlFor="price" className="label-listitem ">
-                    Precio <span className="required">*</span>
+                    Precio por día <span className="required">*</span>
                   </label>
                   <ErrorMessage
                     name="price"
@@ -288,12 +403,17 @@ const ListItemForm = () => {
                 Volver
               </button>
 
-              {step !== 3 && (
-                <button type="button" className="step-btn  " onClick={nextStep}>
+              {step !== 5 && (
+                <button
+                  type="button"
+                  className="step-btn  "
+                  onClick={nextStep}
+                  disabled={!filledFields}
+                >
                   Siguiente
                 </button>
               )}
-              {step === 3 && (
+              {step === 5 && (
                 <button type="submit" className="step-btn">
                   Subir
                 </button>
