@@ -1,5 +1,5 @@
 import React from "react";
-import DetailedProfile from "../components/detailedProfile/detailedProfile";
+import DetailedProfile from "../components/detailedProfile/DetailedProfile";
 import MyBicycles from "../components/myBicycles/MyBicycles";
 
 const ProfileInfo = ({ userInfo, myBicyclesList }) => {
