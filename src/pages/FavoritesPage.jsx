@@ -3,6 +3,24 @@ import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import ItemCard from "../components/itemsListAndCard/ItemCard";
+import Button from "../components/button/Button";
+import { useNavigate } from "react-router-dom";
+
+const token = localStorage.getItem("token");
+
+const LoginToContinue = () => {
+  const navigate = useNavigate();
+
+  const handleLoginNavigate = () => {
+    navigate("/login");
+  };
+  return (
+    <>
+      <div>Parece que no estas logueado</div>
+      <Button onClick={handleLoginNavigate} text={"Loguear"} />
+    </>
+  );
+};
 
 const FavoritesPage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
@@ -28,12 +46,15 @@ const FavoritesPage = () => {
     <>
       <LogoComponent />
       <h1>Aqui tienes tus bicicletas favoritas!</h1>
+
       <ItemsList
         bicyclesList={bicyclesList}
         favoritesList={bicyclesList}
         refresh={refresh}
         toggleRefresh={toggleRefresh}
       />
+
+      {!token && <LoginToContinue />}
     </>
   );
 };

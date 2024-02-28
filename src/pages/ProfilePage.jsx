@@ -24,7 +24,8 @@ const ProfilePage = () => {
 
   const getUserInfo = async () => {
     try {
-      const backendResponse = await api.getUserInfo(user.userId);
+      const userId = localStorage.getItem("userId");
+      const backendResponse = await api.getUserInfo(userId);
 
       if (backendResponse) {
         setUserInfo(backendResponse);
@@ -62,7 +63,7 @@ const ProfilePage = () => {
       getUserInfo();
       getMyBicycles();
     }
-  }, [navigate, token]);
+  }, [token]);
 
   if (!userInfo) {
     return <Loading />;

@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Chat = () => {
-  const { user } = useContext(AuthContext);
+  const userId = localStorage.getItem("userId");
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -39,16 +39,22 @@ const Chat = () => {
       }
     };
     getChats();
-  }, [user.userId]);
+  }, [userId]);
 
   // Connect to Socket.io
   useEffect(() => {
-    socket.current = io("ws://localhost:8800");
-    socket.current.emit("new-user-add", user.userId);
-    socket.current.on("get-users", (users) => {
-      setOnlineUsers(users);
-    });
-  }, [user]);
+    if (userId !== null) {
+      socket.current = io("ws://localhost:8800");
+      socket.current.emit("new-user-add", userId);
+      socket.current.on("get-users", (users) => {
+        setOnlineUsers(users);
+      });
+      socket.current.on("receive-message", (data) => {
+        console.log("recevied message", data);
+        setReceiveMessage(data);
+      });
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (sendMessage !== null) {
@@ -56,12 +62,12 @@ const Chat = () => {
     }
   }, [sendMessage]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     socket.current.on("receive-message", (data) => {
       console.log("recevied message", data);
       setReceiveMessage(data);
     });
-  }, []);
+  }, []); */
 
   useEffect(() => {
     console.log("recieved message", receiveMessage);
@@ -83,7 +89,7 @@ const Chat = () => {
                   backgroundColor: "lightgray",
                 }}
               >
-                <Conversation chat={chat} currentUserId={user.userId} />
+                <Conversation chat={chat} currentUserId={userId} />
               </div>
             ))}
           </div>
@@ -93,7 +99,7 @@ const Chat = () => {
           {currentChat ? (
             <ChatBox
               currentChat={currentChat}
-              currentUserId={user.userId}
+              currentUserId={userId}
               setSendMessage={setSendMessage}
               receiveMessage={receiveMessage}
               sendMessage={sendMessage}

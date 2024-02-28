@@ -81,11 +81,11 @@ const ChatBox = ({
     };
 
     const receiverId = currentChat.members.find((id) => id !== currentUserId);
-    setSendMessage({ ...message, receiverId });
+    //setSendMessage({ ...message, receiverId });
     try {
       const token = localStorage.getItem("token");
 
-      const data = await fetch(`${BASE_URL}/messages/`, {
+      const backendResponse = await fetch(`${BASE_URL}/messages/`, {
         method: "POST",
         body: JSON.stringify(message),
         headers: {
@@ -94,7 +94,9 @@ const ChatBox = ({
         },
       });
 
-      setMessages([...messages, message]);
+      const messageSent = await backendResponse.json();
+      console.log("message sent", messageSent);
+      setMessages([...messages, messageSent]);
       setNewMessage("");
     } catch (error) {
       console.log("Error:", error);
@@ -106,7 +108,6 @@ const ChatBox = ({
     // Agregar lógica para agregar el mensaje recibido a la lista de mensajes
 
     if (receiveMessage) {
-     
       setMessages((prevMessages) => [...prevMessages, receiveMessage]);
     }
   }, [receiveMessage]);

@@ -1,8 +1,6 @@
 import React from "react";
 import BigPhoto from "../photos/bigPhoto/BigPhoto";
 import "./DetailedItem.css";
-import LikedHeart from "../heart/LikedHeart";
-import NotLikedHeart from "../heart/NotLikedHeart";
 import {
   CityIcon,
   ElectricIcon,
@@ -32,6 +30,8 @@ const DetailedItem = ({ bicycle }) => {
     electric: "Eléctrico",
     competition: "Competición",
   };
+
+  console.log(bicycle.owner.firstName);
   return (
     <>
       <div className="detailed-item-container">
@@ -50,8 +50,15 @@ const DetailedItem = ({ bicycle }) => {
             />
           </div>
           <p>{bicycle.description}</p>
+          <h3> Ubicación: {bicycle.location}</h3>
           <h2 className="title">{bicycle.price}€/día</h2>
-          <Button text={"Reservar"} />
+          <h4>
+            Propietario: {bicycle.owner.firstName} {bicycle.owner.secondName}
+          </h4>
+          <div className="flex gap-1">
+            <Button text={"Contactar"} />
+            <Button text={"Reservar"} />
+          </div>
         </div>
       </div>
     </>

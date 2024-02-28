@@ -17,8 +17,8 @@ const DetailedProfile = ({ userInfo }) => {
       <div className="profile-container flex gap-1 align-center">
         <div>
           <div className="avatar-container">
-            <p>{userInfo.firstName[0]}</p>
-            <p>{userInfo.secondName[0]}</p>
+            <p>{userInfo?.firstName[0]}</p>
+            <p>{userInfo?.secondName[0]}</p>
           </div>
           <div className="flex gap-05 justify-center">
             <h2>{userInfo.firstName}</h2>
