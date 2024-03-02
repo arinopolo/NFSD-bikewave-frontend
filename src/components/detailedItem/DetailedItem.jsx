@@ -12,8 +12,9 @@ import {
 import CategoryComponent from "../filters/category/Category";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const DetailedItem = ({ bicycle }) => {
   const categoryIcons = {
@@ -37,25 +38,14 @@ const DetailedItem = ({ bicycle }) => {
   const navigate = useNavigate();
 
   const handleContactClick = async () => {
+    const receiver = {
+      receiverId: bicycle.owner._id,
+    };
     try {
-      const token = localStorage.getItem("token");
-
-      const receiver = {
-        receiverId: bicycle.owner._id,
-      };
-
-      const backendResponse = await fetch(`${BASE_URL}/chat/`, {
-        method: "POST",
-        body: JSON.stringify(receiver),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      });
-
-      const chatOpened = await backendResponse.json();
-      console.log(chatOpened);
-      navigate("/chats");
+      const backendResponse = await api.createChat(receiver);
+      if (backendResponse) {
+        navigate("/chats");
+      }
     } catch (error) {
       console.log("Error:", error);
     }
@@ -87,7 +77,6 @@ const DetailedItem = ({ bicycle }) => {
           <div className="flex gap-1">
             <Button text={"Contactar"} onClick={handleContactClick} />
             <Button text={"Reservar"} />
-           
           </div>
         </div>
       </div>

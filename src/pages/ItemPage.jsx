@@ -1,11 +1,9 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import LogoComponent from "../components/LogoComponent";
 import DetailedItem from "../components/detailedItem/DetailedItem";
 import api from "../api/api";
 import Button from "../components/button/Button";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Loading = () => {
   return <div> Loading</div>;
@@ -31,17 +29,13 @@ const ItemPage = () => {
     }
   };
 
-  const deleteBicycle = async () => {
+  const handleDeleteBicycle = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const deleteProduct = await fetch(`${BASE_URL}/bicycles/${bicycle._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: token,
-        },
-      });
+      const backendResponse = await api.deleteBicycle(bicycle);
 
-      navigate("/");
+      if (backendResponse) {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Listing error:", error.message);
     }
@@ -61,7 +55,7 @@ const ItemPage = () => {
 
       <DetailedItem bicycle={bicycle} />
       {bicycle.owner._id === userId ? (
-        <Button text="Eliminar " onClick={deleteBicycle} />
+        <Button text="Eliminar " onClick={handleDeleteBicycle} />
       ) : null}
     </div>
   );

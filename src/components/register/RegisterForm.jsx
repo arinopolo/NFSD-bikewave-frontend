@@ -6,26 +6,14 @@ import RegistrationSuccessMessage from "./RegistrationSuccessMessage";
 import RegistrationFailMessage from "./RegistrationFailMessage";
 import Button from "../button/Button";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 const RegisterForm = ({ toggle }) => {
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [registerTried, setRegisterTried] = useState(false);
 
-  const sendWelcomingEmail = async (registerData) => {
+  const handleWelcomingEmailSend = async (registerData) => {
     try {
-      const backendResponse = await fetch(`${BASE_URL}/users/send-email/`, {
-        method: "POST",
-        body: JSON.stringify(registerData.userToAdd),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await backendResponse.json();
-      console.log(data);
+      const backendResponse = await api.sendWelcomingEmail(registerData);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -38,7 +26,7 @@ const RegisterForm = ({ toggle }) => {
       if (registerData.success) {
         setRegistrationSuccessful(true);
         console.log(registerData);
-        sendWelcomingEmail(registerData);
+        handleWelcomingEmailSend(registerData);
       }
     } catch (error) {
       setRegistrationFailed(true);
