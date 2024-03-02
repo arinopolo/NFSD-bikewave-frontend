@@ -8,6 +8,7 @@ import ItemPage from "./pages/ItemPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,10 @@ const AppRoutes = () => {
             <Route path="/products/:bikeid" element={<ItemPage />} />
             <Route path="/chats" element={<ChatPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/reset-password/:singleToken"
+              element={<ResetPasswordPage />}
+            />
           </Routes>
         </>
         <BottomNavigation />

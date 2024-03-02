@@ -1,0 +1,21 @@
+.personal-data-container {
+  background-color: white;
+  width: 50%;
+  height: auto;
+  z-index: 1;
+  border-radius: 5px;
+  padding: 2rem 2rem;
+  position: absolute;
+  top: 25%;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.submit-input {
+    width: 30%;
+    border: 1px solid #31b15c;
+    border: 1px solid red;
+}

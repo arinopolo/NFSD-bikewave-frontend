@@ -13,7 +13,7 @@ const MyBicycles = ({ myBicyclesList, onClick }) => {
       <div>
         <h2>Mis bicicletas</h2>
       </div>
-      {myBicyclesList.length > 0 ? (
+      {myBicyclesList ? (
         <div className="my-bikes">
           {myBicyclesList.map((bicycle) => (
             <>

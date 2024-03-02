@@ -6,10 +6,30 @@ import RegistrationSuccessMessage from "./RegistrationSuccessMessage";
 import RegistrationFailMessage from "./RegistrationFailMessage";
 import Button from "../button/Button";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const RegisterForm = ({ toggle }) => {
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [registerTried, setRegisterTried] = useState(false);
+
+  const sendWelcomingEmail = async (registerData) => {
+    try {
+      const backendResponse = await fetch(`${BASE_URL}/users/send-email/`, {
+        method: "POST",
+        body: JSON.stringify(registerData.userToAdd),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await backendResponse.json();
+      console.log(data);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
   const registerHandler = async (values) => {
     try {
@@ -17,6 +37,8 @@ const RegisterForm = ({ toggle }) => {
 
       if (registerData.success) {
         setRegistrationSuccessful(true);
+        console.log(registerData);
+        sendWelcomingEmail(registerData);
       }
     } catch (error) {
       setRegistrationFailed(true);
@@ -49,7 +71,7 @@ const RegisterForm = ({ toggle }) => {
             // Validación del nombre
             if (!values.firstName) {
               errors.firstName = "Por favor introduce tu nombre.";
-            } else if (values.firstName.length < 4) {
+            } else if (values.firstName.length < 1) {
               errors.firstName =
                 "El nombre de usuario debe tener al menos 4 caracteres.";
             } else if (values.firstName.length > 20) {
@@ -63,7 +85,7 @@ const RegisterForm = ({ toggle }) => {
             // Validación del apellido
             if (!values.secondName) {
               errors.secondName = "Por favor introduce tu apellido.";
-            } else if (values.secondName.length < 4) {
+            } else if (values.secondName.length < 1) {
               errors.secondName =
                 "El nombre de usuario debe tener al menos 4 caracteres.";
             } else if (values.secondName.length > 20) {
