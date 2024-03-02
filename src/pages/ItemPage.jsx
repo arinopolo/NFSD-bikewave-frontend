@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import LogoComponent from "../components/LogoComponent";
 import DetailedItem from "../components/detailedItem/DetailedItem";
 import api from "../api/api";
-import { AuthContext } from "../contexts/AuthContext";
+import Button from "../components/button/Button";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -15,14 +15,16 @@ const ItemPage = () => {
   const navigate = useNavigate();
   const [bicycle, setBicycle] = useState();
   let { bikeid } = useParams();
-  const { user } = useContext(AuthContext);
+
+  const userId = localStorage.getItem("userId");
+
   const getBicycleInfo = async () => {
     try {
       const backendResponse = await api.getBicycleInfo(bikeid);
       if (backendResponse) {
         setBicycle(backendResponse);
-        console.log("user id", user);
-        console.log("bike info", bicycle);
+        console.log(backendResponse);
+        console.log("user id", userId);
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
@@ -58,7 +60,9 @@ const ItemPage = () => {
       <LogoComponent />
 
       <DetailedItem bicycle={bicycle} />
-      <button onClick={deleteBicycle}>Eliminar Bicicleta</button>
+      {bicycle.owner._id === userId ? (
+        <Button text="Eliminar " onClick={deleteBicycle} />
+      ) : null}
     </div>
   );
 };

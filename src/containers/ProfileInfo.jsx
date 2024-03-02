@@ -2,7 +2,7 @@ import React from "react";
 import DetailedProfile from "../components/detailedProfile/DetailedProfile";
 import MyBicycles from "../components/myBicycles/MyBicycles";
 
-const ProfileInfo = ({ userInfo, myBicyclesList }) => {
+const ProfileInfo = ({ userInfo, myBicyclesList, onClick }) => {
   return (
     <>
       <div className="w-50 mb-15">

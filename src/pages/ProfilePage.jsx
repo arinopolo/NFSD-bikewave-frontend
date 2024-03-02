@@ -15,16 +15,18 @@ const Loading = () => {
 
 const ProfilePage = () => {
   const token = localStorage.getItem("token");
-  const { user, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState();
   const [isActive, setIsActive] = useState("Sobre mí");
   const [myBicyclesList, setMyBicyclesList] = useState([]);
+  const [refresh, toggleRefresh] = useState(false);
 
   const getUserInfo = async () => {
     try {
-      const backendResponse = await api.getUserInfo(user.userId);
+      const userId = localStorage.getItem("userId");
+      const backendResponse = await api.getUserInfo(userId);
 
       if (backendResponse) {
         setUserInfo(backendResponse);
@@ -62,7 +64,7 @@ const ProfilePage = () => {
       getUserInfo();
       getMyBicycles();
     }
-  }, [navigate, token]);
+  }, [token, refresh]);
 
   if (!userInfo) {
     return <Loading />;
@@ -76,7 +78,12 @@ const ProfilePage = () => {
       {isActive === "Sobre mí" ? (
         <ProfileInfo userInfo={userInfo} myBicyclesList={myBicyclesList} />
       ) : (
-        <Settings handleLogoutClick={logout} />
+        <Settings
+          handleLogoutClick={logout}
+          userInfo={userInfo}
+          toggleRefresh={toggleRefresh}
+          refresh={refresh}
+        />
       )}
     </>
   );

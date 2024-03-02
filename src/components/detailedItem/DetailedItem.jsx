@@ -1,8 +1,6 @@
 import React from "react";
 import BigPhoto from "../photos/bigPhoto/BigPhoto";
 import "./DetailedItem.css";
-import LikedHeart from "../heart/LikedHeart";
-import NotLikedHeart from "../heart/NotLikedHeart";
 import {
   CityIcon,
   ElectricIcon,
@@ -13,6 +11,9 @@ import {
 } from "../../assets/SVGIcons";
 import CategoryComponent from "../filters/category/Category";
 import Button from "../button/Button";
+import { useNavigate } from "react-router-dom";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const DetailedItem = ({ bicycle }) => {
   const categoryIcons = {
@@ -32,6 +33,34 @@ const DetailedItem = ({ bicycle }) => {
     electric: "Eléctrico",
     competition: "Competición",
   };
+
+  const navigate = useNavigate();
+
+  const handleContactClick = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const receiver = {
+        receiverId: bicycle.owner._id,
+      };
+
+      const backendResponse = await fetch(`${BASE_URL}/chat/`, {
+        method: "POST",
+        body: JSON.stringify(receiver),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      const chatOpened = await backendResponse.json();
+      console.log(chatOpened);
+      navigate("/chats");
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
   return (
     <>
       <div className="detailed-item-container">
@@ -50,8 +79,16 @@ const DetailedItem = ({ bicycle }) => {
             />
           </div>
           <p>{bicycle.description}</p>
+          <h3> Ubicación: {bicycle.location}</h3>
           <h2 className="title">{bicycle.price}€/día</h2>
-          <Button text={"Reservar"} />
+          <h4>
+            Propietario: {bicycle.owner.firstName} {bicycle.owner.secondName}
+          </h4>
+          <div className="flex gap-1">
+            <Button text={"Contactar"} onClick={handleContactClick} />
+            <Button text={"Reservar"} />
+           
+          </div>
         </div>
       </div>
     </>

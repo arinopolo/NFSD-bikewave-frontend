@@ -8,6 +8,7 @@ import "../styles/LoginPage.css";
 const LoginAndRegisterPage = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
 
+
   const toggleLoginForm = () => {
     setShowLoginForm((prevShowLoginForm) => !prevShowLoginForm);
   };
