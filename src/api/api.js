@@ -173,13 +173,216 @@ const getUserInfo = async (userId) => {
   }
 };
 
+const forgotPasswordEmail = async (values) => {
+  const email = values.email;
+  try {
+    const response = await fetch(`${BASE_URL}/users/forgot-password`, {
+      method: "PUT",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+const passwordReset = async (values, singleToken) => {
+  const password = values.password;
+  try {
+    const response = await fetch(
+      `${BASE_URL}/users/reset-password/${singleToken}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+const getChats = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const backendResponse = await fetch(`${BASE_URL}/chat/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
+};
+
+const getMessages = async (currentChat) => {
+  try {
+    const token = localStorage.getItem("token");
+    const backendResponse = await fetch(
+      `${BASE_URL}/messages/${currentChat._id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+
+    const data = await backendResponse.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
+};
+
+const sendMessage = async (message) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const backendResponse = await fetch(`${BASE_URL}/messages/`, {
+      method: "POST",
+      body: JSON.stringify(message),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
+const createChat = async (receiver) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const backendResponse = await fetch(`${BASE_URL}/chat/`, {
+      method: "POST",
+      body: JSON.stringify(receiver),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
+const changePersonalInfo = async (userInfo, newValue) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const backendResponse = await fetch(`${BASE_URL}/users/${userInfo._id}`, {
+      method: "PATCH",
+      body: JSON.stringify(newValue),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+const sendWelcomingEmail = async (registerData) => {
+  try {
+    const backendResponse = await fetch(`${BASE_URL}/users/send-email/`, {
+      method: "POST",
+      body: JSON.stringify(registerData.userToAdd),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
+const deleteBicycle = async (bicycle) => {
+  try {
+    const token = localStorage.getItem("token");
+    const backendResponse = await fetch(`${BASE_URL}/bicycles/${bicycle._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.error("Listing error:", error.message);
+  }
+};
+
+const getMyBicycles = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const backendResponse = await fetch(`${BASE_URL}/users/mybicycles`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
+};
+
 export default {
   login,
   register,
   getBicyclesList,
   getFavoritesList,
+  getChats,
   listItem,
   getBicycleInfo,
   addAndDeleterFavorits,
   getUserInfo,
+  passwordReset,
+  forgotPasswordEmail,
+  getMessages,
+  sendMessage,
+  createChat,
+  changePersonalInfo,
+  sendWelcomingEmail,
+  deleteBicycle,
+  getMyBicycles,
 };

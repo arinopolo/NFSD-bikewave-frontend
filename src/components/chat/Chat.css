@@ -2,9 +2,39 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: auto;
-  border: 1px solid red;
   width: 100vw;
   height: auto;
-  gap: 2rem;
   padding: 1rem 1rem;
+}
+
+.left-side,
+.right-side {
+  width: 100%;
+  padding: 1rem;
+}
+
+.chat-list {
+  width: 100%;
+}
+
+.conversation {
+  padding: 0.5rem 0.5rem;
+  opacity: 0.5;
+}
+.conversation:hover {
+  background-color: rgb(243, 243, 243);
+}
+.current {
+  opacity: 1;
+}
+@media (max-width: 800px) {
+  .chat {
+    display: block;
+  }
+
+  .chat-list {
+    flex-direction: row;
+    overflow-x: scroll;
+    gap: 3rem;
+  }
 }

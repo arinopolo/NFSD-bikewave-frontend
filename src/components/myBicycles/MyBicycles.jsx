@@ -3,26 +3,20 @@ import ItemCard from "../itemsListAndCard/ItemCard";
 import "./MyBicycles.css";
 import Button from "../button/Button";
 
-const ErrorMessage = () => {
-  return <div className="error">No se han encontrado bicicletas</div>;
-};
-
 const MyBicycles = ({ myBicyclesList, onClick }) => {
   return (
     <>
-      <div>
-        <h2>Mis bicicletas</h2>
-      </div>
-      {myBicyclesList ? (
-        <div className="my-bikes">
-          {myBicyclesList.map((bicycle) => (
-            <>
-              <ItemCard key={bicycle._id} bicycle={bicycle} />
-            </>
-          ))}
+      {myBicyclesList && (
+        <div className="flex flex-column gap-1 align-center">
+          <h2>Mis bicicletas</h2>
+          <div className="my-bikes">
+            {myBicyclesList.map((bicycle) => (
+              <>
+                <ItemCard key={bicycle._id} bicycle={bicycle} />
+              </>
+            ))}
+          </div>
         </div>
-      ) : (
-        <ErrorMessage />
       )}
     </>
   );

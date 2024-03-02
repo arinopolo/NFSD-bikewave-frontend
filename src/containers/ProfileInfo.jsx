@@ -5,7 +5,7 @@ import MyBicycles from "../components/myBicycles/MyBicycles";
 const ProfileInfo = ({ userInfo, myBicyclesList, onClick }) => {
   return (
     <>
-      <div className="w-50 mb-15">
+      <div className=" flex flex-column align-center mb-15">
         <DetailedProfile userInfo={userInfo} />
         <MyBicycles myBicyclesList={myBicyclesList} />
       </div>

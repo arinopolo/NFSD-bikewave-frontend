@@ -34,8 +34,6 @@ const HomePage = () => {
       );
 
       if (backendResponse) {
-        console.log("todos los bicis", backendResponse);
-        console.log("categoria que paso al back", category);
         setBicyclesList(backendResponse);
       }
     } catch (error) {

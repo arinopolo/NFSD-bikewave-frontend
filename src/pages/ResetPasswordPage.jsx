@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/button/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import api from "../api/api";
 
 const SuccessMessage = () => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const SuccessMessage = () => {
 
   return (
     <div className="flex flex-column gap-1">
-      <p>Correo Enviado con éxito!</p>
+      <p> Has actualizado tu contraseña!</p>
       <Button text={"Continuar"} onClick={handleNavigate} />
     </div>
   );
@@ -22,28 +21,16 @@ const SuccessMessage = () => {
 
 const ResetPasswordPage = () => {
   let { singleToken } = useParams();
-
-  console.log("my single token", singleToken);
-
   const [isSuccess, setIsSuccess] = useState(false);
-  const handleEmail = async (values) => {
-    const password = values.password;
-    try {
-      const response = await fetch(
-        `${BASE_URL}/users/reset-password/${singleToken}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({ password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
 
-      const data = await response.json();
-      if (data) {
+  const handlePasswordReset = async (values) => {
+    try {
+      const backendResponse = await api.passwordReset(values, singleToken);
+
+      if (backendResponse.success) {
         setIsSuccess(true);
-        console.log(isSuccess);
+      } else {
+        console.log("Error");
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -79,7 +66,7 @@ const ResetPasswordPage = () => {
             }}
             //enviar el formulario
             onSubmit={(values, { resetForm }) => {
-              handleEmail(values);
+              handlePasswordReset(values);
               resetForm();
             }}
           >

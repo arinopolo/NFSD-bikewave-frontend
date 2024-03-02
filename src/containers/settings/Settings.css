@@ -9,3 +9,9 @@
   width: 100%;
   align-self: center;
 }
+
+@media (max-width: 800px) {
+  .settings-container {
+    width: 90%;
+  }
+}

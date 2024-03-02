@@ -3,13 +3,12 @@ import "./PersonalData.css";
 import Button from "../button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import api from "../../api/api";
 
 const PersonalData = ({
   userInfo,
-  modalVisible,
-  setModalVisible,
+  modalDataVisible,
+  setModalDataVisible,
   toggleRefresh,
   refresh,
 }) => {
@@ -19,23 +18,13 @@ const PersonalData = ({
   const [email, setEmail] = useState(userInfo.email);
 
   const handleSubmit = async () => {
+    const newValue = { firstName, secondName, email };
     try {
-      const token = localStorage.getItem("token");
-
-      const newValue = { firstName, secondName, email };
-
-      const response = await fetch(`${BASE_URL}/users/${userInfo._id}`, {
-        method: "PATCH",
-        body: JSON.stringify(newValue),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      });
-
-      const data = await response.json();
-      toggleRefresh(!refresh);
-      setEditingMode("");
+      const backendResponse = await api.changePersonalInfo(userInfo, newValue);
+      if (backendResponse) {
+        toggleRefresh(!refresh);
+        setEditingMode("");
+      }
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -54,7 +43,7 @@ const PersonalData = ({
             icon={faCircleXmark}
             size="lg"
             className="close-modal-btn"
-            onClick={() => setModalVisible(!modalVisible)}
+            onClick={() => setModalDataVisible(!modalDataVisible)}
           />
         </div>
         <p>Tu nombre:</p>
@@ -86,6 +75,7 @@ const PersonalData = ({
               type="text"
               name="secondName"
               id="secondName"
+              value={secondName}
               onChange={(e) => setSecondName(e.target.value)}
             />
             <Button
@@ -108,6 +98,7 @@ const PersonalData = ({
               type="email"
               name="email"
               id="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Button

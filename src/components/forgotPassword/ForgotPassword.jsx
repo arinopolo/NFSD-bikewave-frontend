@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import api from "../../api/api";
 
 const SuccessMessage = () => {
   const navigate = useNavigate();
@@ -22,22 +21,15 @@ const SuccessMessage = () => {
 
 const ForgotPassword = () => {
   const [isSuccess, setIsSuccess] = useState(false);
-  const handleEmail = async (values) => {
-    console.log("lo que envio al back", values.email);
-    const email = values.email;
-    try {
-      const response = await fetch(`${BASE_URL}/users/forgot-password`, {
-        method: "PUT",
-        body: JSON.stringify({ email }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      const data = await response.json();
-      if (data) {
+  const handleEmailSending = async (values) => {
+    try {
+      const backendResponse = await api.forgotPasswordEmail(values);
+
+      if (backendResponse.success) {
         setIsSuccess(true);
-        console.log(isSuccess);
+      } else {
+        console.log("Error");
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -75,7 +67,7 @@ const ForgotPassword = () => {
             }}
             //enviar el formulario
             onSubmit={(values, { resetForm }) => {
-              handleEmail(values);
+              handleEmailSending(values);
               resetForm();
             }}
           >

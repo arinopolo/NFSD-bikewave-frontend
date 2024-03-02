@@ -4,8 +4,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Conversation from "../conversation/Conversation";
 import ChatBox from "../chatBox/ChatBox";
 import { io } from "socket.io-client";
+import api from "../../api/api";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const WEB_SOCKET = import.meta.env.VITE_WEB_SOCKET;
 const Chat = () => {
   const userId = localStorage.getItem("userId");
   const [chats, setChats] = useState([]);
@@ -16,23 +17,13 @@ const Chat = () => {
 
   const socket = useRef();
 
-  //llamada al api
-
   useEffect(() => {
     const getChats = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const backendResponse = await fetch(`${BASE_URL}/chat/`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        });
+        const backendResponse = await api.getChats();
 
-        const data = await backendResponse.json();
-        if (data) {
-          setChats(data);
+        if (backendResponse) {
+          setChats(backendResponse);
         }
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -44,7 +35,7 @@ const Chat = () => {
   // Connect to Socket.io
   useEffect(() => {
     if (userId !== null) {
-      socket.current = io("ws://localhost:8800");
+      socket.current = io(WEB_SOCKET);
       socket.current.emit("new-user-add", userId);
       socket.current.on("get-users", (users) => {
         setOnlineUsers(users);
@@ -62,32 +53,23 @@ const Chat = () => {
     }
   }, [sendMessage]);
 
-  /*useEffect(() => {
-    socket.current.on("receive-message", (data) => {
-      console.log("recevied message", data);
-      setReceiveMessage(data);
-    });
-  }, []); */
-
   useEffect(() => {
     console.log("recieved message", receiveMessage);
   }, [receiveMessage]);
 
   return (
     <>
-      <div className="chat">
+      <div className="chat mb-15">
         <div className="left-side flex flex-column align-start gap-1">
           <h2>Chats</h2>
-          <div className="chat-list  flex flex-column gap-1">
+          <div className="chat-list flex flex-column gap-1">
             {chats.map((chat) => (
               <div
                 onClick={() => setCurrentChat(chat)}
                 key={chat._id}
-                style={{
-                  borderBottom: "1px solid grey",
-                  padding: " 1rem 0.5rem",
-                  backgroundColor: "lightgray",
-                }}
+                className={
+                  chat === currentChat ? "conversation current" : "conversation"
+                }
               >
                 <Conversation chat={chat} currentUserId={userId} />
               </div>
@@ -95,7 +77,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="right-side flex flex-column gap-2 align-start">
+        <div className="right-side flex flex-column gap-1 align-start">
           {currentChat ? (
             <ChatBox
               currentChat={currentChat}
