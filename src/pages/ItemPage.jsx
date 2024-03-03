@@ -4,14 +4,14 @@ import LogoComponent from "../components/LogoComponent";
 import DetailedItem from "../components/detailedItem/DetailedItem";
 import api from "../api/api";
 import Button from "../components/button/Button";
+import Loading from "../components/loading/Loading";
 
-const Loading = () => {
-  return <div> Loading</div>;
-};
+
 
 const ItemPage = () => {
   const navigate = useNavigate();
   const [bicycle, setBicycle] = useState();
+  const [loading, setLoading] = useState(true);
   let { bikeid } = useParams();
 
   const userId = localStorage.getItem("userId");
@@ -45,18 +45,27 @@ const ItemPage = () => {
     getBicycleInfo();
   }, []);
 
-  if (!bicycle) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    if (bicycle) {
+      setLoading(false);
+
+    }
+  }, [bicycle]);
 
   return (
     <div className="mb-15">
       <LogoComponent />
-
-      <DetailedItem bicycle={bicycle} />
-      {bicycle.owner._id === userId ? (
-        <Button text="Eliminar " onClick={handleDeleteBicycle} />
-      ) : null}
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          {" "}
+          <DetailedItem bicycle={bicycle} />
+          {bicycle.owner._id === userId ? (
+            <Button text="Eliminar " onClick={handleDeleteBicycle} />
+          ) : null}
+        </div>
+      )}
     </div>
   );
 };

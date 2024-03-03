@@ -7,7 +7,7 @@ const MyBicycles = ({ myBicyclesList, onClick }) => {
   return (
     <>
       {myBicyclesList && (
-        <div className="flex flex-column gap-1 align-center">
+        <div className="flex flex-column gap-1 align-center w-50">
           <h2>Mis bicicletas</h2>
           <div className="my-bikes">
             {myBicyclesList.map((bicycle) => (

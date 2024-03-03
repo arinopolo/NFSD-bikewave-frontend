@@ -150,12 +150,20 @@ select:focus-visible {
   width: 100%;
 }
 
+.w-90 {
+  width: 90%;
+}
+
 .w-50 {
   width: 50%;
 }
 
 .mb-15 {
   margin-bottom: 15vh;
+}
+
+.m-1 {
+  margin: 1rem;
 }
 .flex {
   display: flex;
@@ -178,6 +186,10 @@ select:focus-visible {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-around {
+  justify-content: space-around;
 }
 
 .justify-start {

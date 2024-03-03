@@ -6,10 +6,7 @@ import api from "../api/api";
 import ProfileButtons from "../containers/profileButtons/ProfileButtons";
 import ProfileInfo from "../containers/ProfileInfo";
 import Settings from "../containers/settings/Settings";
-
-const Loading = () => {
-  return <div> Loading</div>;
-};
+import Loading from "../components/loading/Loading";
 
 const ProfilePage = () => {
   const token = localStorage.getItem("token");
@@ -20,6 +17,7 @@ const ProfilePage = () => {
   const [isActive, setIsActive] = useState("Sobre mí");
   const [myBicyclesList, setMyBicyclesList] = useState([]);
   const [refresh, toggleRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getUserInfo = async () => {
     try {
@@ -55,24 +53,32 @@ const ProfilePage = () => {
     }
   }, [token, refresh]);
 
-  if (!userInfo) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    if (userInfo) {
+      setLoading(false);
+    }
+  }, [userInfo]);
 
   return (
     <>
       <LogoComponent />
       <ProfileButtons setIsActive={setIsActive} isActive={isActive} />
-
-      {isActive === "Sobre mí" ? (
-        <ProfileInfo userInfo={userInfo} myBicyclesList={myBicyclesList} />
+      {loading ? (
+        <Loading />
       ) : (
-        <Settings
-          handleLogoutClick={logout}
-          userInfo={userInfo}
-          toggleRefresh={toggleRefresh}
-          refresh={refresh}
-        />
+        <>
+          {" "}
+          {isActive === "Sobre mí" ? (
+            <ProfileInfo userInfo={userInfo} myBicyclesList={myBicyclesList} />
+          ) : (
+            <Settings
+              handleLogoutClick={logout}
+              userInfo={userInfo}
+              toggleRefresh={toggleRefresh}
+              refresh={refresh}
+            />
+          )}{" "}
+        </>
       )}
     </>
   );

@@ -10,6 +10,7 @@ import Map from "../components/Map";
 import MapSwitcher from "../components/mapSwitcher/MapSwitcher";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
@@ -23,6 +24,15 @@ const HomePage = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(3000);
   const [location, setLocation] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const visitedBefore = localStorage.getItem("visitedBefore");
+    if (!visitedBefore) {
+      navigate("/welcome");
+    }
+  }, []);
 
   const getBicyclesList = async () => {
     try {

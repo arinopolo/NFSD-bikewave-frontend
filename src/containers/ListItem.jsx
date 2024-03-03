@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListItemForm from "../components/listItemForm/ListItemForm";
-import ListItemSuccessMessage from "../components/listItemForm/ListItemSuccessMessage";
-import ListItemFailMessage from "../components/listItemForm/ListItemFailMessage";
+import SuccesMessage from "../components/successMessage/SuccessMessage";
+import FailMessage from "../components/failMessage/FailMessage";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/loading/Loading";
 
 const ListItem = () => {
   const [listingSuccess, setListingSuccess] = useState(false);
   const [listingTried, setListingTried] = useState(false);
+  const [filledFields, setFilledFields] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-column align-center mb-15">
       {listingTried ? (
-        listingSuccess ? (
-          <ListItemSuccessMessage />
+        loading ? (
+          <Loading />
+        ) : listingSuccess ? (
+          <SuccesMessage
+            text={"Has subido tu bicicleta con exito!"}
+            onClick={() => navigate("/")}
+          />
         ) : (
-          <ListItemFailMessage />
+          <FailMessage
+            text={"Hubo un error, vuelve a intentarlo!"}
+            onClick={() => navigate("list-item")}
+          />
         )
       ) : (
         <>
@@ -24,6 +39,8 @@ const ListItem = () => {
           <ListItemForm
             setListingTried={setListingTried}
             setListingSuccess={setListingSuccess}
+            loading={loading}
+            setLoading={setLoading}
           />
         </>
       )}

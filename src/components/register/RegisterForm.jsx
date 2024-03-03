@@ -2,14 +2,17 @@ import { ErrorMessage, Field, Formik, Form } from "formik";
 import "../../styles/RegisterForm.css";
 import api from "../../api/api";
 import { useState } from "react";
-import RegistrationSuccessMessage from "./RegistrationSuccessMessage";
-import RegistrationFailMessage from "./RegistrationFailMessage";
 import Button from "../button/Button";
+import SuccessMessage from "../successMessage/SuccessMessage";
+import { useNavigate } from "react-router-dom";
+import FailMessage from "../failMessage/FailMessage";
 
 const RegisterForm = ({ toggle }) => {
+  const navigate = useNavigate();
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [registerTried, setRegisterTried] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleWelcomingEmailSend = async (registerData) => {
     try {
@@ -25,11 +28,11 @@ const RegisterForm = ({ toggle }) => {
 
       if (registerData.success) {
         setRegistrationSuccessful(true);
-        console.log(registerData);
         handleWelcomingEmailSend(registerData);
       }
     } catch (error) {
       setRegistrationFailed(true);
+      setErrorMessage(error.message);
       console.error(
         "Error en la operación de registrar un usuario:",
         error.message
@@ -41,9 +44,15 @@ const RegisterForm = ({ toggle }) => {
     <>
       {registerTried ? (
         registrationSuccessful ? (
-          <RegistrationSuccessMessage />
+          <SuccessMessage
+            text={"Gracias por registrarte!"}
+            onClick={() => navigate("/")}
+          />
         ) : (
-          <RegistrationFailMessage />
+          <FailMessage
+            text={"Hubo un error, vuelve a intentarlo!"}
+            onClick={() => navigate("/login")}
+          />
         )
       ) : (
         <Formik
@@ -194,6 +203,8 @@ const RegisterForm = ({ toggle }) => {
           )}
         </Formik>
       )}
+
+      {errorMessage && <p className="incorrect-data">{errorMessage}</p>}
       <div className="container-register-proposal">
         <p>¿Ya tienes cuenta?</p>{" "}
         <button onClick={toggle} className="btn-register-login-proposal">
