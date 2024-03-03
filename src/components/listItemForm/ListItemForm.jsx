@@ -11,10 +11,8 @@ import {
   ElectricIcon,
   ProIcon,
 } from "../../assets/SVGIcons";
-import ListItemFailMessage from "./ListItemFailMessage";
-import ListItemSuccessMessage from "./ListItemSuccessMessage";
 
-const ListItemForm = ({ setListingTried, setListingSuccess }) => {
+const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const [errorMessage, setErrorMessage] = useState();
   const [step, setStep] = useState(1);
   const [photoFile, setPhotoFile] = useState(null);
@@ -47,6 +45,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
 
   const handleListitem = async (values) => {
     try {
+      setLoading(true);
       if (coordinates) {
         const formData = new FormData();
         formData.append("brand", values.brand);
@@ -61,7 +60,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
         formData.append("lng", coordinates.lng);
 
         const listItemData = await api.listItem(formData);
-
+        setLoading(false);
         if (listItemData && listItemData.success) {
           setListingSuccess(true);
         } else {
@@ -81,19 +80,14 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
   };
 
   const nextStep = () => {
-  
-
-    if (filledFields) {
-      setStep(step + 1);
-    } else {
-      // Aquí podrías mostrar un mensaje o realizar alguna acción para indicar al usuario que debe completar los campos antes de avanzar.
-      console.log("Completa los campos requeridos antes de continuar.");
-    }
+    setStep(step + 1);
+    setFilledFields(false);
   };
 
   const previousStep = () => {
     setStep(step - 1);
   };
+
   return (
     <>
       <div className="steps">
@@ -129,7 +123,6 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
           let errors = {};
           if (step === 1) {
             if (!values.brand || !values.model || !values.description) {
-              setFilledFields(false);
               errors.brand = !values.brand ? "Este campo es obligatorio" : "";
               errors.model = !values.model ? "Este campo es obligatorio" : "";
               errors.description = !values.description
@@ -137,36 +130,35 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
                 : "";
             } else {
               setFilledFields(true);
+              console.log("step 1", filledFields);
             }
           } else if (step === 2) {
             if (!values.category) {
-              setFilledFields(false);
               errors.category = "Este campo es obligatorio";
             } else {
               setFilledFields(true);
+              console.log("step 2", filledFields);
             }
           } else if (step === 3) {
-            if (!values.location || !values.address) {
-              setFilledFields(false);
+            if (!values.location) {
               errors.location = !values.location
                 ? "Este campo es obligatorio"
                 : "";
-              errors.address = !values.address
-                ? "Este campo es obligatorio"
-                : "";
+              /* errors.address = !values.address
+            ? "Este campo es obligatorio"
+            : ""; */
             } else {
               setFilledFields(true);
+              console.log("step 3", filledFields);
             }
           } else if (step === 4) {
-            if (!photoFile) {
+            if (photoFile === null) {
               setFilledFields(false);
-              errors.photo = "Debes subir una foto";
             } else {
               setFilledFields(true);
             }
           } else if (step === 5) {
             if (!values.price) {
-              setFilledFields(false);
               errors.price = "Este campo es obligatorio";
             } else {
               setFilledFields(true);
@@ -336,6 +328,9 @@ const ListItemForm = ({ setListingTried, setListingSuccess }) => {
                       className="error"
                     />
                   </div>
+                  {!photoFile && (
+                    <div className="error">Este campo es obligatorio</div>
+                  )}
                   {photoFile && (
                     <img
                       className="selected-photo"

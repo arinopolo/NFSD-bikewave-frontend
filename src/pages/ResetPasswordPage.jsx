@@ -3,21 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/button/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../api/api";
-
-const SuccessMessage = () => {
-  const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate("/");
-  };
-
-  return (
-    <div className="flex flex-column gap-1">
-      <p> Has actualizado tu contraseña!</p>
-      <Button text={"Continuar"} onClick={handleNavigate} />
-    </div>
-  );
-};
+import SuccessMessage from "../components/successMessage/SuccessMessage";
 
 const ResetPasswordPage = () => {
   let { singleToken } = useParams();
@@ -40,7 +26,10 @@ const ResetPasswordPage = () => {
   return (
     <>
       {isSuccess ? (
-        <SuccessMessage />
+        <SuccessMessage
+          text={"Has actualizado tu contraseña!"}
+          onClick={() => navigate("/")}
+        />
       ) : (
         <div>
           <h2>Escribe tu nueva contraseña</h2>

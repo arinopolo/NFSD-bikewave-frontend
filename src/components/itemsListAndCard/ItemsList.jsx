@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/ItemsList.css";
 import ItemCard from "./ItemCard";
-
-const ErrorMessage = () => {
-  return <div className="error">No se han encontrado bicicletas</div>;
-};
+import FailMessage from "../../components/failMessage/FailMessage";
+import Loading from "../loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 const ItemsList = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
+  const navigate = useNavigate();
+
+
+  
   return (
     <>
       {bicyclesList.length > 0 ? (
@@ -28,7 +31,10 @@ const ItemsList = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
           ))}
         </div>
       ) : (
-        <ErrorMessage />
+        <FailMessage
+          text={"No se han encontrado bicicletas"}
+          onClick={() => navigate("/")}
+        />
       )}
     </>
   );

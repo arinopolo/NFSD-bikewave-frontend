@@ -2,11 +2,9 @@ import LogoComponent from "../components/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import ItemCard from "../components/itemsListAndCard/ItemCard";
 import Button from "../components/button/Button";
 import { useNavigate } from "react-router-dom";
-
-const token = localStorage.getItem("token");
+import Loading from "../components/loading/Loading";
 
 const LoginToContinue = () => {
   const navigate = useNavigate();
@@ -16,15 +14,17 @@ const LoginToContinue = () => {
   };
   return (
     <>
-      <div>Parece que no estas logueado</div>
-      <Button onClick={handleLoginNavigate} text={"Loguear"} />
+      <div>Parece que no has iniciado sesión </div>
+      <Button onClick={handleLoginNavigate} text={"Iniciar sesión"} />
     </>
   );
 };
 
 const FavoritesPage = () => {
+  const token = localStorage.getItem("token");
   const [bicyclesList, setBicyclesList] = useState([]);
   const [refresh, toggleRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getFavoritesList = async () => {
     try {
@@ -34,27 +34,37 @@ const FavoritesPage = () => {
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     getFavoritesList();
-  }, [refresh]);
+  }, [refresh, token]);
 
-  console.log("my bicycle list", bicyclesList);
   return (
     <>
       <LogoComponent />
       <h1>Aqui tienes tus bicicletas favoritas!</h1>
 
-      <ItemsList
-        bicyclesList={bicyclesList}
-        favoritesList={bicyclesList}
-        refresh={refresh}
-        toggleRefresh={toggleRefresh}
-      />
-
-      {!token && <LoginToContinue />}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {" "}
+          {!token ? (
+            <LoginToContinue />
+          ) : (
+            <ItemsList
+              bicyclesList={bicyclesList}
+              favoritesList={bicyclesList}
+              refresh={refresh}
+              toggleRefresh={toggleRefresh}
+            />
+          )}
+        </>
+      )}
     </>
   );
 };

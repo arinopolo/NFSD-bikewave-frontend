@@ -5,12 +5,8 @@
   gap: 2rem;
 }
 
-
-
-  
 @media (max-width: 800px) {
-    .my-bikes {
-      width: 90%;
-      }
+  .my-bikes > * {
+    width: 40vw;
   }
-  
+}

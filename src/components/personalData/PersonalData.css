@@ -15,7 +15,6 @@
 }
 
 .submit-input {
-    width: 30%;
-    border: 1px solid #31b15c;
-    border: 1px solid red;
+  width: 30%;
+  border: 1px solid #31b15c;
 }

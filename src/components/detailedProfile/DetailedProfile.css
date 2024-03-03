@@ -25,4 +25,7 @@
     flex-direction: column;
     width: 90%;
   }
+  .about-me {
+    text-align: center;
+  }
 }

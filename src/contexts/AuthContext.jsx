@@ -15,6 +15,10 @@ export const AuthContextProvider = ({ children }) => {
     setUser({ ...user, ...userData });
   };
 
+  const setPageVisited = () => {
+    localStorage.setItem("visitedBefore", true);
+  };
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const userId = window.localStorage.getItem("userId");
@@ -37,6 +41,7 @@ export const AuthContextProvider = ({ children }) => {
     setUser,
     updateUser,
     logout,
+    setPageVisited,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

@@ -21,6 +21,16 @@
   padding: 0 2rem;
 }
 
+.secondary-btn {
+  background-color: white;
+  border: 1px solid #2c2c2c;
+  color: #2c2c2c;
+}
+
+.secondary-btn:hover {
+  background-color: white;
+  opacity: 0.5;
+}
 @media (max-width: 800px) {
   .detailed-item-container {
     display: flex;

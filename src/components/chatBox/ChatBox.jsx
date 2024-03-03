@@ -60,6 +60,9 @@ const ChatBox = ({
   const handleSend = async (e) => {
     e.preventDefault();
 
+    if (newMessage === "") {
+      return;
+    }
     const message = {
       author: currentUserId,
       text: newMessage,

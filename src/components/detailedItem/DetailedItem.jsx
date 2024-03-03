@@ -14,8 +14,6 @@ import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 
-
-
 const DetailedItem = ({ bicycle }) => {
   const categoryIcons = {
     mountain: <MountainIcon />,
@@ -44,7 +42,7 @@ const DetailedItem = ({ bicycle }) => {
     try {
       const backendResponse = await api.createChat(receiver);
       if (backendResponse) {
-        navigate("/chats");
+        navigate(`/chats`);
       }
     } catch (error) {
       console.log("Error:", error);
@@ -75,7 +73,7 @@ const DetailedItem = ({ bicycle }) => {
             Propietario: {bicycle.owner.firstName} {bicycle.owner.secondName}
           </h4>
           <div className="flex gap-1">
-            <Button text={"Contactar"} onClick={handleContactClick} />
+            <Button text={"Contactar"} onClick={handleContactClick} className={"secondary-btn"} />
             <Button text={"Reservar"} />
           </div>
         </div>
