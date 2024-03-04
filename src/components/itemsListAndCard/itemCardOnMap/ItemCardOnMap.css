@@ -1,10 +1,6 @@
-/*.item-container-map {
+.item-container-map {
   width: 15rem;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-
-} */
+}
 
 .item-info-container {
   background-color: white;

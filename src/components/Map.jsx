@@ -17,7 +17,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   const handlePinClick = (bicycle, event) => {
     setSelectedBicycle(bicycle);
 
-    const offsetX = 30; 
+    const offsetX = 30;
     const offsetY = -100;
     setItemCardPosition({
       x: event.clientX + offsetX,
@@ -33,10 +33,6 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
     handleCloseItemClick();
   };
 
-  const getRandomOffset = () => {
-    return (Math.random() - 0.5) * 0.01;
-  };
-
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -49,16 +45,8 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
         {bicyclesList.map((bicycle, index) => (
           <Pin
             key={index}
-            lat={
-              bicycle.lat
-                ? parseFloat(bicycle.lat)
-                : staticCenter.lat + getRandomOffset()
-            }
-            lng={
-              bicycle.lng
-                ? parseFloat(bicycle.lng)
-                : staticCenter.lng + getRandomOffset()
-            }
+            lat={parseFloat(bicycle.lat)}
+            lng={parseFloat(bicycle.lng)}
             text="My BIKEE"
             onClick={(event) => handlePinClick(bicycle, event)}
           />

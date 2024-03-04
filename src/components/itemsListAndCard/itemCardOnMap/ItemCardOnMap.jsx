@@ -35,13 +35,12 @@ const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
           </div>
 
           <div className="item-info-container">
-            <div>
-              <div className="flex-row">
-                <h2 className="item-name">
-                  {bicycle.brand} <span>{bicycle.model}</span>
-                </h2>
+            <div className="flex flex-column align-start">
+              <div className="flex flex-column align-start">
+                <h2 className="item-name">{bicycle.brand}</h2>
+                <h4>{bicycle.model}</h4>
               </div>
-              <h3>{bicycle.category}</h3>
+              <h4>{bicycle.category}</h4>
               <h3>
                 {bicycle.rating ? bicycle.rating : 0}
                 <FontAwesomeIcon
@@ -53,16 +52,14 @@ const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
             </div>
             <div className="price-location">
               <h2 className="lowercase">{bicycle.price} €/día </h2>
-
-              <h3>
-                {" "}
+              <div className="flex gap-05 align-center">
                 <FontAwesomeIcon
                   icon={faLocationDot}
-                  size="sm"
+                  size="2xl"
                   style={{ color: "#31b15c" }}
-                />{" "}
-                {bicycle.location}
-              </h3>
+                />
+                <h3 className="capitalize">{bicycle.location}</h3>
+              </div>
             </div>
           </div>
         </div>

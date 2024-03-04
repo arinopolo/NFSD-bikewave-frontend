@@ -43,36 +43,48 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
     setFileName(file.name);
   };
 
+  const staticCenter = {
+    lat: 40.4165,
+    lng: -3.70256,
+    zoom: 13,
+  };
+  const getRandomOffset = () => {
+    return (Math.random() - 0.5) * 0.01;
+  };
+
   const handleListitem = async (values) => {
     try {
       setLoading(true);
-      if (coordinates) {
-        const formData = new FormData();
-        formData.append("brand", values.brand);
-        formData.append("model", values.model);
-        formData.append("description", values.description);
-        formData.append("location", values.location);
-        formData.append("category", values.category);
-        formData.append("photo", photoFile);
-        formData.append("price", values.price);
-        formData.append("deposit", values.deposit);
-        formData.append("lat", coordinates.lat);
-        formData.append("lng", coordinates.lng);
 
-        const listItemData = await api.listItem(formData);
-        setLoading(false);
-        if (listItemData && listItemData.success) {
-          setListingSuccess(true);
-        } else {
-          setErrorMessage(listItemData.msg);
-          setListingSuccess(false);
-        }
+      const formData = new FormData();
+      formData.append("brand", values.brand);
+      formData.append("model", values.model);
+      formData.append("description", values.description);
+      formData.append("location", values.location);
+      formData.append("category", values.category);
+      formData.append("photo", photoFile);
+      formData.append("price", values.price);
+      formData.append("deposit", values.deposit);
+      formData.append(
+        "lat",
+        !coordinates.lat
+          ? staticCenter.lat + getRandomOffset()
+          : coordinates.lat
+      );
+      formData.append(
+        "lng",
+        !coordinates.lng
+          ? staticCenter.lng + getRandomOffset()
+          : coordinates.lng
+      );
+
+      const listItemData = await api.listItem(formData);
+      setLoading(false);
+      if (listItemData && listItemData.success) {
+        setListingSuccess(true);
       } else {
-        // Manejar error de geocodificación
+        setErrorMessage(listItemData.msg);
         setListingSuccess(false);
-        setErrorMessage(
-          "No se pudieron obtener las coordenadas para la dirección proporcionada."
-        );
       }
     } catch (error) {
       console.error("Error en la operación de agregar un producto:", error);
