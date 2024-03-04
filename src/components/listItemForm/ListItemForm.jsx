@@ -120,6 +120,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
           address: "",
         }}
         validate={(values) => {
+          console.log("values", values);
           let errors = {};
           if (step === 1) {
             if (!values.brand || !values.model || !values.description) {

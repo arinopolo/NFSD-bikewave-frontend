@@ -211,6 +211,9 @@ select:focus-visible {
 .m-bottom {
   margin-bottom: 10rem;
 }
+.capitalize {
+  text-transform: capitalize;
+}
 @media (max-width: 800px) {
   form {
     width: 80%;

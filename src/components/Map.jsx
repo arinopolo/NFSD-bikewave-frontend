@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import Pin from "../components/Pin";
 import ItemCard from "./itemsListAndCard/ItemCard";
@@ -12,10 +12,25 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   };
 
   const [selectedBicycle, setSelectedBicycle] = useState(null);
+  const [itemCardPosition, setItemCardPosition] = useState();
 
-  const handlePinClick = (bicycle) => {
-    console.log("clicked");
+  const handlePinClick = (bicycle, event) => {
     setSelectedBicycle(bicycle);
+
+    const offsetX = 30; 
+    const offsetY = -100;
+    setItemCardPosition({
+      x: event.clientX + offsetX,
+      y: event.clientY + offsetY,
+    });
+  };
+
+  const handleCloseItemClick = () => {
+    setSelectedBicycle(null);
+  };
+
+  const handleMapClick = () => {
+    handleCloseItemClick();
   };
 
   const getRandomOffset = () => {
@@ -29,6 +44,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
         bootstrapURLKeys={{ key: "AIzaSyAqpZyIprpf5ykPCIn-RpYuuMiWnLeVOyk" }}
         defaultCenter={[staticCenter.lat, staticCenter.lng]}
         defaultZoom={staticCenter.zoom}
+        onClick={handleMapClick}
       >
         {bicyclesList.map((bicycle, index) => (
           <Pin
@@ -44,24 +60,33 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
                 : staticCenter.lng + getRandomOffset()
             }
             text="My BIKEE"
-            onClick={() => handlePinClick(bicycle)}
+            onClick={(event) => handlePinClick(bicycle, event)}
           />
         ))}
       </GoogleMapReact>
       {selectedBicycle && (
-        <ItemCardOnMap
-          key={selectedBicycle._id}
-          bicycle={selectedBicycle}
-          refresh={refresh}
-          toggleRefresh={toggleRefresh}
-          isFavorite={
-            Array.isArray(favoritesList)
-              ? favoritesList.findIndex(
-                  (fav) => fav._id === selectedBicycle._id
-                ) !== -1
-              : false
-          }
-        />
+        <div
+          style={{
+            position: "absolute",
+            top: itemCardPosition.y,
+            left: itemCardPosition.x,
+            backgroundColor: "white",
+          }}
+        >
+          <ItemCardOnMap
+            key={selectedBicycle._id}
+            bicycle={selectedBicycle}
+            refresh={refresh}
+            toggleRefresh={toggleRefresh}
+            isFavorite={
+              Array.isArray(favoritesList)
+                ? favoritesList.findIndex(
+                    (fav) => fav._id === selectedBicycle._id
+                  ) !== -1
+                : false
+            }
+          />{" "}
+        </div>
       )}
     </div>
   );
