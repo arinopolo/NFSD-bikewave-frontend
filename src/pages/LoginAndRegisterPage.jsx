@@ -3,6 +3,7 @@ import LoginForm from "../components/LoginForm";
 import LogoComponent from "../components/LogoComponent";
 import RegisterForm from "../components/register/RegisterForm";
 import "../styles/LoginPage.css";
+import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 // eslint-disable-next-line react/prop-types
 const LoginAndRegisterPage = () => {
@@ -14,6 +15,7 @@ const LoginAndRegisterPage = () => {
   };
 
   return (
+   
     <div className="login-page-container">
       <LogoComponent />
 
@@ -23,6 +25,9 @@ const LoginAndRegisterPage = () => {
         <RegisterForm toggle={toggleLoginForm} />
       )}
     </div>
+ 
+    
+
   );
 };
 

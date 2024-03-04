@@ -14,7 +14,8 @@ import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 
-const DetailedItem = ({ bicycle }) => {
+const DetailedItem = ({ bicycle, setDeleteBicycle }) => {
+  const userId = localStorage.getItem("userId");
   const categoryIcons = {
     mountain: <MountainIcon />,
     road: <RoadIcon />,
@@ -49,14 +50,28 @@ const DetailedItem = ({ bicycle }) => {
     }
   };
 
+  const handleDeleteBicycle = async () => {
+    try {
+      const backendResponse = await api.deleteBicycle(bicycle);
+
+      if (backendResponse) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Listing error:", error.message);
+    }
+  };
+
   return (
     <>
       <div className="detailed-item-container">
         <BigPhoto photo={bicycle.photo} />
         <div className="details align-start">
-          <div>
-            {" "}
-            <h1 className="title">{bicycle.brand}</h1>
+          <div className="w-100">
+            <div className="flex justify-between">
+              <h1 className="title">{bicycle.brand}</h1>
+              <h2 className="title">{bicycle.price}€/día</h2>
+            </div>
             <h2>{bicycle.model}</h2>
             <p className="like-text">Añadir a favoritos</p>
           </div>
@@ -67,15 +82,29 @@ const DetailedItem = ({ bicycle }) => {
             />
           </div>
           <p>{bicycle.description}</p>
-          <h3> Ubicación: {bicycle.location}</h3>
-          <h2 className="title">{bicycle.price}€/día</h2>
+          <div className=" flex ">
+            <h3> Ubicación: </h3>
+            <h3 className="capitalize"> {bicycle.location}</h3>
+          </div>
+
           <h4>
             Propietario: {bicycle.owner.firstName} {bicycle.owner.secondName}
           </h4>
-          <div className="flex gap-1">
-            <Button text={"Contactar"} onClick={handleContactClick} className={"secondary-btn"} />
+          <div className="flex gap-1 w-100">
+            <Button
+              text={"Contactar"}
+              onClick={handleContactClick}
+              className={"secondary-btn "}
+            />
             <Button text={"Reservar"} />
           </div>
+          {bicycle.owner._id === userId ? (
+            <Button
+              className={"w-100"}
+              text="Eliminar "
+              onClick={() => handleDeleteBicycle(bicycle)}
+            />
+          ) : null}
         </div>
       </div>
     </>

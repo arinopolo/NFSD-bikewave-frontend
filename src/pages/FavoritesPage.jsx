@@ -5,6 +5,7 @@ import api from "../api/api";
 import Button from "../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/loading/Loading";
+import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 const LoginToContinue = () => {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ const FavoritesPage = () => {
           )}
         </>
       )}
+     
     </>
   );
 };

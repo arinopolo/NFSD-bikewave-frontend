@@ -4,6 +4,7 @@ import Button from "../components/button/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../api/api";
 import SuccessMessage from "../components/successMessage/SuccessMessage";
+import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 const ResetPasswordPage = () => {
   let { singleToken } = useParams();
@@ -86,6 +87,7 @@ const ResetPasswordPage = () => {
           </Formik>
         </div>
       )}
+     
     </>
   );
 };

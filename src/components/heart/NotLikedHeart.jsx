@@ -7,7 +7,7 @@ const NotLikedHeart = ({ onClick }) => {
     <div onClick={onClick}>
       <FontAwesomeIcon
         icon={faHeart}
-        size="xl"
+        size="2xl"
         style={{
           color: "#31b15c",
           position: "absolute",

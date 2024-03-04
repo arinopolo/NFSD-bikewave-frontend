@@ -1,5 +1,5 @@
 .big-title {
-  font-size: 1.9rem;
+  font-size: 1.6rem;
   font-weight: 800;
   text-align: center;
   width: 50%;
@@ -120,13 +120,12 @@ input[type="file"] {
   width: 20rem;
 }
 
-
 .category-option.city {
-  background-image: url('../assets/SVGIcons/CityIcon.svg');
+  background-image: url("../assets/SVGIcons/CityIcon.svg");
 }
 
 .category-option.road {
-  background-image: url('../assets/SVGIcons/RoadIcon.svg');
+  background-image: url("../assets/SVGIcons/RoadIcon.svg");
 }
 
 @media (max-width: 800px) {

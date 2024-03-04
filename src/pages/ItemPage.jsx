@@ -5,12 +5,12 @@ import DetailedItem from "../components/detailedItem/DetailedItem";
 import api from "../api/api";
 import Button from "../components/button/Button";
 import Loading from "../components/loading/Loading";
-
-
+import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 const ItemPage = () => {
   const navigate = useNavigate();
   const [bicycle, setBicycle] = useState();
+ 
   const [loading, setLoading] = useState(true);
   let { bikeid } = useParams();
 
@@ -29,17 +29,6 @@ const ItemPage = () => {
     }
   };
 
-  const handleDeleteBicycle = async () => {
-    try {
-      const backendResponse = await api.deleteBicycle(bicycle);
-
-      if (backendResponse) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Listing error:", error.message);
-    }
-  };
 
   useEffect(() => {
     getBicycleInfo();
@@ -48,7 +37,6 @@ const ItemPage = () => {
   useEffect(() => {
     if (bicycle) {
       setLoading(false);
-
     }
   }, [bicycle]);
 
@@ -59,11 +47,7 @@ const ItemPage = () => {
         <Loading />
       ) : (
         <div>
-          {" "}
-          <DetailedItem bicycle={bicycle} />
-          {bicycle.owner._id === userId ? (
-            <Button text="Eliminar " onClick={handleDeleteBicycle} />
-          ) : null}
+          <DetailedItem bicycle={bicycle}  />
         </div>
       )}
     </div>

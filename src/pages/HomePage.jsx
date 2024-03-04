@@ -11,11 +11,12 @@ import MapSwitcher from "../components/mapSwitcher/MapSwitcher";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/loading/Loading";
 
 const HomePage = () => {
   const [bicyclesList, setBicyclesList] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [mapView, setMapView] = useState(false);
   const [refresh, toggleRefresh] = useState(false);
@@ -48,6 +49,8 @@ const HomePage = () => {
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,36 +93,43 @@ const HomePage = () => {
         />
       )}
       <CategoriesFilter setCategory={setCategory} />
-
-      {!mapView ? (
-        <>
-          <ItemsList
-            bicyclesList={bicyclesList}
-            favoritesList={favoritesList}
-            refresh={refresh}
-            toggleRefresh={toggleRefresh}
-          />
-          <MapSwitcher
-            text={"Mostrar mapa"}
-            icon={faMap}
-            onClick={handleMapSwitchCLick}
-          />
-        </>
+      {loading ? (
+        <Loading />
       ) : (
         <>
-          <Map
-            bicyclesList={bicyclesList}
-            favoritesList={favoritesList}
-            refresh={refresh}
-            toggleRefresh={toggleRefresh}
-          />
-          <MapSwitcher
-            text={"Mostrar lista"}
-            icon={faList}
-            onClick={handleMapSwitchCLick}
-          />
+          {" "}
+          {!mapView ? (
+            <>
+              <ItemsList
+                bicyclesList={bicyclesList}
+                favoritesList={favoritesList}
+                refresh={refresh}
+                toggleRefresh={toggleRefresh}
+              />
+              <MapSwitcher
+                text={"Mostrar mapa"}
+                icon={faMap}
+                onClick={handleMapSwitchCLick}
+              />
+            </>
+          ) : (
+            <>
+              <Map
+                bicyclesList={bicyclesList}
+                favoritesList={favoritesList}
+                refresh={refresh}
+                toggleRefresh={toggleRefresh}
+              />
+              <MapSwitcher
+                text={"Mostrar lista"}
+                icon={faList}
+                onClick={handleMapSwitchCLick}
+              />
+            </>
+          )}{" "}
         </>
       )}
+         
     </>
   );
 };
