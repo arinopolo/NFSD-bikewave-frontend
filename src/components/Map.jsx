@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import Pin from "../components/Pin";
-import ItemCard from "./itemsListAndCard/ItemCard";
+
 import ItemCardOnMap from "./itemsListAndCard/itemCardOnMap/ItemCardOnMap";
 
 const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
@@ -33,6 +33,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
     handleCloseItemClick();
   };
 
+  
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100vw" }}>

@@ -5,8 +5,9 @@ import LikedHeart from "../../heart/LikedHeart";
 import NotLikedHeart from "../../heart/NotLikedHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
+import CategoryComponent from "../../filters/category/Category";
 
-const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
+const ItemCardOnMap = ({ bicycle, isFavorite }) => {
   return (
     <>
       <Link to={`/products/${bicycle._id}`}>
@@ -40,7 +41,8 @@ const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
                 <h2 className="item-name">{bicycle.brand}</h2>
                 <h4>{bicycle.model}</h4>
               </div>
-              <h4>{bicycle.category}</h4>
+
+              <h4 className="capitalize">{bicycle.category}</h4>
               <h3>
                 {bicycle.rating ? bicycle.rating : 0}
                 <FontAwesomeIcon
@@ -52,14 +54,17 @@ const ItemCardOnMap = ({ bicycle, refresh, togggleRefresh, isFavorite }) => {
             </div>
             <div className="price-location">
               <h2 className="lowercase">{bicycle.price} €/día </h2>
-              <div className="flex gap-05 align-center">
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  size="2xl"
-                  style={{ color: "#31b15c" }}
-                />
-                <h3 className="capitalize">{bicycle.location}</h3>
-              </div>
+
+              <h3 className="capitalize">
+                <span>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    size="lg"
+                    style={{ color: "#31b15c" }}
+                  />
+                </span>
+                {bicycle.location}
+              </h3>
             </div>
           </div>
         </div>

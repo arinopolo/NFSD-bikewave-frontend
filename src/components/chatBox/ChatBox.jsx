@@ -82,7 +82,6 @@ const ChatBox = ({
   };
 
   useEffect(() => {
-    console.log("recieved message", receiveMessage);
     // Agregar lógica para agregar el mensaje recibido a la lista de mensajes
 
     if (receiveMessage) {
@@ -91,6 +90,13 @@ const ChatBox = ({
   }, [receiveMessage]);
 
   const scroll = useRef();
+
+  // controlar el envio del mensaje con la tecla Enter
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSend(e);
+    }
+  };
 
   return (
     <>
@@ -118,7 +124,11 @@ const ChatBox = ({
         </div>
 
         <div className="chat-input flex gap-05 align-center">
-          <InputEmoji value={newMessage} onChange={handleChange} />
+          <InputEmoji
+            value={newMessage}
+            onChange={handleChange}
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
           <button className="Enviar" onClick={handleSend}>
             Enviar
           </button>
