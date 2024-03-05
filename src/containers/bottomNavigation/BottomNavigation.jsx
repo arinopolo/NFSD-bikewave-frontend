@@ -14,7 +14,11 @@ const BottomNavigation = () => {
       <nav className="bottom-navigation-container">
         <NavigationItem link="/" text="Inicio" icon={faHouse} />
         <NavigationItem link="/favorites" text="Favoritos" icon={faHeart} />
-        <NavigationItem link="/list-item" text="Alquilar" icon={faCirclePlus} />
+        <NavigationItem
+          link="/list-item"
+          text="Subir bici"
+          icon={faCirclePlus}
+        />
         <NavigationItem link="/chats" text="Mensajes" icon={faMessage} />
         <NavigationItem link="/profile" text="Perfil" icon={faUser} />
       </nav>

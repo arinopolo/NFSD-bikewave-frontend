@@ -3,6 +3,7 @@
   grid-template-columns: 60% 1fr;
   grid-template-rows: auto;
   text-align: start;
+  width: 100vw;
 }
 
 .title {
@@ -31,6 +32,13 @@
   background-color: white;
   opacity: 0.5;
 }
+
+.bicycle-description,
+.owner-name {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 800px) {
   .detailed-item-container {
     display: flex;

@@ -366,6 +366,27 @@ const getMyBicycles = async () => {
   }
 };
 
+const bookBicycle = async (bicycleId, ownerId) => {
+  try {
+    const token = localStorage.getItem("token");
+    console.log("owner id", ownerId);
+
+    const bookBike = await fetch(`${BASE_URL}/users/book/${bicycleId}`, {
+      method: "PUT",
+      body: JSON.stringify({ownerId}),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const data = await bookBike.json();
+    return data;
+  } catch (error) {
+    console.error("Listing error:", error.message);
+  }
+};
+
 export default {
   login,
   register,
@@ -385,4 +406,5 @@ export default {
   sendWelcomingEmail,
   deleteBicycle,
   getMyBicycles,
+  bookBicycle,
 };

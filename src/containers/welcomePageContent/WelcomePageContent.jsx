@@ -11,9 +11,13 @@ const WelcomePageContent = () => {
         {" "}
         <h1 className="welcome-title">HOLA</h1>
         <h4 className="welcome-message">
-          Somos una comunidad ciclista. Alquila bicicletas localmente, tanto de
-          propietarios privados como de pequeñas tiendas de segunda mano.
-          ¡Reserva tu bicicleta perfecta ahora!"
+          Bienvendid@ a tu nueva comunidad ciclista.
+        </h4>
+        <h4 className="welcome-message">
+          ¿Tienes una bicicleta que no usas?,¿preparando tu primer triatlón y no
+          puedes comprar una bici? ¡Alquílala! Aquí encontrarás una bicicleta
+          para todos tus planes en un solo click, tanto de propietarios
+          personales como de pequeños negocios. ¡Reserva ahora!
         </h4>
       </div>
       <Button

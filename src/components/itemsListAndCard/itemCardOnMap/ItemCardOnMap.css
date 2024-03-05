@@ -5,3 +5,13 @@
 .item-info-container {
   background-color: white;
 }
+
+.mobile-div {
+  margin-bottom: 15rem;
+}
+
+.mobile-div,
+.mobile-div .item-info-container,
+.mobile-div .item-pic {
+  width: 100vw;
+}
