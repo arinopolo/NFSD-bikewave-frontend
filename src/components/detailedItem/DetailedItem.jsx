@@ -17,12 +17,14 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SuccessMessage from "../../components/successMessage/SuccessMessage";
 import FailMessage from "../../components/failMessage/FailMessage";
+import Loading from "../../components/loading/Loading";
 
 const DetailedItem = ({ bicycle }) => {
   const userId = localStorage.getItem("userId");
 
   const [successBooking, setSuccessBooking] = useState(false);
   const [bookingTried, setBookingTried] = useState(false);
+  const [loading, setLoading] = useState(false);
   const categoryIcons = {
     mountain: <MountainIcon />,
     road: <RoadIcon />,
@@ -75,89 +77,107 @@ const DetailedItem = ({ bicycle }) => {
     if (!token) {
       navigate("/login");
     }
+    setLoading(true);
     try {
       const backendResponse = await api.bookBicycle(
         bicycle._id,
         bicycle.owner._id
       );
+      const receiver = {
+        receiverId: bicycle.owner._id,
+      };
+      const createChatResponse = await api.createChat(receiver);
+
       setBookingTried(true);
-      if (backendResponse.success) {
+
+      if (backendResponse.success && createChatResponse.success || createChatResponse.existing ) {
         setSuccessBooking(true);
       }
     } catch (error) {
       console.log("Error:", error);
       setSuccessBooking(false);
+    } finally {
+      setLoading(false);
     }
   };
   return (
-    <>
-      {bookingTried ? (
-        successBooking ? (
-          <SuccessMessage text={"RESERVADO"} />
-        ) : (
-          <FailMessage text={"no reservado"} />
-        )
+    <div className="flex w-100 h-100 flex-column gap-2 align-center justify-start">
+      {loading ? (
+        <Loading />
       ) : (
         <>
           {" "}
-          <div className="detailed-item-container">
-            <BigPhoto photo={bicycle.photo} />
+          {bookingTried && !loading ? (
+            successBooking ? (
+              <SuccessMessage
+                onClick={() => navigate("/")}
+                text={
+                  "Felicidades! Tu bicicleta ha sido reservada con éxito. Te hemos enviado un email de confirmación con los detalles del pedido. ¡Prepárate para disfrutar de un paseo emocionante! "
+                }
+              />
+            ) : (
+              <FailMessage text={"no reservado"} />
+            )
+          ) : (
+            <div className="detailed-item-container">
+              <BigPhoto photo={bicycle.photo} />
 
-            <div className="details align-start">
-              <div className="w-100">
-                <div className="flex justify-between">
-                  <h1 className="title">{bicycle.brand}</h1>
-                  <h2 className="title">{bicycle.price}€/día</h2>
+              <div className="details align-start">
+                <div className="w-100">
+                  <div className="flex justify-between">
+                    <h1 className="title">{bicycle.brand}</h1>
+                    <h2 className="title">{bicycle.price}€/día</h2>
+                  </div>
+                  <h2>{bicycle.model}</h2>
+                  <p className="like-text">Añadir a favoritos</p>
                 </div>
-                <h2>{bicycle.model}</h2>
-                <p className="like-text">Añadir a favoritos</p>
-              </div>
-              <div>
-                <CategoryComponent
-                  text={categories[bicycle.category]}
-                  image={categoryIcons[bicycle.category]}
-                />
-              </div>
-              <p className="bicycle-description">{bicycle.description}</p>
+                <div>
+                  <CategoryComponent
+                    text={categories[bicycle.category]}
+                    image={categoryIcons[bicycle.category]}
+                  />
+                </div>
+                <p className="bicycle-description">{bicycle.description}</p>
 
-              <div className="flex gap-05">
-                {" "}
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  size="lg"
-                  style={{ color: "#31b15c" }}
-                />
-                <h3 className="capitalize">{bicycle.location}</h3>{" "}
-              </div>
+                <div className="flex gap-05">
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    size="lg"
+                    style={{ color: "#31b15c" }}
+                  />
+                  <h3 className="capitalize">{bicycle.location}</h3>{" "}
+                </div>
 
-              <h4 className="owner-name">
-                Propietario: {bicycle.owner.firstName}{" "}
-                {bicycle.owner.secondName}
-              </h4>
-              <div className="flex gap-1 w-100">
-                <Button
-                  text={"Contactar"}
-                  onClick={handleContactClick}
-                  className={"secondary-btn  w-50"}
-                />
-                <Button
-                  text={"Reservar"}
-                  className={"w-50"}
-                  onClick={() => handleBookClick()}
-                />
+                <h4 className="owner-name">
+                  Propietario: {bicycle.owner.firstName}{" "}
+                  {bicycle.owner.secondName}
+                </h4>
+                <div className="flex gap-1 w-100">
+                  <Button
+                    text={"Contactar"}
+                    onClick={handleContactClick}
+                    className={"secondary-btn  w-50"}
+                  />
+                  <Button
+                    text={"Reservar"}
+                    className={"w-50"}
+                    onClick={() => handleBookClick()}
+                  />
+                </div>
+                {bicycle.owner._id === userId ? (
+                  <Button
+                    className={"w-100"}
+                    text="Eliminar "
+                    onClick={() => handleDeleteBicycle(bicycle)}
+                  />
+                ) : null}
               </div>
-              {bicycle.owner._id === userId ? (
-                <Button
-                  className={"w-100"}
-                  text="Eliminar "
-                  onClick={() => handleDeleteBicycle(bicycle)}
-                />
-              ) : null}
             </div>
-          </div>
+          )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

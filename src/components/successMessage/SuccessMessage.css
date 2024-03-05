@@ -1,0 +1,9 @@
+.success-message {
+  width: 50%;
+}
+
+@media (max-width: 800px) {
+  .success-message {
+    width: 90%;
+  }
+}

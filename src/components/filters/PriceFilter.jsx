@@ -32,7 +32,7 @@ const FilterModal = ({
   };
 
   return (
-    <div className="price-filter-modal">
+    <div className="price-filter-modal flex flex-column ">
       <div className="flex-row-space-between">
         <h2>Rango de precios</h2>
         <FontAwesomeIcon
@@ -42,49 +42,50 @@ const FilterModal = ({
           onClick={() => setModalVisible(!modalVisible)}
         />
       </div>
+      <div className="flex flex-column align-center justify-center my-5">
+        <div className="padding ">
+          <p>Precios por noche con comisiones e impuestos incluidos</p>
+          <div className="flex-row-center">
+            <div className="price-container">
+              <p>min</p>
+              <input
+                className="price-tag"
+                type="number"
+                id="min"
+                value={values[0]}
+                placeholder={values[0]}
+                onChange={handleInputChange}
+              />
+            </div>
+            <p>-</p>
+            <div className="price-container">
+              <p>max</p>
+              <input
+                className="price-tag"
+                type="number"
+                id="max"
+                placeholder={values[1]}
+                value={values[1]}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
 
-      <div className="padding">
-        <p>Precios por noche con comisiones e impuestos incluidos</p>
-        <div className="flex-row-center">
-          <div className="price-container">
-            <p>min</p>
-            <input
-              className="price-tag"
-              type="number"
-              id="min"
-              value={values[0]}
-              placeholder={values[0]}
-              onChange={handleInputChange}
-            />
-          </div>
-          <p>-</p>
-          <div className="price-container">
-            <p>max</p>
-            <input
-              className="price-tag"
-              type="number"
-              id="max"
-              placeholder={values[1]}
-              value={values[1]}
-              onChange={handleInputChange}
-            />
-          </div>
+          <ReactSlider
+            className="slider"
+            min={MIN}
+            max={MAX}
+            value={values}
+            onChange={(value) => setValues(value)}
+          />
         </div>
-
-        <ReactSlider
-          className="slider"
-          min={MIN}
-          max={MAX}
-          value={values}
-          onChange={(value) => setValues(value)}
-        />
+        <button
+          className="submit filter-btn"
+          onClick={() => filterBikesByPrice(values)}
+        >
+          Filtrar
+        </button>
       </div>
-      <button
-        className="submit filter-btn"
-        onClick={() => filterBikesByPrice(values)}
-      >
-        Filtrar
-      </button>
     </div>
   );
 };

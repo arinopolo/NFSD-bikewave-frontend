@@ -13,6 +13,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
 
   const [selectedBicycle, setSelectedBicycle] = useState(null);
   const [itemCardPosition, setItemCardPosition] = useState();
+  const [isMobile, setIsMobile] = useState(false);
 
   const handlePinClick = (bicycle, event) => {
     setSelectedBicycle(bicycle);
@@ -33,7 +34,17 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
     handleCloseItemClick();
   };
 
-  
+  useEffect(() => {
+    // Detectar si el dispositivo es móvil
+    const isMobileDevice = () => {
+      console.log("ancuhra de la pantalla: ", window.innerWidth);
+      console.log("is mobile?s ", isMobile);
+      return window.innerWidth <= 600;
+    };
+
+    setIsMobile(isMobileDevice());
+  }, [selectedBicycle]);
+
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -55,10 +66,11 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
       </GoogleMapReact>
       {selectedBicycle && (
         <div
+          className={isMobile && "mobile-div"}
           style={{
             position: "absolute",
-            top: itemCardPosition.y,
-            left: itemCardPosition.x,
+            top: isMobile ? "90%" : itemCardPosition.y,
+            left: isMobile ? "0" : itemCardPosition.x,
             backgroundColor: "white",
           }}
         >

@@ -219,6 +219,13 @@ select:focus-visible {
   font-style: italic;
 }
 
+.h-100 {
+  height: 100vh;
+}
+
+.my-5 {
+  margin: 5rem auto;
+}
 
 @media (max-width: 800px) {
   form {
