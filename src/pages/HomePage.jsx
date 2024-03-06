@@ -2,14 +2,12 @@ import LogoComponent from "../components/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import SearchFilterComponent from "../containers/searchAndFilter/SearchAndFilter";
-import FilterModal from "../components/filters/PriceFilter";
+import FilterModal from "../components/filters/priceFilter/PriceFilter";
 import CategoriesFilter from "../containers/categories/Categories";
 import api from "../api/api";
-import GoogleMapReact from "google-map-react";
 import Map from "../components/Map";
 import MapSwitcher from "../components/mapSwitcher/MapSwitcher";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
-import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/loading/Loading";
 
