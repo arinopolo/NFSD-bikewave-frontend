@@ -13,7 +13,7 @@ import CategoryComponent from "../filters/category/Category";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SuccessMessage from "../../components/successMessage/SuccessMessage";
 import FailMessage from "../../components/failMessage/FailMessage";
@@ -90,7 +90,10 @@ const DetailedItem = ({ bicycle }) => {
 
       setBookingTried(true);
 
-      if (backendResponse.success && createChatResponse.success || createChatResponse.existing ) {
+      if (
+        (backendResponse.success && createChatResponse.success) ||
+        createChatResponse.existing
+      ) {
         setSuccessBooking(true);
       }
     } catch (error) {
@@ -129,6 +132,14 @@ const DetailedItem = ({ bicycle }) => {
                     <h2 className="title">{bicycle.price}€/día</h2>
                   </div>
                   <h2>{bicycle.model}</h2>
+                  <h3>
+                    {bicycle.rating ? bicycle.rating : 0}
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      size="sm"
+                      style={{ color: "#31b15c" }}
+                    />
+                  </h3>
                   <p className="like-text">Añadir a favoritos</p>
                 </div>
                 <div>

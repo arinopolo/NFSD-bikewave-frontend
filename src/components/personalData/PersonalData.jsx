@@ -38,7 +38,9 @@ const PersonalData = ({
     <>
       <div className="personal-data-container ">
         <div className="flex-row-space-between">
-          <h2>Pincha en el campo para cambiarlo </h2>
+          <h2 className="modal-title">
+            Por favor, haz clic en el campo para editarlo.
+          </h2>
           <FontAwesomeIcon
             icon={faCircleXmark}
             size="lg"
@@ -46,70 +48,76 @@ const PersonalData = ({
             onClick={() => setModalDataVisible(!modalDataVisible)}
           />
         </div>
-        <p>Tu nombre:</p>
+        <div>
+          <p className="bold">Tu nombre:</p>
 
-        {editingMode === "firstName" ? (
-          <div className="flex flex-row">
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <Button
-              text="Guardar"
-              className="submit-input"
-              onClick={() => handleSubmit(firstName)}
-            />
-          </div>
-        ) : (
-          <p onClick={() => handleEditing("firstName")}>{userInfo.firstName}</p>
-        )}
+          {editingMode === "firstName" ? (
+            <div className="flex flex-row">
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Button
+                text="Guardar"
+                className="submit-input"
+                onClick={() => handleSubmit(firstName)}
+              />
+            </div>
+          ) : (
+            <p onClick={() => handleEditing("firstName")}>
+              {userInfo.firstName}
+            </p>
+          )}
+        </div>
+        <div>
+          <p className="bold"> Tu apellido:</p>
 
-        <p>Tu apellido:</p>
+          {editingMode === "secondName" ? (
+            <div className="flex flex-row">
+              <input
+                type="text"
+                name="secondName"
+                id="secondName"
+                value={secondName}
+                onChange={(e) => setSecondName(e.target.value)}
+              />
+              <Button
+                text="Guardar"
+                className="submit-input"
+                onClick={() => handleSubmit(secondName)}
+              />
+            </div>
+          ) : (
+            <p onClick={() => handleEditing("secondName")}>
+              {userInfo.secondName}
+            </p>
+          )}
+        </div>
+        <div>
+          <p className="bold">Tu correo electrónico:</p>
 
-        {editingMode === "secondName" ? (
-          <div className="flex flex-row">
-            <input
-              type="text"
-              name="secondName"
-              id="secondName"
-              value={secondName}
-              onChange={(e) => setSecondName(e.target.value)}
-            />
-            <Button
-              text="Guardar"
-              className="submit-input"
-              onClick={() => handleSubmit(secondName)}
-            />
-          </div>
-        ) : (
-          <p onClick={() => handleEditing("secondName")}>
-            {userInfo.secondName}
-          </p>
-        )}
-
-        <p>Tu correo electrónico:</p>
-
-        {editingMode === "email" ? (
-          <div className="flex flex-row">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Button
-              text="Guardar"
-              className="submit-input"
-              onClick={() => handleSubmit(email)}
-            />
-          </div>
-        ) : (
-          <p onClick={() => handleEditing("email")}>{userInfo.email}</p>
-        )}
+          {editingMode === "email" ? (
+            <div className="flex flex-row">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Button
+                text="Guardar"
+                className="submit-input"
+                onClick={() => handleSubmit(email)}
+              />
+            </div>
+          ) : (
+            <p onClick={() => handleEditing("email")}>{userInfo.email}</p>
+          )}
+        </div>
       </div>
     </>
   );

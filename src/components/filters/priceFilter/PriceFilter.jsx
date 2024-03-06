@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/FilterModal.css";
+import "./PriceFilter.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import ReactSlider from "react-slider";

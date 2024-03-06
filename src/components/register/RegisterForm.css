@@ -1,0 +1,18 @@
+.form-register {
+    display: grid;
+    gap: 8%;
+    grid-template-columns: 46% 46%;
+  }
+  
+  .field-holder-register {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+  }
+  
+  .required {
+    color: rgb(199, 30, 30);
+  }
+  

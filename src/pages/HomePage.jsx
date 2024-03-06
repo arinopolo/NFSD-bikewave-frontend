@@ -1,7 +1,7 @@
 import LogoComponent from "../components/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
-import SearchFilterComponent from "../containers/SearchAndFilter";
+import SearchFilterComponent from "../containers/searchAndFilter/SearchAndFilter";
 import FilterModal from "../components/filters/PriceFilter";
 import CategoriesFilter from "../containers/categories/Categories";
 import api from "../api/api";
@@ -129,7 +129,6 @@ const HomePage = () => {
           )}{" "}
         </>
       )}
-         
     </>
   );
 };

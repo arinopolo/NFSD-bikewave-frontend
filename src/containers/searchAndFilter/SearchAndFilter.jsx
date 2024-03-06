@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "../styles/SearchFilterComponent.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FilterIcon } from "../assets/SVGIcons";
-import FilterIconComponent from "../components/filters/FilterIconComponent";
-import CitySearch from "../components/filters/CitySearch";
+import FilterIconComponent from "../../components/filters/FilterIconComponent";
+import CitySearch from "../../components/filters/CitySearch";
+import "./SearchAndFilter.css";
 
 const SearchFilterComponent = ({
   setModalVisible,

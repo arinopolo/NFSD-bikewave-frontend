@@ -61,7 +61,7 @@ input:focus:not(:placeholder-shown) {
 }
 
 .btn-register-login-proposal:hover {
- background-color: transparent;
+  background-color: transparent;
   color: #239b4c;
 }
 

@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import "../../styles/ItemCard.css";
+import "./ItemCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
-import LikedHeart from "../heart/LikedHeart";
-import NotLikedHeart from "../heart/NotLikedHeart";
+import LikedHeart from "../../heart/LikedHeart";
+import NotLikedHeart from "../../heart/NotLikedHeart";
 import { Link } from "react-router-dom";
-import api from "../../api/api";
+import api from "../../../api/api";
 
-const ItemCard = ({
-  bicycle,
-  refresh,
-  toggleRefresh,
-  isFavorite,
-  
-}) => {
+const ItemCard = ({ bicycle, refresh, toggleRefresh, isFavorite }) => {
   const handleClickLike = async (bicycleId, e) => {
     e.stopPropagation();
     e.preventDefault();
