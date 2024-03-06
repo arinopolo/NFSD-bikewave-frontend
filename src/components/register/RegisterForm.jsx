@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Formik, Form } from "formik";
-import "../../styles/RegisterForm.css";
+import "./RegisterForm.css";
 import api from "../../api/api";
 import { useState } from "react";
 import Button from "../button/Button";

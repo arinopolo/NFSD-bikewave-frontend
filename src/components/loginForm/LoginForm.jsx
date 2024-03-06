@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import "../styles/LoginForm.css";
+import "./LoginForm.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import api from "../api/api";
-import { AuthContext } from "../contexts/AuthContext";
-import Button from "./button/Button";
-import ForgotPassword from "./forgotPassword/ForgotPassword";
+import api from "../../api/api";
+import { AuthContext } from "../../contexts/AuthContext";
+import Button from "../button/Button";
+import ForgotPassword from "../forgotPassword/ForgotPassword";
 
 const LoginForm = ({ toggle }) => {
   const token = localStorage.getItem("token");

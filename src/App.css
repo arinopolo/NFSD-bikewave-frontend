@@ -235,4 +235,10 @@ select:focus-visible {
   .logo-bikewave {
     margin: 3rem auto;
   }
+  .login-page-container {
+    background-image: url("../assets/fondo.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
 }

@@ -12,6 +12,7 @@ import {
   ProIcon,
 } from "../../assets/SVGIcons";
 
+
 const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const [errorMessage, setErrorMessage] = useState();
   const [step, setStep] = useState(1);

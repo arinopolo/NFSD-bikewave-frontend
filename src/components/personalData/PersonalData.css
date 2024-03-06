@@ -10,11 +10,15 @@
   text-align: start;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .submit-input {
   width: 30%;
   border: 1px solid #31b15c;
+}
+
+.modal-title{
+  font-size: 1.2rem;
 }

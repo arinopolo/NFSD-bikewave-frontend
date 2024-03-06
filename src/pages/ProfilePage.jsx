@@ -4,10 +4,9 @@ import LogoComponent from "../components/LogoComponent";
 import { AuthContext } from "../contexts/AuthContext";
 import api from "../api/api";
 import ProfileButtons from "../containers/profileButtons/ProfileButtons";
-import ProfileInfo from "../containers/ProfileInfo";
+import ProfileInfo from "../containers/profileInfo/ProfileInfo";
 import Settings from "../containers/settings/Settings";
 import Loading from "../components/loading/Loading";
-import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 const ProfilePage = () => {
   const token = localStorage.getItem("token");
@@ -81,7 +80,6 @@ const ProfilePage = () => {
           )}{" "}
         </>
       )}
-    
     </>
   );
 };

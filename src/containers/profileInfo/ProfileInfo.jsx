@@ -1,6 +1,6 @@
 import React from "react";
-import DetailedProfile from "../components/detailedProfile/DetailedProfile";
-import MyBicycles from "../components/myBicycles/MyBicycles";
+import DetailedProfile from "../../components/detailedProfile/DetailedProfile";
+import MyBicycles from "../../components/myBicycles/MyBicycles";
 
 const ProfileInfo = ({ userInfo, myBicyclesList, onClick }) => {
   return (

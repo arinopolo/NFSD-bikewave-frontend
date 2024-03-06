@@ -29,7 +29,7 @@ const DetailedProfile = ({ userInfo }) => {
           <p className="about-me">
             ¡Hola a todos! Soy {userInfo.firstName} y acabo de unirme a
             <span className="bold"> Bikewave.</span>
-            ¡Estoy emocionad@ por montar y alquilar bicicletas geniales!
+            ¡List@ para recorrer kilómetros y alquilar bicicletas fabulosas!
           </p>
         </div>
       </div>

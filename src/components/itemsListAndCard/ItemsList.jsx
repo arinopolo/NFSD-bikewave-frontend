@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/ItemsList.css";
-import ItemCard from "./ItemCard";
+import "./ItemsList.css";
+import ItemCard from "./itemCard/ItemCard";
 import FailMessage from "../../components/failMessage/FailMessage";
-import Loading from "../loading/Loading";
+
 import { useNavigate } from "react-router-dom";
 
 const ItemsList = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   const navigate = useNavigate();
 
-
-  
   return (
     <>
       {bicyclesList.length > 0 ? (
