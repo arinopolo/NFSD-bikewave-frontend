@@ -55,20 +55,21 @@ const PlacesAutocomplete = ({ onUpdateCoordinates }) => {
         <li
           key={place_id}
           onClick={handleSelect(suggestion)}
-          style={{ width: "100%" }}
+          className="w-100 text-start"
         >
-          <strong>{main_text}</strong> <small>{secondary_text}</small>
+          <p style={{fontSize: "0.8rem", fontWeight: 600}}>{main_text}</p>{" "}
+          <p style={{fontSize: "0.6rem"}}>{secondary_text}</p>
         </li>
       );
     });
 
   return (
-    <div ref={ref} style={{ width: "100%" }}>
+    <div ref={ref} className="w-100">
       <input
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Where are you going?"
+        placeholder="Escribe tu dirección"
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && <ul>{renderSuggestions()}</ul>}

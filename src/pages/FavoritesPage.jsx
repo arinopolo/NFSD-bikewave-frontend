@@ -1,4 +1,4 @@
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import api from "../api/api";

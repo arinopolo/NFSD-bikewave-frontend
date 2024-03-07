@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import { AuthContext } from "../contexts/AuthContext";
 import api from "../api/api";
 import ProfileButtons from "../containers/profileButtons/ProfileButtons";

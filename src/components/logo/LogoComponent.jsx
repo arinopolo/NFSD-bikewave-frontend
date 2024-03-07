@@ -1,5 +1,5 @@
-import bikewaveLogo from "../assets/logo_bikewave.svg";
-import "../App.css";
+import bikewaveLogo from "../../assets/logo_bikewave.svg";
+import "./LogoComponent.css";
 
 const LogoComponent = () => {
   return (

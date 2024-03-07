@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import DetailedItem from "../components/detailedItem/DetailedItem";
 import api from "../api/api";
-import Button from "../components/button/Button";
 import Loading from "../components/loading/Loading";
-import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
+
 
 const ItemPage = () => {
   const navigate = useNavigate();

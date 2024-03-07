@@ -1,8 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../../api/api";
 import "./ListItemForm.css";
-import { useEffect, useState } from "react";
-import PlacesAutocomplete from "../AutocompleteInput";
+import { useState } from "react";
+import PlacesAutocomplete from "../../components/autocompleteInput/AutocompleteInput";
 import {
   CityIcon,
   RoadIcon,

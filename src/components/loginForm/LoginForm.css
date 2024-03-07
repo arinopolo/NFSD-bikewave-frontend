@@ -10,6 +10,7 @@ input {
   align-items: flex-end;
   background-color: transparent;
   border: 0;
+  border-radius: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
   display: flex;
   outline: none;

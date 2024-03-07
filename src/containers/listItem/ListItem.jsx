@@ -9,7 +9,6 @@ import "./ListItem.css";
 const ListItem = () => {
   const [listingSuccess, setListingSuccess] = useState(false);
   const [listingTried, setListingTried] = useState(false);
-  const [filledFields, setFilledFields] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
