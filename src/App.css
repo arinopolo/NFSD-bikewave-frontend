@@ -49,15 +49,17 @@ a {
   text-decoration: none;
 }
 
-.logo-bikewave {
-  margin: 1rem auto;
-  width: 8rem;
-}
-
 .bold {
   font-weight: 800;
 }
 
+.white {
+  background-color: white;
+}
+
+.absolute {
+  position: absolute;
+}
 .field-holder {
   align-items: flex-start;
   display: flex;
@@ -219,14 +221,21 @@ select:focus-visible {
   margin: 5rem auto;
 }
 
+.text-start {
+  text-align: start;
+}
+
+.small {
+  font-size: 0.7;
+}
 @media (max-width: 800px) {
   form {
     width: 80%;
   }
-
-  .logo-bikewave {
-    margin: 3rem auto;
+  .justify-sm-start {
+    justify-content: start;
   }
+
   .login-page-container {
     background-image: url("../assets/fondo.png");
     background-position: 50% 50%;

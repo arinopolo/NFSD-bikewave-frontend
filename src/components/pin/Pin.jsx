@@ -1,5 +1,5 @@
 import React from "react";
-import bike from "../assets/bike.svg";
+import bike from "../../assets/bike.svg";
 
 const Pin = ({ onClick }) => {
   return (

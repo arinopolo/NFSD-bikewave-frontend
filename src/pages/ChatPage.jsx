@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Chat from "../components/chat/Chat";
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
 
 const ChatPage = () => {

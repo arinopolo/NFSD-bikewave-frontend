@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LoginForm from "../components/loginForm/LoginForm";
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import RegisterForm from "../components/register/RegisterForm";
 
 // eslint-disable-next-line react/prop-types

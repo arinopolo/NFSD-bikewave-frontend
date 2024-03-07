@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import Pin from "../components/Pin";
+import Pin from "../pin/Pin";
 
-import ItemCardOnMap from "./itemsListAndCard/itemCardOnMap/ItemCardOnMap";
+import ItemCardOnMap from "../itemsListAndCard/itemCardOnMap/ItemCardOnMap";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -46,7 +46,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: "100vh", width: "100vw", position: "absolute" }}>
+    <div className="w-100 h-100">
       <GoogleMapReact
         bootstrapURLKeys={{ key: API_KEY }}
         defaultCenter={[staticCenter.lat, staticCenter.lng]}
@@ -65,12 +65,10 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
       </GoogleMapReact>
       {selectedBicycle && (
         <div
-          className={isMobile ? "mobile-div" : ""}
+          className={isMobile ? "mobile-div white absolute" : "white absolute"}
           style={{
-            position: "absolute",
-            top: isMobile ? "50%" : itemCardPosition.y,
+            top: isMobile ? "calc(100vh - 4rem)" : itemCardPosition.y,
             left: isMobile ? "0" : itemCardPosition.x,
-            backgroundColor: "white",
           }}
         >
           <ItemCardOnMap

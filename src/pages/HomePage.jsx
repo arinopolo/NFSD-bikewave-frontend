@@ -1,11 +1,11 @@
-import LogoComponent from "../components/LogoComponent";
+import LogoComponent from "../components/logo/LogoComponent";
 import ItemsList from "../components/itemsListAndCard/ItemsList";
 import { useEffect, useState } from "react";
 import SearchFilterComponent from "../containers/searchAndFilter/SearchAndFilter";
 import FilterModal from "../components/filters/priceFilter/PriceFilter";
 import CategoriesFilter from "../containers/categories/Categories";
 import api from "../api/api";
-import Map from "../components/Map";
+import Map from "../components/map/Map";
 import MapSwitcher from "../components/mapSwitcher/MapSwitcher";
 import { faList, faMap } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -95,7 +95,6 @@ const HomePage = () => {
         <Loading />
       ) : (
         <>
-    
           {!mapView ? (
             <>
               <ItemsList

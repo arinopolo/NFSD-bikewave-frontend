@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import LogoComponent from "../components/LogoComponent";
+import {  useEffect, useState } from "react";
+import LogoComponent from "../components/logo/LogoComponent";
 import ListItem from "../containers/listItem/ListItem";
 import { useNavigate } from "react-router-dom";
 

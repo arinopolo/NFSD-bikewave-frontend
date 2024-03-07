@@ -1,0 +1,10 @@
+.logo-bikewave {
+  margin: 1rem auto;
+  width: 8rem;
+}
+
+@media (max-width: 800px) {
+  .logo-bikewave {
+    margin: 3rem auto;
+  }
+}
