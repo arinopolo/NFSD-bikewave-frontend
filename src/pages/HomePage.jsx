@@ -95,7 +95,7 @@ const HomePage = () => {
         <Loading />
       ) : (
         <>
-          {" "}
+    
           {!mapView ? (
             <>
               <ItemsList

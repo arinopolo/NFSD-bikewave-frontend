@@ -4,6 +4,8 @@ import Pin from "../components/Pin";
 
 import ItemCardOnMap from "./itemsListAndCard/itemCardOnMap/ItemCardOnMap";
 
+const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
 const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   const staticCenter = {
     lat: 40.4165,
@@ -35,10 +37,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   };
 
   useEffect(() => {
-    // Detectar si el dispositivo es móvil
     const isMobileDevice = () => {
-      console.log("ancuhra de la pantalla: ", window.innerWidth);
-      console.log("is mobile?s ", isMobile);
       return window.innerWidth <= 600;
     };
 
@@ -47,9 +46,9 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: "100vh", width: "100vw" }}>
+    <div style={{ height: "100vh", width: "100vw", position: "absolute" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAqpZyIprpf5ykPCIn-RpYuuMiWnLeVOyk" }}
+        bootstrapURLKeys={{ key: API_KEY }}
         defaultCenter={[staticCenter.lat, staticCenter.lng]}
         defaultZoom={staticCenter.zoom}
         onClick={handleMapClick}
@@ -66,10 +65,10 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
       </GoogleMapReact>
       {selectedBicycle && (
         <div
-          className={isMobile && "mobile-div"}
+          className={isMobile ? "mobile-div" : ""}
           style={{
             position: "absolute",
-            top: isMobile ? "90%" : itemCardPosition.y,
+            top: isMobile ? "50%" : itemCardPosition.y,
             left: isMobile ? "0" : itemCardPosition.x,
             backgroundColor: "white",
           }}
@@ -86,7 +85,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
                   ) !== -1
                 : false
             }
-          />{" "}
+          />
         </div>
       )}
     </div>

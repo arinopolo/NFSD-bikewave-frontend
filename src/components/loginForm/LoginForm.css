@@ -1,3 +1,11 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: flex-start;
+  width: 30vw;
+}
+
 input {
   align-items: flex-end;
   background-color: transparent;
@@ -76,5 +84,9 @@ input:focus:not(:placeholder-shown) {
 @media (max-width: 800px) {
   .link-password-forgoten {
     font-size: 0.8rem;
+  }
+
+  form {
+    width: 90%;
   }
 }

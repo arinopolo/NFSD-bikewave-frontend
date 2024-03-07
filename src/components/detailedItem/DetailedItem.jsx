@@ -90,10 +90,7 @@ const DetailedItem = ({ bicycle }) => {
 
       setBookingTried(true);
 
-      if (
-        (backendResponse.success && createChatResponse.success) ||
-        createChatResponse.existing
-      ) {
+      if (backendResponse.success) {
         setSuccessBooking(true);
       }
     } catch (error) {

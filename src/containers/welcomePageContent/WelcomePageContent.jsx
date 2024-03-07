@@ -8,16 +8,15 @@ const WelcomePageContent = () => {
   return (
     <div className="welcome-container flex flex-column  gap-1">
       <div>
-        {" "}
+
         <h1 className="welcome-title">HOLA</h1>
         <h4 className="welcome-message">
           Bienvendid@ a tu nueva comunidad ciclista.
-        </h4>
-        <h4 className="welcome-message">
+ 
           ¿Tienes una bicicleta que no usas?,¿preparando tu primer triatlón y no
           puedes comprar una bici? ¡Alquílala! Aquí encontrarás una bicicleta
           para todos tus planes en un solo click, tanto de propietarios
-          personales como de pequeños negocios. ¡Reserva ahora!
+          personales como de pequeños negocios.
         </h4>
       </div>
       <Button

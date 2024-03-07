@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Chat.css";
-import { AuthContext } from "../../contexts/AuthContext";
 import Conversation from "../conversation/Conversation";
 import ChatBox from "../chatBox/ChatBox";
 import { io } from "socket.io-client";
 import api from "../../api/api";
-import { useLocation } from "react-router-dom";
 
 const WEB_SOCKET = import.meta.env.VITE_WEB_SOCKET;
 const Chat = () => {
@@ -18,6 +16,7 @@ const Chat = () => {
 
   const socket = useRef();
 
+  // llamada api para traer a los chats
   useEffect(() => {
     const getChats = async () => {
       try {
@@ -54,26 +53,6 @@ const Chat = () => {
     }
   }, [sendMessage]);
 
-  useEffect(() => {
-    console.log("recieved message", receiveMessage);
-  }, [receiveMessage]);
-
-  // Get query parameters from URL
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const chatId = params.get("chatId");
-  const receiverId = params.get("receiverId");
-
-  // Automatically open chat if chatId or receiverId is provided
-  useEffect(() => {
-    if (chatId) {
-      const selectedChat = chats.find((chat) => chat._id === chatId);
-      setCurrentChat(selectedChat);
-    } else if (receiverId) {
-      const newChat = createChatWithReceiver(receiverId);
-      setCurrentChat(newChat);
-    }
-  }, [chatId, receiverId, chats]);
   return (
     <>
       <div className="chat mb-15">

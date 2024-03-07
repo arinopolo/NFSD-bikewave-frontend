@@ -58,14 +58,6 @@ a {
   font-weight: 800;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: flex-start;
-  width: 30vw;
-}
-
 .field-holder {
   align-items: flex-start;
   display: flex;

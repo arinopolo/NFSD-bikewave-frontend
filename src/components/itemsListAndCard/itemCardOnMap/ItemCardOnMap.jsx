@@ -5,7 +5,7 @@ import LikedHeart from "../../heart/LikedHeart";
 import NotLikedHeart from "../../heart/NotLikedHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
-import CategoryComponent from "../../filters/category/Category";
+
 
 const ItemCardOnMap = ({ bicycle, isFavorite }) => {
   return (

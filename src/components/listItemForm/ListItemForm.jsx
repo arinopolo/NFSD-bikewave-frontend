@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../../api/api";
 import "./ListItemForm.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlacesAutocomplete from "../AutocompleteInput";
 import {
   CityIcon,
@@ -12,12 +12,11 @@ import {
   ProIcon,
 } from "../../assets/SVGIcons";
 
-
 const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const [errorMessage, setErrorMessage] = useState();
   const [step, setStep] = useState(1);
   const [photoFile, setPhotoFile] = useState(null);
-  const [fileName, setFileName] = useState("");
+
   const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
   const [filledFields, setFilledFields] = useState(false);
 
@@ -41,7 +40,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
     setPhotoFile(file);
-    setFileName(file.name);
+    setFilledFields(true);
   };
 
   const staticCenter = {
@@ -151,7 +150,6 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
               errors.category = "Este campo es obligatorio";
             } else {
               setFilledFields(true);
-              console.log("step 2", filledFields);
             }
           } else if (step === 3) {
             if (!values.location) {
@@ -163,9 +161,9 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
             : ""; */
             } else {
               setFilledFields(true);
-              console.log("step 3", filledFields);
             }
           } else if (step === 4) {
+            console.log("rerender del photo,", photoFile);
             if (photoFile === null) {
               setFilledFields(false);
             } else {

@@ -252,6 +252,7 @@ const getMessages = async (currentChat) => {
   }
 };
 
+
 const sendMessage = async (message) => {
   try {
     const token = localStorage.getItem("token");
@@ -373,7 +374,7 @@ const bookBicycle = async (bicycleId, ownerId) => {
 
     const bookBike = await fetch(`${BASE_URL}/users/book/${bicycleId}`, {
       method: "PUT",
-      body: JSON.stringify({ownerId}),
+      body: JSON.stringify({ ownerId }),
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -407,4 +408,5 @@ export default {
   deleteBicycle,
   getMyBicycles,
   bookBicycle,
+  
 };
