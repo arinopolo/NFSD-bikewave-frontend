@@ -16,7 +16,7 @@ const BottomNavigation = () => {
         <NavigationItem link="/favorites" text="Favoritos" icon={faHeart} />
         <NavigationItem
           link="/list-item"
-          text="Subir bici"
+          text="Ofrece tu bici"
           icon={faCirclePlus}
         />
         <NavigationItem link="/chats" text="Mensajes" icon={faMessage} />

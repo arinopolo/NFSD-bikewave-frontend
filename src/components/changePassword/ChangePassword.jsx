@@ -3,6 +3,8 @@ import Button from "../button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const ChangePassword = ({
   userInfo,
   setModalPasswordVisible,
@@ -14,6 +16,29 @@ const ChangePassword = ({
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState(false);
 
+  const changePassword = async (oldPassword, newPassword) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const backendResponse = await fetch(`${BASE_URL}/users/change-password`, {
+        method: "PUT",
+        body: JSON.stringify({ oldPassword, newPassword }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      const data = await backendResponse.json();
+      return data;
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  const handleSubmit = () => {
+    changePassword(oldPassword, newPassword);
+  };
   return (
     <>
       <div className="personal-data-container ">

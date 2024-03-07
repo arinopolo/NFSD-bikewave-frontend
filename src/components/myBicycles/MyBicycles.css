@@ -5,8 +5,15 @@
   gap: 2rem;
 }
 
+.mybicycle-container {
+  width: 50%;
+}
+
 @media (max-width: 800px) {
   .my-bikes > * {
     width: 40vw;
+  }
+  .mybicycle-container {
+    width: 90%;
   }
 }

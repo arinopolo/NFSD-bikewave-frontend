@@ -67,7 +67,6 @@ const ProfilePage = () => {
         <Loading />
       ) : (
         <>
-          {" "}
           {isActive === "Sobre mí" ? (
             <ProfileInfo userInfo={userInfo} myBicyclesList={myBicyclesList} />
           ) : (

@@ -19,6 +19,12 @@
   border: 1px solid #31b15c;
 }
 
-.modal-title{
+.modal-title {
   font-size: 1.2rem;
+}
+
+@media (max-width: 800px) {
+  .personal-data-container {
+    width: 90%;
+  }
 }

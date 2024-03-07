@@ -42,7 +42,7 @@ const ChatBox = ({
         const backendResponse = await api.getMessages(currentChat);
 
         if (backendResponse) {
-          setMessages(backendResponse);
+        setMessages(backendResponse);
         }
       } catch (error) {
         console.error("Error fetching data:", error.message);
