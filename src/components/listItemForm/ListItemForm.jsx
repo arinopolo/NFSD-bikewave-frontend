@@ -18,6 +18,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const [photoFile, setPhotoFile] = useState(null);
 
   const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
+  
   const [filledFields, setFilledFields] = useState(false);
 
   const categories = [
