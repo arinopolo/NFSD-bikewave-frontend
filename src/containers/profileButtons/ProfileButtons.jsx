@@ -5,7 +5,7 @@ import "./ProfileButtons.css";
 const ProfileButtons = ({ setIsActive, isActive }) => {
   const handleClick = (text) => {
     setIsActive(text);
-    console.log("clicked");
+
   };
   const activeClass = (buttonText) => {
     return isActive === buttonText ? "active" : "not-active";

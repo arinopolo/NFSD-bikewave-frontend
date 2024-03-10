@@ -40,7 +40,7 @@ const PlacesAutocomplete = ({ onUpdateCoordinates }) => {
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
         onUpdateCoordinates({ lat, lng });
-        console.log("📍 Coordinates: ", { lat, lng });
+  
       });
     };
 

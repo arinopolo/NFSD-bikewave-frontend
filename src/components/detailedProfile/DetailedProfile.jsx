@@ -28,7 +28,7 @@ const DetailedProfile = ({ userInfo }) => {
         <div className="flex justify-start ">
           <p className="about-me">
             ¡Hola a todos! Soy {userInfo.firstName} y acabo de unirme a
-            <span className="bold"> Bikewave.</span>
+            <span className="bold"> Bikewave. </span>
             ¡List@ para recorrer kilómetros y alquilar bicicletas fabulosas!
           </p>
         </div>

@@ -13,7 +13,6 @@ const ItemCard = ({ bicycle, refresh, toggleRefresh, isFavorite }) => {
     e.preventDefault();
     try {
       const backendResponse = await api.addAndDeleterFavorits(bicycleId);
-      console.log(backendResponse);
       toggleRefresh(!refresh);
     } catch (error) {
       console.error("Listing error:", error.message);
@@ -50,7 +49,7 @@ const ItemCard = ({ bicycle, refresh, toggleRefresh, isFavorite }) => {
             <div>
               <div className="flex-row">
                 <h2 className="item-name">
-                  {bicycle.brand} <span>{bicycle.model}</span>
+                  {bicycle.brand} <span className="model">{bicycle.model}</span>
                 </h2>
               </div>
               <h3>{bicycle.category}</h3>

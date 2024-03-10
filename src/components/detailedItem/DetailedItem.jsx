@@ -112,7 +112,7 @@ const DetailedItem = ({ bicycle }) => {
               <SuccessMessage
                 onClick={() => navigate("/")}
                 text={
-                  "Felicidades! Tu bicicleta ha sido reservada con éxito. Te hemos enviado un email de confirmación con los detalles del pedido. ¡Prepárate para disfrutar de un paseo emocionante! "
+                  "¡Felicidades! Tu bicicleta ha sido reservada con éxito. Te hemos enviado un email de confirmación con los detalles del pedido. ¡Prepárate para disfrutar de un paseo emocionante! "
                 }
               />
             ) : (
@@ -164,13 +164,15 @@ const DetailedItem = ({ bicycle }) => {
                 <div className="flex gap-1 w-100">
                   <Button
                     text={"Contactar"}
-                    onClick={handleContactClick}
+                    onClick={() => handleContactClick()}
                     className={"secondary-btn  w-50"}
+                    disabled={bicycle.owner._id === userId}
                   />
                   <Button
                     text={"Reservar"}
                     className={"w-50"}
                     onClick={() => handleBookClick()}
+                    disabled={bicycle.owner._id === userId}
                   />
                 </div>
                 {bicycle.owner._id === userId ? (

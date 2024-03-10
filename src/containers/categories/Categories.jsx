@@ -15,7 +15,6 @@ const CategoriesFilter = ({ setCategory }) => {
   const [isActive, setIsActive] = useState("all");
 
   const handleCategoryClick = (category) => {
-    console.log("click");
     setIsActive(category);
     setCategory(category);
   };
@@ -77,9 +76,9 @@ const CategoriesFilter = ({ setCategory }) => {
         />
         <CategoryComponent
           onClick={() => {
-            handleCategoryClick("competition");
+            handleCategoryClick("pro");
           }}
-          className={handleActiveCategory("competition")}
+          className={handleActiveCategory("pro")}
           text={"Competición"}
           image={<ProIcon />}
         />

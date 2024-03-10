@@ -24,7 +24,7 @@ const LoginForm = ({ toggle }) => {
       setErrorMessage("");
       const loginData = await api.login(values.email, values.password);
       if (loginData && loginData.success) {
-        console.log(loginData);
+     
         updateUser({ userId: loginData.userId, token: loginData.token });
         navigate("/");
       } else {

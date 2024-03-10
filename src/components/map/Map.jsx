@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import Pin from "../pin/Pin";
-
 import ItemCardOnMap from "../itemsListAndCard/itemCardOnMap/ItemCardOnMap";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;

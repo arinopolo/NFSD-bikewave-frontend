@@ -76,6 +76,7 @@ input:focus:not(:placeholder-shown) {
 
 .link-password-forgoten {
   font-size: 0.6rem;
+  cursor: pointer;
 }
 
 .link-password-forgoten:hover {

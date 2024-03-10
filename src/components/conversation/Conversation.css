@@ -1,0 +1,18 @@
+.unread-messages {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: rgb(172, 21, 21);
+  border-radius: 4rem;
+  color: #fff;
+}
+
+.conversation {
+  padding: 0.5rem 0.5rem;
+  opacity: 1;
+}
+.conversation:hover {
+  background-color: rgb(243, 243, 243);
+}
+.current {
+  opacity: 0.5;
+}

@@ -7,9 +7,9 @@ import { format } from "timeago.js";
 const ChatBox = ({
   currentChat,
   currentUserId,
-  setSendMessage,
   receiveMessage,
-  sendMessage,
+  refresh,
+  toggleRefresh,
 }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -19,7 +19,7 @@ const ChatBox = ({
     setNewMessage(newMessage);
   };
 
-  //llamada api
+  //llamada api de la info del usuario
   useEffect(() => {
     const otherUserId = currentChat.members.find((id) => id !== currentUserId);
     const getUserData = async () => {
@@ -36,20 +36,36 @@ const ChatBox = ({
     if (currentChat !== null) getUserData();
   }, [currentChat, currentUserId]);
 
+  //llamada api de los mensajes del chat
   useEffect(() => {
     const getMessages = async () => {
       try {
         const backendResponse = await api.getMessages(currentChat);
 
         if (backendResponse) {
-        setMessages(backendResponse);
+          setMessages(backendResponse);
         }
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
     };
+
     if (currentChat !== null) {
       getMessages();
+    }
+  }, [currentChat]);
+
+  useEffect(() => {
+    const seeMessage = async () => {
+      try {
+        const backendResponse = await api.seenMessage(currentChat);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+    if (currentChat !== null) {
+      seeMessage();
+      toggleRefresh(!refresh);
     }
   }, [currentChat]);
 

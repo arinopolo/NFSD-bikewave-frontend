@@ -53,7 +53,6 @@ const register = async (values) => {
 //  la lista de productos en la home page
 const getBicyclesList = async (category, minPrice, maxPrice, location) => {
   try {
-    console.log(" mis params", category, minPrice, maxPrice, location);
     const categoryParam = category !== "all" ? `category=${category}&` : "";
     const minPriceParam = `minPrice=${minPrice}&`;
     const maxPriceParam = `maxPrice=${maxPrice}&`;
@@ -100,7 +99,6 @@ const getFavoritesList = async () => {
 const addAndDeleterFavorits = async (favoriteId) => {
   try {
     const token = localStorage.getItem("token");
-    console.log(favoriteId);
     const addProduct = await fetch(
       `${BASE_URL}/users/favorites/${favoriteId}`,
       {
@@ -252,7 +250,6 @@ const getMessages = async (currentChat) => {
   }
 };
 
-
 const sendMessage = async (message) => {
   try {
     const token = localStorage.getItem("token");
@@ -370,7 +367,6 @@ const getMyBicycles = async () => {
 const bookBicycle = async (bicycleId, ownerId) => {
   try {
     const token = localStorage.getItem("token");
-    console.log("owner id", ownerId);
 
     const bookBike = await fetch(`${BASE_URL}/users/book/${bicycleId}`, {
       method: "PUT",
@@ -385,6 +381,27 @@ const bookBicycle = async (bicycleId, ownerId) => {
     return data;
   } catch (error) {
     console.error("Listing error:", error.message);
+  }
+};
+
+const seenMessage = async (currentChat) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const backendResponse = await fetch(
+      `${BASE_URL}/chat/${currentChat._id}/seen`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    const data = await backendResponse.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error.message);
   }
 };
 
@@ -408,5 +425,5 @@ export default {
   deleteBicycle,
   getMyBicycles,
   bookBicycle,
-  
+  seenMessage,
 };
