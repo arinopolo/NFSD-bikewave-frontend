@@ -44,7 +44,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
   }, [selectedBicycle]);
 
   return (
-    // Important! Always set the container height explicitly
+
     <div className="w-100 h-100">
       <GoogleMapReact
         bootstrapURLKeys={{ key: API_KEY }}
@@ -66,7 +66,7 @@ const SimpleMap = ({ bicyclesList, favoritesList, refresh, toggleRefresh }) => {
         <div
           className={isMobile ? "mobile-div white absolute" : "white absolute"}
           style={{
-            top: isMobile ? "calc(100vh - 4rem)" : itemCardPosition.y,
+            top: isMobile ? "calc(100vh - 5rem)" : itemCardPosition.y,
             left: isMobile ? "0" : itemCardPosition.x,
           }}
         >

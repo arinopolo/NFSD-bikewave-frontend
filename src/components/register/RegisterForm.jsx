@@ -6,6 +6,7 @@ import Button from "../button/Button";
 import SuccessMessage from "../successMessage/SuccessMessage";
 import { useNavigate } from "react-router-dom";
 import FailMessage from "../failMessage/FailMessage";
+import Loading from "../../components/loading/Loading";
 
 const RegisterForm = ({ toggle }) => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const RegisterForm = ({ toggle }) => {
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [registerTried, setRegisterTried] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleWelcomingEmailSend = async (registerData) => {
     try {
@@ -23,6 +25,7 @@ const RegisterForm = ({ toggle }) => {
   };
 
   const registerHandler = async (values) => {
+    setLoading(true);
     try {
       const registerData = await api.register(values);
 
@@ -37,6 +40,9 @@ const RegisterForm = ({ toggle }) => {
         "Error en la operación de registrar un usuario:",
         error.message
       );
+    } finally {
+      setIsRegistering(false);
+      setRegisterTried(true);
     }
   };
 
@@ -207,6 +213,8 @@ const RegisterForm = ({ toggle }) => {
       )}
 
       {errorMessage && <p className="incorrect-data">{errorMessage}</p>}
+
+      {loading && <Loading />}
       <div className="container-register-proposal">
         <p>¿Ya tienes cuenta?</p>{" "}
         <button onClick={toggle} className="btn-register-login-proposal">
