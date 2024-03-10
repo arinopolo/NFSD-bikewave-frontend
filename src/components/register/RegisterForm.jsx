@@ -41,7 +41,7 @@ const RegisterForm = ({ toggle }) => {
         error.message
       );
     } finally {
-      setIsRegistering(false);
+      setLoading(false);
       setRegisterTried(true);
     }
   };
