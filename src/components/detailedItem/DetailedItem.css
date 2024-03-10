@@ -28,9 +28,14 @@
   color: #2c2c2c;
 }
 
+.secondary-btn:disabled {
+  opacity: 0.1;
+}
+
 .secondary-btn:hover {
   background-color: white;
-  opacity: 0.5;
+  border: 1px solid #969696;
+  color: #969696;
 }
 
 .bicycle-description,

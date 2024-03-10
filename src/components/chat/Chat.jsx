@@ -11,8 +11,8 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const [sendMessage, setSendMessage] = useState(null);
   const [receiveMessage, setReceiveMessage] = useState(null);
+  const [refresh, toggleRefresh] = useState();
 
   const socket = useRef();
 
@@ -30,7 +30,7 @@ const Chat = () => {
       }
     };
     getChats();
-  }, [userId]);
+  }, [userId, refresh]);
 
   // Connect to Socket.io
   useEffect(() => {
@@ -41,17 +41,16 @@ const Chat = () => {
         setOnlineUsers(users);
       });
       socket.current.on("receive-message", (data) => {
-        console.log("recevied message", data);
         setReceiveMessage(data);
       });
     }
   }, [userId]);
-
+  /*
   useEffect(() => {
     if (sendMessage !== null) {
       socket.current.emit("send-message", sendMessage);
     }
-  }, [sendMessage]);
+  }, [sendMessage]); */
 
   return (
     <>
@@ -78,9 +77,9 @@ const Chat = () => {
             <ChatBox
               currentChat={currentChat}
               currentUserId={userId}
-              setSendMessage={setSendMessage}
               receiveMessage={receiveMessage}
-              sendMessage={sendMessage}
+              refresh={refresh}
+              toggleRefresh={toggleRefresh}
             />
           ) : (
             <p>Elije chat para empezar a chatear</p>

@@ -17,16 +17,7 @@
   width: 100%;
 }
 
-.conversation {
-  padding: 0.5rem 0.5rem;
-  opacity: 0.5;
-}
-.conversation:hover {
-  background-color: rgb(243, 243, 243);
-}
-.current {
-  opacity: 1;
-}
+
 @media (max-width: 800px) {
   .chat {
     display: block;

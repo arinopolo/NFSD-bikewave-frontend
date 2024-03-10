@@ -51,7 +51,7 @@ const ChangePassword = ({
             onClick={() => setModalPasswordVisible(!modalPasswordVisible)}
           />
         </div>
-        <p>ecribe tu contrañse actual </p>
+        <p className="bold">Escribe tu contraseña actual: </p>
 
         <input
           type="text"
@@ -60,7 +60,7 @@ const ChangePassword = ({
           onChange={(e) => setOldPassword(e.target.value)}
         />
 
-        <p>ecribe tu nueva contraseña </p>
+        <p className="bold">Escribe tu nueva contraseña: </p>
         <input
           type="text"
           name="oldPassword"

@@ -47,7 +47,7 @@ const FavoritesPage = () => {
   return (
     <>
       <LogoComponent />
-      <h1>Aqui tienes tus bicicletas favoritas!</h1>
+      <h1>¡Aquí tienes tus bicicletas favoritas!</h1>
 
       {loading ? (
         <Loading />
@@ -66,7 +66,6 @@ const FavoritesPage = () => {
           )}
         </>
       )}
-     
     </>
   );
 };

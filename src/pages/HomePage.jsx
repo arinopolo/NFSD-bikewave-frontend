@@ -18,7 +18,6 @@ const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [mapView, setMapView] = useState(false);
   const [refresh, toggleRefresh] = useState(false);
-
   const [category, setCategory] = useState("all");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(3000);
@@ -74,6 +73,7 @@ const HomePage = () => {
   const handleMapSwitchCLick = () => {
     setMapView(!mapView);
   };
+
   return (
     <>
       <LogoComponent />

@@ -45,7 +45,9 @@ const RegisterForm = ({ toggle }) => {
       {registerTried ? (
         registrationSuccessful ? (
           <SuccessMessage
-            text={"Gracias por registrarte!"}
+            text={
+              "¡Gracias por registrarte! ¡Te hemos enviado un correo de confirmación!"
+            }
             onClick={() => navigate("/")}
           />
         ) : (

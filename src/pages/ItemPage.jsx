@@ -20,8 +20,7 @@ const ItemPage = () => {
       const backendResponse = await api.getBicycleInfo(bikeid);
       if (backendResponse) {
         setBicycle(backendResponse);
-        console.log(backendResponse);
-        console.log("user id", userId);
+    
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);

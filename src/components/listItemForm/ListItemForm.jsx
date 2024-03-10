@@ -132,7 +132,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
           address: "",
         }}
         validate={(values) => {
-          console.log("values", values);
+         
           let errors = {};
           if (step === 1) {
             if (!values.brand || !values.model || !values.description) {
@@ -143,7 +143,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
                 : "";
             } else {
               setFilledFields(true);
-              console.log("step 1", filledFields);
+          
             }
           } else if (step === 2) {
             if (!values.category) {
@@ -163,7 +163,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
               setFilledFields(true);
             }
           } else if (step === 4) {
-            console.log("rerender del photo,", photoFile);
+        
             if (photoFile === null) {
               setFilledFields(false);
             } else {

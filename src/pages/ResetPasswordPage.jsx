@@ -4,9 +4,10 @@ import Button from "../components/button/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../api/api";
 import SuccessMessage from "../components/successMessage/SuccessMessage";
-import BottomNavigation from "../containers/bottomNavigation/BottomNavigation";
+import LogoComponent from "../components/logo/LogoComponent";
 
 const ResetPasswordPage = () => {
+  const navigate = useNavigate();
   let { singleToken } = useParams();
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -26,13 +27,14 @@ const ResetPasswordPage = () => {
 
   return (
     <>
+      <LogoComponent />
       {isSuccess ? (
         <SuccessMessage
-          text={"Has actualizado tu contraseña!"}
+          text={"¡Has actualizado tu contraseña!"}
           onClick={() => navigate("/")}
         />
       ) : (
-        <div>
+        <div className="flex flex-column gap-2">
           <h2>Escribe tu nueva contraseña</h2>
           <Formik
             initialValues={{ password: "" }}
@@ -87,7 +89,6 @@ const ResetPasswordPage = () => {
           </Formik>
         </div>
       )}
-     
     </>
   );
 };

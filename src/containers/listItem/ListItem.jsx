@@ -20,7 +20,7 @@ const ListItem = () => {
           <Loading />
         ) : listingSuccess ? (
           <SuccesMessage
-            text={"Has subido tu bicicleta con exito!"}
+            text={"¡Has subido tu bicicleta con exito!"}
             onClick={() => navigate("/")}
           />
         ) : (

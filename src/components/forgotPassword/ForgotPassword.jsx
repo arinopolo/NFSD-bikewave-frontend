@@ -13,7 +13,7 @@ const SuccessMessage = () => {
 
   return (
     <div className="flex flex-column gap-1">
-      <p>Correo Enviado con éxito!</p>
+      <p>¡Correo enviado con éxito!</p>
       <Button text={"Continuar"} onClick={handleNavigate} />
     </div>
   );
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
       {isSuccess ? (
         <SuccessMessage />
       ) : (
-        <div>
+        <div className="flex flex-column align-center justify-center gap-2">
           <h2>
             Escribe tu email y te mandamos el link para restablecer tu
             contraseña
