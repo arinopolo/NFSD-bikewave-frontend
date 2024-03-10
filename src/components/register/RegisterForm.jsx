@@ -133,7 +133,7 @@ const RegisterForm = ({ toggle }) => {
           onSubmit={(values, { resetForm }) => {
             registerHandler(values);
             resetForm();
-            setRegisterTried(true);
+
             //aqui va a ir la conexion con el back haciendo una entrada con token
           }}
         >
