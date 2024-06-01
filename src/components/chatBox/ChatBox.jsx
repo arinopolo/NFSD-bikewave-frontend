@@ -73,6 +73,8 @@ const ChatBox = ({
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+
+   //llamada api para post mensaje
   const handleSend = async (e) => {
     e.preventDefault();
 
@@ -98,7 +100,7 @@ const ChatBox = ({
   };
 
   useEffect(() => {
-    // Agregar lógica para agregar el mensaje recibido a la lista de mensajes
+    // WEBSOCKET  agregar el mensaje recibido a la lista de mensajes y mostrarlo al momento
 
     if (receiveMessage) {
       setMessages((prevMessages) => [...prevMessages, receiveMessage]);

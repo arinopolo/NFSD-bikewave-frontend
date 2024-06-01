@@ -18,7 +18,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
   const [photoFile, setPhotoFile] = useState(null);
 
   const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
-  
+
   const [filledFields, setFilledFields] = useState(false);
 
   const categories = [
@@ -49,6 +49,7 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
     lng: -3.70256,
     zoom: 13,
   };
+
   const getRandomOffset = () => {
     return (Math.random() - 0.5) * 0.01;
   };
@@ -133,7 +134,6 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
           address: "",
         }}
         validate={(values) => {
-         
           let errors = {};
           if (step === 1) {
             if (!values.brand || !values.model || !values.description) {
@@ -144,7 +144,6 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
                 : "";
             } else {
               setFilledFields(true);
-          
             }
           } else if (step === 2) {
             if (!values.category) {
@@ -164,7 +163,6 @@ const ListItemForm = ({ setListingTried, setListingSuccess, setLoading }) => {
               setFilledFields(true);
             }
           } else if (step === 4) {
-        
             if (photoFile === null) {
               setFilledFields(false);
             } else {

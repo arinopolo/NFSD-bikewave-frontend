@@ -41,16 +41,11 @@ const Chat = () => {
         setOnlineUsers(users);
       });
       socket.current.on("receive-message", (data) => {
+        console.log("mensaje recibidooooo ,", data);
         setReceiveMessage(data);
       });
     }
   }, [userId]);
-  /*
-  useEffect(() => {
-    if (sendMessage !== null) {
-      socket.current.emit("send-message", sendMessage);
-    }
-  }, [sendMessage]); */
 
   return (
     <>
